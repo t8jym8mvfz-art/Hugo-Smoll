@@ -158,6 +158,34 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 :root[data-pal="lave"]{color-scheme:dark;--bg:#0b0605;--card:#1a0f0c;--fill:#241612;--tx:#fff0e6;--mut:#a98f84;--bd:rgba(255,120,60,.15);--gold:#ff4d1a;--hi:#ffb02e;--acc2:#c4002b;--on:#fff;--gold2:#c4002b;--err:#ffb29a;--bar:rgba(11,6,5,.62);--aura:.65}
 :root[data-pal="sakura"]{color-scheme:light;--bg:#fbeef2;--card:#fffafb;--fill:#f6e3ea;--tx:#2a1620;--mut:#8a6c78;--bd:rgba(120,40,70,.1);--gold:#e0568a;--hi:#b8336a;--acc2:#f29bb8;--on:#fff;--gold2:#f29bb8;--err:#c2213f;--bar:rgba(251,238,242,.75);--aura:.4}
 :root[data-pal="glacier"]{color-scheme:light;--bg:#eaf3f8;--card:#fbfdff;--fill:#deebf2;--tx:#0f2230;--mut:#5f7a8a;--bd:rgba(15,60,90,.1);--gold:#2b8fd6;--hi:#1565a8;--acc2:#5ccfe6;--on:#fff;--gold2:#5ccfe6;--err:#c63b3b;--bar:rgba(234,243,248,.75);--aura:.4}
+:root[data-pal="rubis"]{color-scheme:dark;--bg:#12060a;--card:#200d14;--fill:#2b121c;--tx:#fff0f3;--mut:#b48c97;--bd:rgba(255,90,130,.15);--gold:#e0245e;--hi:#ff8fab;--acc2:#9b1b5a;--on:#fff;--gold2:#9b1b5a;--err:#ffb3c1;--bar:rgba(18,6,10,.62);--aura:.6}
+:root[data-pal="amethyste"]{color-scheme:dark;--bg:#0d0716;--card:#1a1029;--fill:#241638;--tx:#f5efff;--mut:#a495bd;--bd:rgba(190,140,255,.15);--gold:#9d4edd;--hi:#d0a2ff;--acc2:#ff6ec7;--on:#fff;--gold2:#ff6ec7;--err:#ff9fb5;--bar:rgba(13,7,22,.62);--aura:.65}
+:root[data-pal="foret"]{color-scheme:dark;--bg:#060d09;--card:#0f1a13;--fill:#16241b;--tx:#eef5ee;--mut:#8ea493;--bd:rgba(200,180,100,.14);--gold:#3a9d5d;--hi:#c9b458;--acc2:#1f6f8b;--on:#fff;--gold2:#1f6f8b;--err:#f08a7e;--bar:rgba(6,13,9,.62);--aura:.55}
+:root[data-pal="cuivre"]{color-scheme:dark;--bg:#0e0907;--card:#1b1310;--fill:#261a15;--tx:#f8efe8;--mut:#a8958a;--bd:rgba(220,140,90,.15);--gold:#c8743c;--hi:#f0b27a;--acc2:#8c3b1e;--on:#fff;--gold2:#8c3b1e;--err:#f5a08a;--bar:rgba(14,9,7,.62);--aura:.55}
+:root[data-pal="arctique"]{color-scheme:dark;--bg:#050b12;--card:#0d1622;--fill:#142030;--tx:#eef6ff;--mut:#8aa0b6;--bd:rgba(160,210,255,.14);--gold:#5aa9e6;--hi:#bfe3ff;--acc2:#7f5af0;--on:#04101c;--gold2:#7f5af0;--err:#ff9a9a;--bar:rgba(5,11,18,.62);--aura:.6}
+:root[data-pal="mono"]{color-scheme:dark;--bg:#0a0a0a;--card:#161616;--fill:#202020;--tx:#f5f5f5;--mut:#9a9a9a;--bd:rgba(255,255,255,.1);--gold:#d9d9d9;--hi:#ffffff;--acc2:#7a7a7a;--on:#0a0a0a;--gold2:#7a7a7a;--err:#ff8a80;--bar:rgba(10,10,10,.62);--aura:.35}
+:root[data-pal="peche"]{color-scheme:light;--bg:#fdf0e8;--card:#fffaf6;--fill:#f7e4d8;--tx:#2b1a12;--mut:#8c7064;--bd:rgba(120,60,30,.1);--gold:#f08a5d;--hi:#c4562b;--acc2:#f5b971;--on:#fff;--gold2:#f5b971;--err:#c2383a;--bar:rgba(253,240,232,.75);--aura:.4}
+:root[data-pal="lilas"]{color-scheme:light;--bg:#f3eefb;--card:#fdfbff;--fill:#e9e1f6;--tx:#1f1630;--mut:#75688c;--bd:rgba(70,40,120,.1);--gold:#8b5cf6;--hi:#6d3fd6;--acc2:#e879f9;--on:#fff;--gold2:#e879f9;--err:#c62a4a;--bar:rgba(243,238,251,.75);--aura:.4}
+/* ===== Réglages, pas de glissement de côté ===== */
+html,body,main{overflow-x:clip}
+#s2 .card,#det .card{animation-name:rise}
+input[type=date],input[type=time]{display:block;min-width:0;width:100%;max-width:100%}
+input::-webkit-date-and-time-value{text-align:left}
+.hd{position:relative}
+.gear{position:absolute;right:0;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surf-a);color:var(--hi);box-shadow:0 0 0 1px var(--bd);z-index:3;transition:transform .2s}
+.gear svg{width:22px;height:22px;animation:gspin 12s linear infinite}
+@keyframes gspin{to{transform:rotate(360deg)}}
+.gear:active{transform:translateY(-50%) scale(.9)}
+.sw2{justify-content:space-between;align-items:center}
+.sw2 input{appearance:none;-webkit-appearance:none;width:50px!important;height:30px!important;border-radius:999px;background:var(--fill);position:relative;flex:none;transition:background-color .25s;box-shadow:inset 0 0 0 1px var(--bd);margin:0!important;cursor:pointer}
+.sw2 input::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .25s cubic-bezier(.3,.7,.2,1)}
+.sw2 input:checked{background:var(--grad);background-size:200% 200%}
+.sw2 input:checked::after{transform:translateX(20px)}
+.note{margin:10px 8px 0;color:var(--mut);font-size:13px}
+.pals{grid-template-columns:repeat(4,1fr)}
+@keyframes fadeView{from{opacity:0}to{opacity:1}}
+main.fade{animation:fadeView .28s ease-out}
+
 /* ===== Accueil dynamique ===== */
 .today{position:relative;overflow:hidden}
 .today::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--gold) 35%,transparent),transparent 65%);animation:orb 7s ease-in-out infinite alternate;pointer-events:none}
@@ -270,7 +298,7 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 <div class="moth m3" data-s="b" style="top:900px;right:-14px;width:84px;aspect-ratio:270/214;transform:rotate(10deg)"></div>
 <div class="moth m4" data-s="d" style="top:1380px;left:-22px;width:96px;aspect-ratio:300/274"></div></div>
 <main>
-<div class="hd">
+<div class="hd"><button class="gear" id="gear" type="button" aria-label="Réglages" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
 <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--hi)"/><stop offset=".5" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:var(--acc2)"/></linearGradient></defs><polygon fill="url(#g)" points="50,2 53.4,41.7 71.2,28.8 58.3,46.6 98,50 58.3,53.4 71.2,71.2 53.4,58.3 50,98 46.6,58.3 28.8,71.2 41.7,53.4 2,50 41.7,46.6 28.8,28.8 46.6,41.7"/></svg>
 <div><h1 id="h1">Consentement</h1><div class="ig" id="sub">Hugo Smoll · @hugo_Smoll</div></div>
 </div>
@@ -326,8 +354,7 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 <div id="impF" hidden><div class="row f"><div><label class="l">Nom *</label><input type="text" id="inom" autocomplete="off"></div><div><label class="l">Prénom *</label><input type="text" id="ipre" autocomplete="off"></div></div>
 <div class="f"><label class="l">PDF du consentement *</label><input type="file" id="ipdf" accept="application/pdf,.pdf"></div>
 <div class="f"><button class="pri" id="impGo" type="button">Ajouter</button><p style="color:var(--mut);font-size:13px;margin:8px 0 0">Si une fiche porte déjà ce nom, le PDF y est ajouté.</p></div></div></div>
-<h2>Couleurs</h2><div class="card"><div class="pals" id="pals"></div></div>
-<h2>Sécurité</h2><div class="card"><div class="f"><button class="lnk" id="chpin" type="button">Changer le code</button></div></div>
+
 </div>
 <div id="det" hidden></div>
 </div>
@@ -353,6 +380,16 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 <p id="rWarn" class="warn" hidden></p>
 <button class="pri" id="rSave" type="button" style="margin-top:14px">Enregistrer le rendez-vous</button>
 <div class="rbtns"><button class="lnk" id="rCancel" type="button">Annuler</button><button class="lnk" id="rDel" type="button" style="color:var(--err)" hidden>Supprimer</button></div></div>
+</div>
+<div id="s7" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<h2>Couleurs</h2><div class="card"><div class="pals" id="pals"></div></div>
+<h2>Code et sécurité</h2><div class="card">
+<label class="chk sw2"><span>Demander le code à l’ouverture de l’appli</span><input type="checkbox" id="optAsk"></label>
+<label class="chk sw2"><span>Verrouiller après 2 minutes sans utilisation</span><input type="checkbox" id="optIdle"></label>
+<div class="f"><button class="lnk" id="chpin" type="button">Changer le code</button></div></div>
+<p class="note">Le code est toujours demandé pour revenir à ton espace après un consentement, et pour ouvrir les fiches depuis le formulaire client.</p>
+<h2>Navigation</h2><div class="card"><div class="f" style="font-size:15px;color:var(--mut)">Glisse le doigt vers la droite pour revenir en arrière, vers la gauche pour revenir en avant. Dans le calendrier, glisse sur le mois pour en changer.</div></div>
 </div>
 <div id="s6" hidden>
 <button class="lnk tohome" type="button">‹ Accueil</button>
@@ -391,7 +428,7 @@ function shrink(file,m0){return new Promise(res=>{const u=URL.createObjectURL(fi
 $('files').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f);if(p){photos.push(p);const i=new Image();i.src=p.url;$('ph').appendChild(i)}}e.target.value='';qd()};
 let mtm;function msg(t,bad,html){const m=$('msg');clearTimeout(mtm);if(html)m.innerHTML=html;else m.textContent=t||'';m.className=bad?'err':'';if(t&&!bad&&!html)mtm=setTimeout(()=>{m.textContent=''},9000)}
 $('msg').onclick=e=>{if(!e.target.closest('a,button'))$('msg').textContent=''};
-function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=6;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients','Accueil','Calendrier','Projets'][n];$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':n>=4?todayLabel():'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
+function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=7;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients','Accueil','Calendrier','Projets','Réglages'][n];$('gear').hidden=n<3||n===7;$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':n>=4?todayLabel():'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
 const v=id=>$(id).value.trim();
 $('next').onclick=async()=>{
 if(!v('nom')||!v('prenom')||!v('naiss'))return msg('Merci de renseigner nom, prénom et date de naissance.',1);
@@ -557,7 +594,7 @@ $('lkok').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter')go()}})}
 function gate(title,sub,cancel){if(unlocked)return Promise.resolve(true);if(busy)return busy;const setup=!lsg(PK);
 busy=ask(setup?'setup':'verify',setup?'Crée ton code':title,setup?'4 à 8 chiffres. Il protège les fiches clients et ton espace tatoueur.':sub,cancel).finally(()=>{busy=null});return busy}
 ['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,()=>{last=Date.now()},true));
-setInterval(()=>{if(unlocked&&Date.now()-last>120000){unlocked=false;if($('s1').hidden)gate('Session verrouillée','Entre ton code pour continuer.',false)}},15000);
+setInterval(()=>{if(lsg('idle')==='1'&&unlocked&&Date.now()-last>120000){unlocked=false;if($('s1').hidden)gate('Session verrouillée','Entre ton code pour continuer.',false)}},15000);
 $('toClients').onclick=async()=>{if(await gate('Fiches clients','Entre ton code.',true))openClients()};
 $('chpin').onclick=async()=>{if(await ask('setup','Nouveau code','4 à 8 chiffres.',true))msg('Code modifié.')};
 $('newCons').onclick=()=>{cur=null;show(1)};
@@ -579,7 +616,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 addEventListener('pagehide',()=>{clearTimeout(dtm);saveDraft()});
 const clearDraft=()=>{clearTimeout(dtm);return del(DK).catch(()=>{})};
 (async()=>{try{
-const L=await all(),d=L.find(x=>x.id===DK);if(!d){goHome();return}
+const L=await all(),d=L.find(x=>x.id===DK);if(!d){startApp();return}
 [...F1,...F2].forEach(k=>{if(d[k]!=null&&$(k))$(k).value=d[k]});
 document.querySelectorAll('.req').forEach((c,i)=>{c.checked=!!(d.checks&&d.checks[i])});$('photoOk').checked=!!d.photoOk;
 photos=d.photos||[];tphotos=d.tphotos||[];
@@ -590,7 +627,7 @@ stage=2;if(await gate('Merci !','Remets le téléphone à Hugo Smoll.',false))sh
 }catch(e){}})();
 
 // ---- style Aurora : thèmes, fond animé, ondes au toucher
-const PALS=[["nebuleuse", "Nébuleuse", "#7b5cff", "#07061a", "#38b6ff"], ["sang", "Encre & sang", "#c8323c", "#09090b", "#ff8a3d"], ["or", "Or", "#e6b325", "#08080a", "#ff8f3c"], ["emeraude", "Émeraude", "#2fbf8f", "#070b0a", "#2bb3e6"], ["ivoire", "Ivoire", "#b07d12", "#f2ede3", "#c45f34"], ["couchant", "Coucher de soleil", "#ff5e62", "#140a12", "#b44cff"], ["ocean", "Océan", "#0fa3b1", "#04121a", "#2f6bff"], ["neon", "Néon", "#ff2bd6", "#07050f", "#00f0ff"], ["minuit", "Minuit doré", "#d4a73c", "#070b16", "#5b7cfa"], ["lave", "Lave", "#ff4d1a", "#0b0605", "#c4002b"], ["sakura", "Sakura", "#e0568a", "#fbeef2", "#f29bb8"], ["glacier", "Glacier", "#2b8fd6", "#eaf3f8", "#5ccfe6"]];
+const PALS=[["nebuleuse", "Nébuleuse", "#7b5cff", "#07061a", "#38b6ff"], ["sang", "Encre & sang", "#c8323c", "#09090b", "#ff8a3d"], ["or", "Or", "#e6b325", "#08080a", "#ff8f3c"], ["emeraude", "Émeraude", "#2fbf8f", "#070b0a", "#2bb3e6"], ["ivoire", "Ivoire", "#b07d12", "#f2ede3", "#c45f34"], ["couchant", "Coucher de soleil", "#ff5e62", "#140a12", "#b44cff"], ["ocean", "Océan", "#0fa3b1", "#04121a", "#2f6bff"], ["neon", "Néon", "#ff2bd6", "#07050f", "#00f0ff"], ["minuit", "Minuit doré", "#d4a73c", "#070b16", "#5b7cfa"], ["lave", "Lave", "#ff4d1a", "#0b0605", "#c4002b"], ["sakura", "Sakura", "#e0568a", "#fbeef2", "#f29bb8"], ["glacier", "Glacier", "#2b8fd6", "#eaf3f8", "#5ccfe6"], ["rubis", "Rubis", "#e0245e", "#12060a", "#9b1b5a"], ["amethyste", "Améthyste", "#9d4edd", "#0d0716", "#ff6ec7"], ["foret", "Forêt", "#3a9d5d", "#060d09", "#c9b458"], ["cuivre", "Cuivre", "#c8743c", "#0e0907", "#8c3b1e"], ["arctique", "Arctique", "#5aa9e6", "#050b12", "#7f5af0"], ["mono", "Noir & blanc", "#d9d9d9", "#0a0a0a", "#7a7a7a"], ["peche", "Pêche", "#f08a5d", "#fdf0e8", "#f5b971"], ["lilas", "Lilas", "#8b5cf6", "#f3eefb", "#e879f9"]];
 const RM=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}})();
 const curPal=()=>{const p=lsg('pal');return PALS.find(x=>x[0]===p)||PALS[0]};
 function accRGB(){const h=curPal()[2];return[1,3,5].map(i=>parseInt(h.slice(i,i+2),16))}
@@ -656,7 +693,7 @@ const hm=m=>pad(Math.floor(m/60)%24)+':'+pad(m%60);
 const durTxt=m=>m>=480?'Journée':m<60?m+' min':(m%60?Math.floor(m/60)+' h '+pad(m%60):m/60+' h');
 const DURS=[30,60,90,120,180,240,300,360,480];
 let calY,calM,selD=dk(new Date()),editId=null,rDur=120;
-async function goHome(){if(await gate('Espace tatoueur','Entre ton code.',true)){cur=null;show(4);renderHome()}else show(1)}
+async function goHome(){if(await gate('Espace tatoueur','Entre ton code.',true)){cur=null;homeView()}else show(1)}
 async function renderHome(){
   const [R,T,Fi]=await Promise.all([allOf('rdv'),allOf('todo'),all().catch(()=>[])]);
   const now=new Date(),t=dk(now),nm=now.getHours()*60+now.getMinutes();
@@ -755,9 +792,9 @@ async function addTodo(){const t=$('tTitle').value.trim();if(!t)return msg('Écr
   const x={id:Date.now().toString(36),title:t,due:$('tDue').value||null,done:false};await putIn('todo',x);$('tTitle').value='';$('tDue').value='';await renderTodo();
   const el=document.querySelector('#tOpen .td-it[data-id="'+x.id+'"]');if(el)el.classList.add('new');vib(10)}
 $('tAdd').onclick=addTodo;$('tTitle').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTodo()}};
-document.querySelectorAll('.tohome').forEach(b=>b.onclick=()=>{show(4);renderHome()});
+document.querySelectorAll('.tohome').forEach(b=>b.onclick=()=>{homeView()});
 $('toClients').onclick=goHome;
-$('newCons').textContent='‹ Accueil';$('newCons').onclick=()=>{cur=null;show(4);renderHome()};
+$('newCons').textContent='‹ Accueil';$('newCons').onclick=()=>{cur=null;homeView()};
 setInterval(()=>{if(!$('s4').hidden&&document.visibilityState==='visible')renderHome()},60000);
 
 // ---- accueil dynamique (remplace l'ancien rendu)
@@ -815,6 +852,31 @@ function homeTick(full){
     $('hList').querySelectorAll('.rd').forEach(b=>b.onclick=()=>{const r=HT.find(x=>x.id===b.dataset.id);if(r){selD=r.date;openCal(r)}})}
 }
 setInterval(()=>{if(document.visibilityState==='visible')homeTick(false)},1000);
+
+// ---- réglages, ouverture sans code, balayage arrière / avant
+function startApp(){if(lsg('askpin')==='1')goHome();else{unlocked=true;last=Date.now();cur=null;homeView()}}
+function homeView(){show(4);renderHome()}
+async function openSettings(){show(7);renderPals();$('optAsk').checked=lsg('askpin')==='1';$('optIdle').checked=lsg('idle')==='1'}
+$('optAsk').onchange=e=>{lss('askpin',e.target.checked?'1':'0');msg(e.target.checked?'Le code sera demandé à l’ouverture.':'Plus de code à l’ouverture.')};
+$('optIdle').onchange=e=>{lss('idle',e.target.checked?'1':'0');msg(e.target.checked?'Verrouillage automatique activé.':'Verrouillage automatique désactivé.')};
+$('gear').onclick=()=>openSettings();
+document.querySelectorAll('.tohome').forEach(b=>b.onclick=()=>homeView());
+// historique des rubriques
+const NAV={st:[],i:-1,replay:false};
+function route(fn){if(NAV.replay)return;const top=NAV.st[NAV.i];if(top&&top.k===fn.k)return;NAV.st=NAV.st.slice(0,NAV.i+1);NAV.st.push(fn);NAV.i=NAV.st.length-1}
+// les fonctions déclarées sont des propriétés de window : on les entoure
+[['homeView',()=>'home'],['openClients',()=>'clients'],['showDetail',id=>'fiche:'+id],['openCal',()=>'cal'],['openTodo',()=>'todo'],['openSettings',()=>'settings']].forEach(([n,k])=>{const o=window[n];if(typeof o!=='function')return;const w=function(...a){const f=()=>o.apply(null,a);f.k=k(...a);route(f);return o.apply(this,a)};window[n]=w});
+function navGo(d){const j=NAV.i+d;if(j<0||j>=NAV.st.length)return false;NAV.i=j;NAV.replay=true;try{const m=document.querySelector('main');m.classList.remove('fade');void m.offsetWidth;m.classList.add('fade');NAV.st[j]()}finally{NAV.replay=false}return true}
+let sw0=null;
+document.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;if(!$('lock').hidden){sw0=null;return}
+  if(e.target.closest('canvas,input,textarea,select')){sw0=null;return}sw0={x:e.clientX,y:e.clientY,t:Date.now(),cal:!!e.target.closest('#cGrid,.calh')}},{passive:true});
+document.addEventListener('pointerup',e=>{if(!sw0)return;const dx=e.clientX-sw0.x,dy=e.clientY-sw0.y,dt=Date.now()-sw0.t,c=sw0.cal;sw0=null;
+  if(dt>700||Math.abs(dx)<70||Math.abs(dy)>Math.abs(dx)*.6)return;
+  if(c&&!$('s5').hidden){(dx<0?$('cNext'):$('cPrev')).click();return}
+  if(!$('s1').hidden){if(dx>0)goHome();return}
+  if(!$('s2').hidden){if(dx>0)$('back').click();return}
+  if(navGo(dx>0?-1:1)&&navigator.vibrate)try{navigator.vibrate(8)}catch(_){}},{passive:true});
+document.addEventListener('pointercancel',()=>{sw0=null},{passive:true});
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
