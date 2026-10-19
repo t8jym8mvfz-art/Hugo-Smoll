@@ -218,6 +218,23 @@ main.fade{animation:fadeView .28s ease-out}
 .celib button:last-child{border-bottom:0}
 .celib button b{flex:none;color:var(--hi);font-size:12px;min-width:74px;padding-top:1px}
 
+
+/* réorganisation de la fiche de soins */
+.cehead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-right:6px}
+.cehead .lnk{font-size:15px;font-weight:600}
+.cb .cbar{flex:none;display:flex;flex-direction:column;gap:2px;margin-top:2px}
+.cb .mv{width:30px;height:26px;border-radius:8px;background:var(--fill);color:var(--hi);font-size:11px;line-height:1;display:grid;place-items:center}
+.cb .mv:active{transform:scale(.9)}
+.cb .cbp{display:none;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cb.t-title .cbp{font-weight:700}
+#ceList.compact .cb textarea{display:none}
+#ceList.compact .cb .cbp{display:block}
+#ceList.compact .cb{padding:6px 0;align-items:center}
+#ceList.compact .cb .cbt{font-size:10px}
+.cb.dragging{z-index:20;position:relative;will-change:transform}
+@keyframes moved{0%{background:color-mix(in srgb,var(--gold) 28%,var(--surf-a))}100%{background:transparent}}
+.cb.moved{animation:moved .7s ease-out}
+.cb.t-note.moved{animation:none}
 /* ===== atelier de couleurs ===== */
 .aurora{opacity:calc(var(--aura,.5) * var(--auraK,1))}
 .cpick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:14px 0 6px}
@@ -558,7 +575,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 <div class="f"><label class="l">Titre du PDF</label><input type="text" id="ceTitle" maxlength="50" autocomplete="off"></div>
 <div class="f"><label class="l">Pour (facultatif)</label><input type="text" id="ceFor" list="ceForL" placeholder="Nom du client" autocomplete="off"><datalist id="ceForL"></datalist></div>
 <div class="f"><label class="l">Introduction</label><textarea id="ceIntro" rows="2"></textarea></div></div>
-<h2>Contenu de la fiche</h2><div class="card"><div class="slist" id="ceList"></div></div>
+<div class="cehead"><h2>Contenu de la fiche</h2><button class="lnk" id="ceCompact" type="button">Réorganiser</button></div><div class="card"><div class="slist" id="ceList"></div></div>
 <div class="ceadd"><button class="dur" type="button" data-t="title">+ Titre</button><button class="dur" type="button" data-t="tip">+ Consigne</button><button class="dur" type="button" data-t="note">+ Encadré important</button></div>
 <h2>Éléments tout prêts</h2><div class="card"><div class="f" style="font-size:13px;color:var(--mut)">Touche un élément pour l’ajouter à la fin, puis modifie son texte.</div><div class="celib" id="ceLib"></div></div>
 <h2>Fin de la fiche</h2><div class="card"><div class="f"><label class="l">Message de fin</label><textarea id="ceOutro" rows="2"></textarea></div></div>
@@ -1098,7 +1115,7 @@ async function applyHome(){
 }
 (()=>{const orig=window.renderHome;window.renderHome=async function(...a){const r=await orig.apply(this,a);await window.applyHome();return r}})();
 function rowHTML(k,name,subt,on,ico){return '<div class="srow'+(on?'':' off')+'" data-k="'+k+'"><span class="drag" aria-label="Déplacer">'+DRAG+'</span>'+(ico?'<span class="si">'+isvg(ico)+'</span>':'')+'<span class="sn">'+esc(name)+(subt?'<small>'+esc(subt)+'</small>':'')+'</span><input type="checkbox" '+(on?'checked':'')+' aria-label="Afficher"></div>'}
-function sortable(list,save){list.querySelectorAll('.drag').forEach(h=>{h.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();const li=h.closest('.srow');let y0=e.clientY;li.classList.add('dragging');try{h.setPointerCapture(e.pointerId)}catch(_){}
+function sortable(list,save){list.querySelectorAll('.drag').forEach(h=>{if(h.dataset.b)return;h.dataset.b='1';h.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();const li=h.closest('.srow');let y0=e.clientY;li.classList.add('dragging');try{h.setPointerCapture(e.pointerId)}catch(_){}
   const mv=ev=>{const dy=ev.clientY-y0,nx=li.nextElementSibling,pv=li.previousElementSibling;
     if(nx&&dy>nx.offsetHeight/2){list.insertBefore(nx,li);y0+=nx.offsetHeight;vib(6)}else if(pv&&dy<-pv.offsetHeight/2){list.insertBefore(li,pv);y0-=pv.offsetHeight;vib(6)}
     li.style.transform='translateY('+(ev.clientY-y0)+'px)'};
@@ -1314,13 +1331,34 @@ function careTplGet(){let t=null;try{t=JSON.parse(lsg('careTpl')||'null')}catch(
   return t}
 const careTplSet=t=>lss('careTpl',JSON.stringify(t));
 const grow=ta=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};
-function ceRow(b){return '<div class="srow cb t-'+b.t+'" data-t="'+b.t+'"><span class="drag" aria-label="Déplacer">'+DRAG+'</span><div class="cbm"><span class="cbt">'+TLAB[b.t]+'</span><textarea rows="1">'+esc(b.x)+'</textarea></div><button class="x" type="button" aria-label="Supprimer">×</button></div>'}
+function ceRow(b){return '<div class="srow cb t-'+b.t+'" data-t="'+b.t+'"><span class="drag" aria-label="Glisser pour déplacer">'+DRAG+'</span><div class="cbm"><span class="cbt">'+TLAB[b.t]+'</span><textarea rows="1">'+esc(b.x)+'</textarea><span class="cbp">'+esc(b.x)+'</span></div><span class="cbar"><button class="mv" type="button" data-d="-1" aria-label="Monter">▲</button><button class="mv" type="button" data-d="1" aria-label="Descendre">▼</button></span><button class="x" type="button" aria-label="Supprimer">×</button></div>'}
 function ceRead(){const t=careTplGet();t.title=$('ceTitle').value.trim()||'Consignes de soins';t.intro=$('ceIntro').value.trim();t.outro=$('ceOutro').value.trim();
   t.blocks=[...$('ceList').children].map(r=>({t:r.dataset.t,x:r.querySelector('textarea').value.trim()})).filter(b=>b.x);return t}
 let ceT;const ceSave=()=>{clearTimeout(ceT);ceT=setTimeout(()=>careTplSet(ceRead()),250)};
-function ceBind(){$('ceList').querySelectorAll('.cb').forEach(r=>{const ta=r.querySelector('textarea');grow(ta);ta.oninput=()=>{grow(ta);ceSave()};
-  let arm=false;r.querySelector('.x').onclick=()=>{const b=r.querySelector('.x');if(!arm&&ta.value.trim()){arm=true;b.textContent='Suppr. ?';b.style.fontSize='12px';b.style.color='var(--err)';return}r.remove();careTplSet(ceRead());vib(10)}});
-  sortable($('ceList'),()=>careTplSet(ceRead()))}
+function ceMove(r,d){const sib=d<0?r.previousElementSibling:r.nextElementSibling;if(!sib){vib(20);return}
+  if(d<0)r.parentNode.insertBefore(r,sib);else r.parentNode.insertBefore(sib,r);r.classList.remove('moved');void r.offsetWidth;r.classList.add('moved');careTplSet(ceRead());vib(8);
+  try{r.scrollIntoView({block:'nearest',behavior:RM?'auto':'smooth'})}catch(e){}}
+function ceDrag(list){list.querySelectorAll('.drag').forEach(h=>{if(h.dataset.b)return;h.dataset.b='1';
+  h.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();const li=h.closest('.cb'),sc=$('scroller');if(!li)return;
+    if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+    li.classList.add('dragging');try{h.setPointerCapture(e.pointerId)}catch(_){}
+    const grab=e.clientY-li.getBoundingClientRect().top;let curY=e.clientY,raf=0,live=true;
+    const base=()=>{li.style.transform='';return li.getBoundingClientRect().top};
+    const place=()=>{let b=base();const nx=li.nextElementSibling,pv=li.previousElementSibling;
+      if(nx){const r=nx.getBoundingClientRect();if(curY>r.top+r.height/2){list.insertBefore(nx,li);vib(6);b=base()}}
+      if(pv){const r=pv.getBoundingClientRect();if(curY<r.top+r.height/2){list.insertBefore(li,pv);vib(6);b=base()}}
+      li.style.transform='translateY('+(curY-grab-b)+'px)'};
+    const loop=()=>{if(!live)return;const H=sc.clientHeight;let v=0;if(curY<100)v=-Math.ceil((100-curY)/5);else if(curY>H-100)v=Math.ceil((curY-(H-100))/5);
+      if(v){const t0=sc.scrollTop;sc.scrollTop+=v;if(sc.scrollTop!==t0)place()}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop);
+    const mv=ev=>{curY=ev.clientY;place()};
+    const up=()=>{live=false;cancelAnimationFrame(raf);h.removeEventListener('pointermove',mv);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);
+      li.style.transform='';li.classList.remove('dragging');li.classList.remove('moved');void li.offsetWidth;li.classList.add('moved');careTplSet(ceRead())};
+    h.addEventListener('pointermove',mv);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)})})}
+function ceBind(){$('ceList').querySelectorAll('.cb').forEach(r=>{if(r.dataset.b)return;r.dataset.b='1';const ta=r.querySelector('textarea'),pv=r.querySelector('.cbp');grow(ta);
+  ta.oninput=()=>{grow(ta);pv.textContent=ta.value;ceSave()};
+  r.querySelectorAll('.mv').forEach(b=>b.onclick=()=>ceMove(r,+b.dataset.d));
+  let arm=false;r.querySelector('.x').onclick=()=>{const b=r.querySelector('.x');if(!arm&&ta.value.trim()){arm=true;b.textContent='Suppr. ?';b.style.fontSize='12px';b.style.color='var(--err)';setTimeout(()=>{arm=false;b.textContent='×';b.style.fontSize='';b.style.color=''},3500);return}r.remove();careTplSet(ceRead());vib(10)}});
+  ceDrag($('ceList'))}
 function ceAdd(t,x){$('ceList').insertAdjacentHTML('beforeend',ceRow({t,x:x||''}));const r=$('ceList').lastElementChild;r.classList.add('new');ceBind();careTplSet(ceRead());
   const ta=r.querySelector('textarea');setTimeout(()=>{r.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'});if(!x)ta.focus()},60);vib(10)}
 async function openCareRaw(name){show(10);const t=careTplGet();$('ceTitle').value=t.title||'';$('ceIntro').value=t.intro||'';$('ceOutro').value=t.outro||'';if(typeof name==='string')$('ceFor').value=name;
@@ -1336,21 +1374,41 @@ let ceArm=false;$('ceReset').onclick=()=>{if(!ceArm){ceArm=true;$('ceReset').tex
   ceArm=false;$('ceReset').textContent='Remettre la fiche par défaut';lss('care','');careTplSet(JSON.parse(JSON.stringify(CARE_TPL_DEF)));openCareRaw();msg('Fiche de soins remise par défaut.')};
 $('cfOpenCare').onclick=()=>openCare();
 async function buildCarePDF(t,who,date){const sub=(who?'Pour '+who+'  ·  ':'')+(date?'séance du '+date:'remis le '+new Date().toLocaleDateString('fr-FR'));
-  const{doc,W,M,bg}=await goldDoc(t.title||'Consignes de soins',sub);let y=52;
-  const need=h=>{if(y+h>278){doc.addPage();bg();y=18}};
-  if(t.intro){doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...TX);const l=doc.splitTextToSize(t.intro,W-2*M);need(l.length*5+4);doc.text(l,M,y+4);y+=l.length*5+6}
-  let n=0;
-  t.blocks.forEach(b=>{if(b.t==='title'){n=n;need(16);y+=4;star(doc,M,y-.4,4.6,GOLD);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...GHI);doc.text(b.x,M+7,y+3.4);gbar(doc,M,y+6,W-2*M,.35,40);y+=11}
-    else if(b.t==='tip'){n++;doc.setFont('helvetica','normal');doc.setFontSize(10.5);const l=doc.splitTextToSize(b.x,W-2*M-18),h=l.length*5+7;need(h+3);
-      doc.setFillColor(...CARD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');doc.setFillColor(...GOLD);doc.roundedRect(M+3.5,y+h/2-3.5,7,7,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...BG);doc.text(String(n),M+8.6,y+h/2+1.2,{align:'right'});
-      doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...TX);doc.text(l,M+15,y+5.6);y+=h+3}
-    else{doc.setFont('helvetica','bold');doc.setFontSize(10.5);const l=doc.splitTextToSize(b.x,W-2*M-16),h=l.length*5+9;need(h+4);y+=1;
-      doc.setFillColor(...HEAD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');doc.setDrawColor(...GOLD);doc.setLineWidth(.6);doc.roundedRect(M,y,W-2*M,h,3,3,'S');star(doc,M+4,y+h/2-2.8,5.6,GOLD);doc.setTextColor(...GHI);doc.text(l,M+13,y+6.6);y+=h+4}});
-  if(t.outro){y+=4;doc.setFont('helvetica','bold');doc.setFontSize(10);const l=doc.splitTextToSize(t.outro,W-2*M);need(l.length*5+4);doc.setTextColor(...GHI);doc.text(l,M,y+4);y+=l.length*5}
+  const{doc,W,M}=await goldDoc(t.title||'Consignes de soins',sub);const TOP=50,BOT=280,GAP=6;
+  // mise en page : renvoie la hauteur utilisée ; dessine seulement si draw
+  const lay=(k,cols,draw)=>{const fullW=W-2*M,cw=cols===1?fullW:(fullW-GAP)/2,lh=5*k;let y=TOP,n=0,maxY=TOP;
+    const txt=(str,fs,bold,w)=>{doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fs);return doc.splitTextToSize(str,w)};
+    if(t.intro){const l=txt(t.intro,10.5*k,false,fullW);if(draw){doc.setTextColor(...TX);doc.text(l,M,y+4*k)}y+=l.length*lh+4*k}
+    const colTop=y;let col=0,x=M;const items=t.blocks.map(b=>{let h,l;
+      if(b.t==='title'){l=txt(b.x,12*k,true,cw-8*k);h=(l.length-1)*lh*1.1+15*k}
+      else if(b.t==='tip'){l=txt(b.x,10.5*k,false,cw-18*k);h=l.length*lh+7*k+3*k}
+      else{l=txt(b.x,10.5*k,true,cw-16*k);h=l.length*lh+9*k+5*k}return{b,l,h}});
+    let colH=[0,0];
+    if(cols===2){const tot=items.reduce((a,i)=>a+i.h,0);let acc=0,split=items.length;for(let i=0;i<items.length;i++){if(acc+items[i].h/2>tot/2){split=i;break}acc+=items[i].h}
+      if(split>0&&items[split]&&items[split].b.t!=='title'&&items[split-1].b.t==='title')split--;items.forEach((it,i)=>it.c=i<split?0:1)}else items.forEach(it=>it.c=0);
+    items.forEach(it=>{if(it.c!==col){col=it.c;y=colTop;x=M+cw+GAP}const b=it.b,l=it.l;
+      if(b.t==='title'){if(draw){star(doc,x,y+3*k-.4,4.6*k,GOLD);doc.setFont('helvetica','bold');doc.setFontSize(12*k);doc.setTextColor(...GHI);doc.text(l,x+7*k,y+3*k+3.4*k);gbar(doc,x,y+it.h-5*k,cw,.35,30)}}
+      else if(b.t==='tip'){n++;const h=it.h-3*k;if(draw){doc.setFillColor(...CARD);doc.roundedRect(x,y,cw,h,3*k,3*k,'F');const bs=7*k;doc.setFillColor(...GOLD);doc.roundedRect(x+3.5*k,y+h/2-bs/2,bs,bs,2*k,2*k,'F');
+        doc.setFont('helvetica','bold');doc.setFontSize(8.5*k);doc.setTextColor(...BG);doc.text(String(n),x+3.5*k+bs/2+(n>9?1.6:.9)*k,y+h/2+1.2*k,{align:'right'});
+        doc.setFont('helvetica','normal');doc.setFontSize(10.5*k);doc.setTextColor(...TX);doc.text(l,x+15*k,y+5.6*k)}}
+      else{const h=it.h-5*k;if(draw){doc.setFillColor(...HEAD);doc.roundedRect(x,y+k,cw,h,3*k,3*k,'F');doc.setDrawColor(...GOLD);doc.setLineWidth(.6);doc.roundedRect(x,y+k,cw,h,3*k,3*k,'S');star(doc,x+4*k,y+k+h/2-2.8*k,5.6*k,GOLD);
+        doc.setFont('helvetica','bold');doc.setFontSize(10.5*k);doc.setTextColor(...GHI);doc.text(l,x+13*k,y+k+6.6*k)}}
+      y+=it.h;colH[col]=y;maxY=Math.max(maxY,y)});
+    y=Math.max(maxY,colTop);
+    if(t.outro){const l=txt(t.outro,10*k,true,fullW);y+=4*k;if(draw){doc.setTextColor(...GHI);doc.text(l,M,y+4*k)}y+=l.length*lh+2*k}
+    return y};
+  let best=null;
+  for(const cols of [1,2]){for(let k=1;k>=.58;k-=.03){if(lay(k,cols,false)<=BOT){best={k,cols};break}}if(best)break}
+  if(!best){best={k:.55,cols:2}}
+  lay(best.k,best.cols,true);
   goldFoot(doc,W,M,(t.title||'Consignes de soins')+'  ·  Hugo Smoll');return doc.output()}
 $('cePdf').onclick=async()=>{if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);const t=ceRead();careTplSet(t);if(!t.blocks.length)return msg('Ajoute au moins une consigne.',1);
   msg('Création de la fiche de soins…');const who=$('ceFor').value.trim();const blob=await buildCarePDF(t,who,'');offer(blob,'soins'+(who?clean(who):'')+'.pdf','')};
 window.carePDF=async function(f){if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);msg('Création des consignes…');const blob=await buildCarePDF(careTplGet(),(f.prenom+' '+f.nom).trim(),lastDate(f));offer(blob,'soins'+clean(f.nom)+clean(f.prenom)+'.pdf','')};
+
+$('ceCompact').onclick=()=>{const L=$('ceList'),on=!L.classList.contains('compact');L.classList.toggle('compact',on);$('ceCompact').textContent=on?'Terminé':'Réorganiser';
+  L.querySelectorAll('.cb').forEach(r=>{r.querySelector('.cbp').textContent=r.querySelector('textarea').value});if(!on)L.querySelectorAll('textarea').forEach(grow);vib(10)};
+new MutationObserver(()=>{if(!$('s10').hidden){$('ceList').classList.remove('compact');$('ceCompact').textContent='Réorganiser'}}).observe($('s10'),{attributes:true,attributeFilter:['hidden']});
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
