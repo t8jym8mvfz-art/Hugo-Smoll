@@ -115,7 +115,7 @@ canvas{border-radius:16px;box-shadow:0 0 0 1.5px color-mix(in srgb,var(--gold) 6
 .lkt{background:var(--grad);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradshift 5s linear infinite}
 #lkin{background:var(--surf-a);border:1px solid var(--bd)}
 #lkin:focus{border-color:var(--gold)}
-.pals{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:12px 0}
+.pals{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:12px 0}
 .pal{display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 2px;border-radius:14px;background:var(--fill);border:1.5px solid transparent;color:var(--mut);font-size:11px;font-weight:600;line-height:1.2;text-align:center}
 .pal[aria-pressed="true"]{border-color:var(--gold);color:var(--tx)}
 .pal i{width:34px;height:34px;border-radius:50%;display:block;box-shadow:0 0 0 1px var(--bd)}
@@ -150,6 +150,115 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 .dn{flex:1;min-width:0;overflow-wrap:anywhere;font-size:15px}.dn small{display:block;color:var(--mut);font-size:12px}
 .doc .lnk{flex:none;font-size:14px}
 .addpdf{display:inline-block;cursor:pointer;padding:12px 0}
+
+:root[data-pal="couchant"]{color-scheme:dark;--bg:#140a12;--card:#22131f;--fill:#2d1a29;--tx:#fff1ea;--mut:#b8949f;--bd:rgba(255,160,120,.16);--gold:#ff5e62;--hi:#ffb36b;--acc2:#b44cff;--on:#fff;--gold2:#b44cff;--err:#ffb4a6;--bar:rgba(20,10,18,.62);--aura:.65}
+:root[data-pal="ocean"]{color-scheme:dark;--bg:#04121a;--card:#0b2130;--fill:#112c3e;--tx:#e8f7ff;--mut:#86aebf;--bd:rgba(120,220,255,.14);--gold:#0fa3b1;--hi:#7ee8fa;--acc2:#2f6bff;--on:#fff;--gold2:#2f6bff;--err:#ff8a8a;--bar:rgba(4,18,26,.62);--aura:.65}
+:root[data-pal="neon"]{color-scheme:dark;--bg:#07050f;--card:#120d22;--fill:#1b1433;--tx:#f5f2ff;--mut:#9a8fc0;--bd:rgba(0,255,240,.14);--gold:#ff2bd6;--hi:#00f0ff;--acc2:#7c3aed;--on:#fff;--gold2:#00f0ff;--err:#ff7aa8;--bar:rgba(7,5,15,.6);--aura:.75}
+:root[data-pal="minuit"]{color-scheme:dark;--bg:#070b16;--card:#0f1628;--fill:#162038;--tx:#f2efe6;--mut:#8f97ad;--bd:rgba(230,190,100,.14);--gold:#d4a73c;--hi:#f3d58a;--acc2:#5b7cfa;--on:#0b0f1c;--gold2:#5b7cfa;--err:#f08a7e;--bar:rgba(7,11,22,.62);--aura:.55}
+:root[data-pal="lave"]{color-scheme:dark;--bg:#0b0605;--card:#1a0f0c;--fill:#241612;--tx:#fff0e6;--mut:#a98f84;--bd:rgba(255,120,60,.15);--gold:#ff4d1a;--hi:#ffb02e;--acc2:#c4002b;--on:#fff;--gold2:#c4002b;--err:#ffb29a;--bar:rgba(11,6,5,.62);--aura:.65}
+:root[data-pal="sakura"]{color-scheme:light;--bg:#fbeef2;--card:#fffafb;--fill:#f6e3ea;--tx:#2a1620;--mut:#8a6c78;--bd:rgba(120,40,70,.1);--gold:#e0568a;--hi:#b8336a;--acc2:#f29bb8;--on:#fff;--gold2:#f29bb8;--err:#c2213f;--bar:rgba(251,238,242,.75);--aura:.4}
+:root[data-pal="glacier"]{color-scheme:light;--bg:#eaf3f8;--card:#fbfdff;--fill:#deebf2;--tx:#0f2230;--mut:#5f7a8a;--bd:rgba(15,60,90,.1);--gold:#2b8fd6;--hi:#1565a8;--acc2:#5ccfe6;--on:#fff;--gold2:#5ccfe6;--err:#c63b3b;--bar:rgba(234,243,248,.75);--aura:.4}
+/* ===== Accueil dynamique ===== */
+.today{position:relative;overflow:hidden}
+.today::after{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--gold) 35%,transparent),transparent 65%);animation:orb 7s ease-in-out infinite alternate;pointer-events:none}
+@keyframes orb{to{transform:translate(-40px,30px) scale(1.25)}}
+.hrow{display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.clock{font-size:46px;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;background:var(--grad);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradshift 5s linear infinite}
+.clock .sec{font-size:20px;opacity:.75;margin-left:2px}
+.colon{animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:.25}}
+.hring{margin-left:auto;position:relative;width:74px;height:74px;flex:none}
+.hring svg{display:block;transform:rotate(-90deg)}
+.hring .arc{transition:stroke-dashoffset 1.2s cubic-bezier(.3,.7,.2,1)}
+.hring span{position:absolute;inset:0;display:grid;place-content:center;text-align:center;font-weight:800;font-size:17px;line-height:1.1}
+.hring span small{display:block;font-weight:500;font-size:10px;color:var(--mut)}
+.cd{position:relative;z-index:1;margin-top:12px;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--gold) 12%,transparent)}
+.cd .pulse{flex:none;width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 color-mix(in srgb,var(--gold) 70%,transparent);animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{to{box-shadow:0 0 0 12px transparent}}
+.cd b{font-size:15px}.cd span{color:var(--mut);font-size:13px;display:block}
+.tline{position:relative;z-index:1;height:46px;margin:16px 0 4px;border-radius:12px;background:var(--fill);overflow:hidden}
+.tline .blk{position:absolute;top:8px;bottom:8px;border-radius:8px;background:var(--grad);background-size:200% 200%;animation:gradshift 6s ease-in-out infinite,grow .7s cubic-bezier(.2,.8,.2,1) both;transform-origin:left;box-shadow:0 4px 14px color-mix(in srgb,var(--gold) 40%,transparent);overflow:hidden;color:var(--on);font-size:11px;font-weight:700;padding:0 6px;display:flex;align-items:center;white-space:nowrap}
+.tline .blk.done{opacity:.4}
+@keyframes grow{from{transform:scaleX(0)}}
+.tline .now{position:absolute;top:0;bottom:0;width:2px;background:var(--tx);box-shadow:0 0 10px var(--tx);transition:left 1s linear}
+.tline .now::before{content:"";position:absolute;top:-3px;left:-4px;width:10px;height:10px;border-radius:50%;background:var(--tx)}
+.tticks{position:relative;z-index:1;height:14px;font-size:10px;color:var(--mut);font-variant-numeric:tabular-nums}
+.tticks span{position:absolute;transform:translateX(-50%)}
+.wkc{margin-top:12px;padding:12px 10px}
+.wkg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.wk{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 0;border-radius:14px;background:none;color:var(--tx);transition:background-color .2s,transform .12s;animation:rise .45s cubic-bezier(.2,.8,.2,1) both}
+.wk:active{transform:scale(.92)}
+.wk small{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+.wk b{font-size:16px;font-variant-numeric:tabular-nums}
+.wk .wb{width:8px;height:34px;border-radius:4px;background:var(--fill);display:flex;align-items:flex-end;overflow:hidden}
+.wk .wb i{display:block;width:100%;border-radius:4px;background:var(--grad);animation:growy .8s cubic-bezier(.2,.8,.2,1) both;transform-origin:bottom}
+@keyframes growy{from{transform:scaleY(0)}}
+.wk em{font-style:normal;font-size:11px;font-weight:700;color:var(--hi);min-height:14px}
+.wk.on{background:color-mix(in srgb,var(--gold) 16%,transparent)}
+.wk.on b{color:var(--hi)}
+.tl .ico{animation:gradshift 6s ease-in-out infinite,bob 4s ease-in-out infinite}
+.tl:nth-child(2) .ico{animation-delay:0s,-1s}.tl:nth-child(3) .ico{animation-delay:0s,-2s}.tl:nth-child(4) .ico{animation-delay:0s,-3s}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -4px}}
+.tl::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,color-mix(in srgb,var(--hi) 18%,transparent) 50%,transparent 70%);background-size:250% 100%;animation:sheen 5s ease-in-out infinite;pointer-events:none}
+.tl:nth-child(2)::after{animation-delay:1.2s}.tl:nth-child(3)::after{animation-delay:2.4s}.tl:nth-child(4)::after{animation-delay:3.6s}
+@keyframes sheen{0%,100%{background-position:120% 0}50%{background-position:-20% 0}}
+
+/* ===== Accueil, calendrier, projets ===== */
+.tiles4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.tl{display:flex;flex-direction:column;align-items:flex-start;gap:10px;text-align:left;padding:16px;border-radius:22px;background:var(--surf-a);color:var(--tx);box-shadow:0 0 0 1px var(--bd),0 12px 32px rgba(0,0,0,.18);position:relative;overflow:hidden;animation:rise .5s cubic-bezier(.2,.8,.2,1) both;transition:transform .12s;min-width:0}
+.tl:active{transform:scale(.96)}
+.tl:nth-child(2){animation-delay:.06s}.tl:nth-child(3){animation-delay:.12s}.tl:nth-child(4){animation-delay:.18s}
+.tl .ico{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;color:var(--on);background:var(--grad);background-size:200% 200%;animation:gradshift 6s ease-in-out infinite}
+.tl .ico svg{width:22px;height:22px}
+.tl b{font-size:16px;line-height:1.2}
+.tl small{color:var(--mut);font-size:13px}
+.tl .n{position:absolute;top:14px;right:14px;min-width:26px;height:26px;padding:0 8px;border-radius:999px;display:grid;place-items:center;font-size:13px;font-weight:700;background:var(--fill);color:var(--hi)}
+.today{padding:16px}
+.today .lab{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--hi)}
+.today .big{font-size:22px;font-weight:700;margin:4px 0 2px}
+.today .sub2{color:var(--mut);font-size:14px}
+.rd{display:flex;gap:12px;align-items:stretch;padding:12px 0;border-bottom:.5px solid var(--bd);width:100%;text-align:left;background:none;color:var(--tx)}
+.rd:last-child{border-bottom:0}
+.rd .tm{flex:none;width:58px;font-variant-numeric:tabular-nums;font-weight:700;font-size:16px}
+.rd .tm small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+.rd .bar{flex:none;width:4px;border-radius:2px;background:var(--grad)}
+.rd .who{flex:1;min-width:0}
+.rd .who b{display:block;font-size:16px;overflow-wrap:anywhere}
+.rd .who span{color:var(--mut);font-size:13px;overflow-wrap:anywhere}
+.rd.past{opacity:.5}
+.rd .tag{flex:none;align-self:center;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;background:var(--grad);color:var(--on)}
+.rd .tag.next{background:var(--fill);color:var(--hi)}
+.empty2{color:var(--mut);font-size:15px;padding:12px 0}
+.calh{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.calh b{font-size:17px;text-transform:capitalize}
+.calh .lnk{font-size:24px;padding:4px 12px}
+.calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;padding:4px 0 12px}
+.calg .wd{text-align:center;font-size:11px;font-weight:600;color:var(--mut);padding:4px 0}
+.dy{aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;color:var(--tx);font-size:15px;font-variant-numeric:tabular-nums;position:relative;transition:background-color .2s,transform .12s}
+.dy:active{transform:scale(.92)}
+.dy.out{visibility:hidden}
+.dy.td{color:var(--hi);font-weight:800}
+.dy.sel{background:var(--grad);background-size:200% 200%;color:var(--on);font-weight:700;animation:gradshift 6s ease-in-out infinite}
+.dy i{display:flex;gap:2px;height:5px}
+.dy i em{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.dy.sel i em{background:var(--on)}
+.durs{display:flex;flex-wrap:wrap;gap:6px;padding:6px 0}
+.dur{padding:8px 12px;border-radius:999px;background:var(--fill);color:var(--tx);font-size:14px;font-weight:600;border:1.5px solid transparent}
+.dur[aria-pressed="true"]{background:var(--grad);background-size:200% 200%;color:var(--on)}
+.warn{margin:10px 6px 0;color:var(--err);font-size:14px}
+.rbtns{display:flex;justify-content:center;gap:28px;margin-top:10px}
+.td-it{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:.5px solid var(--bd)}
+.td-it:last-child{border-bottom:0}
+.td-it input{width:22px;height:22px;flex:none;accent-color:var(--gold)}
+.td-it .tt{flex:1;min-width:0;overflow-wrap:anywhere}
+.td-it .tt small{display:block;color:var(--mut);font-size:12px}
+.td-it .tt small.late{color:var(--err)}
+.td-it.done .tt{text-decoration:line-through;color:var(--mut)}
+.td-it .x{flex:none;background:none;color:var(--mut);font-size:20px;padding:2px 6px}
+.td-it.new{animation:slideIn .35s both}
+.rda{display:flex;gap:20px;padding:0 0 10px 74px;margin-top:-6px}
+.rda .lnk{font-size:14px}
+
 .vh{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -166,7 +275,7 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 <div><h1 id="h1">Consentement</h1><div class="ig" id="sub">Hugo Smoll · @hugo_Smoll</div></div>
 </div>
 
-<div id="s1"><div style="text-align:right;margin:-6px 0 -10px"><button class="lnk" id="toClients" type="button">Fiches clients ›</button></div><h2>Client</h2>
+<div id="s1"><div style="text-align:right;margin:-6px 0 -10px"><button class="lnk" id="toClients" type="button">Espace tatoueur ›</button></div><h2>Client</h2>
 <div class="card">
 <div class="row f"><div><label class="l">Nom *</label><input type="text" id="nom" autocomplete="off"></div>
 <div><label class="l">Prénom *</label><input type="text" id="prenom" autocomplete="off"></div></div>
@@ -222,6 +331,36 @@ canvas.signed{animation:sigglow 1.1s ease-out}
 </div>
 <div id="det" hidden></div>
 </div>
+<div id="s4" hidden>
+<div id="hToday"></div>
+<div class="card wkc" id="hWeek"></div>
+<div class="tiles4" id="hTiles"></div>
+<h2>Projets à faire</h2><div class="card" id="hTodo"></div>
+</div>
+<div id="s5" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<div class="card calc"><div class="calh"><button class="lnk" id="cPrev" type="button" aria-label="Mois précédent">‹</button><b id="cMonth"></b><button class="lnk" id="cNext" type="button" aria-label="Mois suivant">›</button></div>
+<div class="calg" id="cGrid"></div></div>
+<h2 id="cDay"></h2><div id="cList"></div>
+<button class="pri" id="cAdd" type="button" style="margin-top:14px">+ Ajouter un rendez-vous</button>
+<div id="rForm" hidden><h2 id="rTitle">Nouveau rendez-vous</h2><div class="card">
+<div class="f"><label class="l">Client *</label><input type="text" id="rCli" list="rCliL" autocomplete="off" placeholder="Nom du client"><datalist id="rCliL"></datalist></div>
+<div class="row f"><div><label class="l">Jour *</label><input type="date" id="rDate"></div><div><label class="l">Heure *</label><input type="time" id="rTime" value="14:00"></div></div>
+<div class="f"><label class="l">Durée</label><div class="durs" id="rDur"></div></div>
+<div class="f"><label class="l">Projet / notes</label><textarea id="rNote" rows="2" placeholder="Motif, emplacement, acompte…"></textarea></div>
+<label class="chk"><input type="checkbox" id="rIcs"><span>Ajouter aussi au calendrier iPhone (rappel 2 h avant)</span></label>
+</div>
+<p id="rWarn" class="warn" hidden></p>
+<button class="pri" id="rSave" type="button" style="margin-top:14px">Enregistrer le rendez-vous</button>
+<div class="rbtns"><button class="lnk" id="rCancel" type="button">Annuler</button><button class="lnk" id="rDel" type="button" style="color:var(--err)" hidden>Supprimer</button></div></div>
+</div>
+<div id="s6" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<h2>Nouveau projet</h2><div class="card"><div class="f"><input type="text" id="tTitle" placeholder="Ex. dessiner le dos de Léa" autocomplete="off" enterkeyhint="done"></div>
+<div class="row f"><div><label class="l">Pour le</label><input type="date" id="tDue"></div><div style="display:flex;align-items:flex-end"><button class="pri" id="tAdd" type="button" style="padding:12px">Ajouter</button></div></div></div>
+<h2>À faire</h2><div class="card" id="tOpen"></div>
+<h2>Terminés</h2><div class="card" id="tDone"></div>
+</div>
 <div id="msg"></div>
 </main>
 <div class="dock" id="d1"><button class="pri" id="next" type="button">Continuer</button></div>
@@ -252,7 +391,7 @@ function shrink(file,m0){return new Promise(res=>{const u=URL.createObjectURL(fi
 $('files').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f);if(p){photos.push(p);const i=new Image();i.src=p.url;$('ph').appendChild(i)}}e.target.value='';qd()};
 let mtm;function msg(t,bad,html){const m=$('msg');clearTimeout(mtm);if(html)m.innerHTML=html;else m.textContent=t||'';m.className=bad?'err':'';if(t&&!bad&&!html)mtm=setTimeout(()=>{m.textContent=''},9000)}
 $('msg').onclick=e=>{if(!e.target.closest('a,button'))$('msg').textContent=''};
-function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=3;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients'][n];$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
+function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=6;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients','Accueil','Calendrier','Projets'][n];$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':n>=4?todayLabel():'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
 const v=id=>$(id).value.trim();
 $('next').onclick=async()=>{
 if(!v('nom')||!v('prenom')||!v('naiss'))return msg('Merci de renseigner nom, prénom et date de naissance.',1);
@@ -290,40 +429,58 @@ else if(q.t==='l'){pg.drawLine({start:{x:q.x1*MM,y:H-q.y1*MM},end:{x:q.x2*MM,y:H
 else if(q.t==='t'){const ft=q.b?this.fb:this.f,wd=q.al==='right'?ft.widthOfTextAtSize(q.s,q.fs):0;pg.drawText(q.s,{x:q.x*MM-wd,y:H-q.y*MM,size:q.fs,font:ft,color:rgb(q.c)})}
 else if(q.t==='i'){let im=cache[q.u];if(!im){const m=/^data:image\/(\w+);base64,(.*)$/.exec(q.u),by=Uint8Array.from(atob(m[2]),c=>c.charCodeAt(0));im=cache[q.u]=await(m[1]==='png'?this.doc.embedPng(by):this.doc.embedJpg(by))}pg.drawImage(im,{x:q.x*MM,y:H-(q.y+q.h)*MM,width:q.w*MM,height:q.h*MM})}}}
 return new Blob([await this.doc.save()],{type:'application/pdf'})}}
-let GOLD=[201,151,0];const INK=[29,29,31],MUT=[110,110,115],CARD=[245,245,247];
+let GOLD=[230,179,37];const GHI=[243,211,106],GDP=[168,116,15],BG=[12,12,14],HEAD=[19,19,22],CARD=[24,24,27],LINE=[44,44,48],TX=[244,243,239],MUT=[146,145,140],INK=TX,PAPER=[247,242,229];
 const STAR=[[50,2],[53.4,41.7],[71.2,28.8],[58.3,46.6],[98,50],[58.3,53.4],[71.2,71.2],[53.4,58.3],[50,98],[46.6,58.3],[28.8,71.2],[41.7,53.4],[2,50],[41.7,46.6],[28.8,28.8],[46.6,41.7]];
-function star(doc,x,y,sz){const k=sz/100,p=STAR.map(a=>[x+a[0]*k,y+a[1]*k]),s=[];for(let i=1;i<p.length;i++)s.push([p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]]);doc.setFillColor(...GOLD);doc.lines(s,p[0][0],p[0][1],[1,1],'F',true)}
+function star(doc,x,y,sz,col){const k=sz/100,p=STAR.map(a=>[x+a[0]*k,y+a[1]*k]),s=[];for(let i=1;i<p.length;i++)s.push([p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]]);doc.setFillColor(...(col||GOLD));doc.lines(s,p[0][0],p[0][1],[1,1],'F',true)}
+function goldStar(doc,x,y,sz){star(doc,x,y,sz,GDP);star(doc,x+sz*.08,y+sz*.08,sz*.84,GOLD);star(doc,x+sz*.27,y+sz*.27,sz*.46,GHI)}
+const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
+function gbar(doc,x,y,w,h,n){n=n||60;const sw=w/n;for(let i=0;i<n;i++){const t=i/(n-1),c=t<.5?mix(GHI,GOLD,t*2):mix(GOLD,GDP,(t-.5)*2);doc.setFillColor(...c);doc.rect(x+i*sw,y,sw+.05,h,'F')}}
 async function buildPDF(d,moth){
-GOLD=accRGB();const doc=await MiniPDF.create(),W=210,M=16;let y=50;
-const need=h=>{if(y+h>282){doc.addPage();y=16}};
-doc.setFillColor(0,0,0);doc.rect(0,0,W,40,'F');star(doc,M,10,20);
-doc.setTextColor(255,255,255);doc.setFont('helvetica','bold');doc.setFontSize(20);doc.text('Consentement de tatouage',M+26,19);
-doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...GOLD);doc.text(d.studio+'  ·  @hugo_Smoll',M+26,26.5);
-doc.setTextColor(170,170,170);doc.text(d.date,M+26,33);
-if(moth)doc.addImage(moth,'PNG',W-M-38,5,36,36*MR);
-doc.setFillColor(...GOLD);doc.rect(0,40,W,1,'F');
-const sect=t=>{need(16);y+=3;doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...GOLD);doc.text(t,M,y+3);doc.setDrawColor(225,225,228);doc.setLineWidth(.2);doc.line(M,y+5,W-M,y+5);y+=9};
-const grid=(pairs,cols=2)=>{const cw=(W-2*M-8)/cols;for(let i=0;i<pairs.length;i+=cols){const r=pairs.slice(i,i+cols);doc.setFont('helvetica','bold');doc.setFontSize(10);const ls=r.map(p=>doc.splitTextToSize(p[1]||'—',cw-2)),h=Math.max(...ls.map(l=>l.length))*4.8+10;need(h+2);doc.setFillColor(...CARD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');r.forEach((p,j)=>{const x=M+4+j*cw;doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text(p[0],x,y+5);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...INK);doc.text(ls[j],x,y+10)});y+=h+2}};
+const doc=await MiniPDF.create(),W=210,M=16;let y=58;
+const bg=()=>{doc.setFillColor(...BG);doc.rect(0,0,W,297,'F')};
+const need=h=>{if(y+h>280){doc.addPage();bg();y=18}};
+bg();
+doc.setFillColor(...HEAD);doc.rect(0,0,W,46,'F');
+goldStar(doc,M,11,22);
+doc.setTextColor(...TX);doc.setFont('helvetica','bold');doc.setFontSize(21);doc.text('Consentement de tatouage',M+29,20);
+doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...GHI);doc.text(String(d.studio||'Hugo Smoll').toUpperCase()+'   ·   @hugo_Smoll',M+29,27.5);
+doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(...MUT);doc.text(d.imported?'Fiche '+d.date:'Signé le '+d.date,M+29,34);
+if(moth)doc.addImage(moth,'PNG',W-M-40,6,38,38*MR);
+gbar(doc,0,46,W,1.6,90);
+const sect=t=>{need(18);y+=4;star(doc,M,y-.4,4.2,GOLD);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...GHI);doc.text(t,M+6.5,y+3);gbar(doc,M,y+5.6,W-2*M,.35,40);y+=10};
+const card=(x,yy,w,h)=>{doc.setFillColor(...CARD);doc.roundedRect(x,yy,w,h,3,3,'F');doc.setDrawColor(...LINE);doc.setLineWidth(.25);doc.roundedRect(x,yy,w,h,3,3,'S')};
+const grid=(pairs,cols=2)=>{const cw=(W-2*M-8)/cols;for(let i=0;i<pairs.length;i+=cols){const r=pairs.slice(i,i+cols);doc.setFont('helvetica','bold');doc.setFontSize(10);const ls=r.map(p=>doc.splitTextToSize(p[1]||'—',cw-2)),h=Math.max(...ls.map(l=>l.length))*4.8+10.5;need(h+2.5);card(M,y,W-2*M,h);
+  r.forEach((p,j)=>{const x=M+4.5+j*cw;doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...MUT);doc.text(p[0],x,y+5.3);doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...TX);doc.text(ls[j],x,y+10.4)});
+  if(cols>1&&r.length>1){doc.setDrawColor(...LINE);doc.setLineWidth(.2);doc.line(M+4+cw-2,y+3,M+4+cw-2,y+h-3)}y+=h+2.5}};
 sect('CLIENT');
 grid([['NOM',d.nom],['PRÉNOM',d.prenom],['DATE DE NAISSANCE',d.naiss],['TÉLÉPHONE',d.tel],['EMAIL',d.mail],['ADRESSE',d.adr]]);
 grid([['ALLERGIES / SANTÉ',d.sante||'Rien à signaler']],1);
 if(d.decl&&d.decl.length){sect('DÉCLARATIONS ACCEPTÉES');
-const bl=(t,on)=>{doc.setFont('helvetica','normal');doc.setFontSize(9.5);const l=doc.splitTextToSize(t,W-2*M-7);need(l.length*4.6+2);if(on){doc.setFillColor(...GOLD);doc.roundedRect(M,y+.6,3.2,3.2,.7,.7,'F')}else{doc.setDrawColor(...GOLD);doc.setLineWidth(.3);doc.roundedRect(M,y+.6,3.2,3.2,.7,.7,'S')}doc.setTextColor(...INK);doc.text(l,M+7,y+3.6);y+=l.length*4.6+2.2};
-d.decl.forEach(t=>bl(t,true));bl('Autorisation de photographier le tatouage',d.photoOk)}
-if(d.sig){sect('SIGNATURE DU CLIENT');need(46);
-doc.setDrawColor(215,215,220);doc.setLineWidth(.3);doc.roundedRect(M,y,92,40,3,3,'S');doc.addImage(d.sig,'PNG',M+3,y+2,86,36);
-doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text('Signé le '+d.date,M+98,y+37);y+=44}else{sect('CONSENTEMENT');grid([['CONSENTEMENT SIGNÉ',(d.docs&&d.docs.length?'Voir le PDF joint : '+d.docs.map(x=>x.name).join(', '):'Document joint à la fiche')]],1)}
-d.seances.forEach((s,i)=>{sect('TRAÇABILITÉ · SÉANCE '+(i+1)+' · '+s.date);
-grid([['TATOUEUR',s.studio],['AIGUILLES',s.aig],['LOT AIGUILLES',s.laig],['ENCRE',s.enc],['LOT ENCRE',s.lenc]]);
-if(s.notes)grid([['NOTES',s.notes]],1);
-[['PHOTOS DU TATOUAGE',s.tattoo||[]],['PHOTOS DU MATÉRIEL',s.photos]].forEach(([ttl,arr])=>{if(arr.length){sect(ttl);let x=M,rh=0;const w=(W-2*M-8)/3;arr.forEach(p=>{const q=w*p.h/p.w;if(x+w>W-M+1){x=M;y+=rh+4;rh=0}need(q+2);doc.addImage(p.url,'JPEG',x,y,w,q);doc.setDrawColor(215,215,220);doc.roundedRect(x,y,w,q,1.5,1.5,'S');x+=w+4;rh=Math.max(rh,q)});y+=rh+3}})});
+  const bl=(t,on)=>{doc.setFont('helvetica','normal');doc.setFontSize(9.5);const l=doc.splitTextToSize(t,W-2*M-9);need(l.length*4.6+2.4);
+    if(on){doc.setFillColor(...GOLD);doc.roundedRect(M,y+.4,3.6,3.6,.8,.8,'F');doc.setDrawColor(...BG);doc.setLineWidth(.45);doc.line(M+.8,y+2.3,M+1.6,y+3.2);doc.line(M+1.6,y+3.2,M+2.9,y+1.2)}
+    else{doc.setDrawColor(...GOLD);doc.setLineWidth(.3);doc.roundedRect(M,y+.4,3.6,3.6,.8,.8,'S')}
+    doc.setTextColor(...(on?TX:MUT));doc.text(l,M+8,y+3.5);y+=l.length*4.6+2.4};
+  d.decl.forEach(t=>bl(t,true));bl('Autorisation de photographier le tatouage',d.photoOk)}
+if(d.sig){sect('SIGNATURE DU CLIENT');need(48);
+  doc.setFillColor(...PAPER);doc.roundedRect(M,y,96,42,3.5,3.5,'F');doc.setDrawColor(...GOLD);doc.setLineWidth(.5);doc.roundedRect(M,y,96,42,3.5,3.5,'S');
+  doc.addImage(d.sig,'PNG',M+4,y+3,88,36);
+  doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...GHI);doc.text(((d.prenom||'')+' '+(d.nom||'')).trim(),M+102,y+30);
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text('Signé le '+d.date,M+102,y+36);y+=47}
+else{sect('CONSENTEMENT');grid([['CONSENTEMENT SIGNÉ',(d.docs&&d.docs.length?'Voir le PDF joint : '+d.docs.map(x=>x.name).join(', '):'Document joint à la fiche')]],1)}
+if(d.docs&&d.docs.length){sect('DOCUMENTS JOINTS');d.docs.forEach(x=>{need(14);card(M,y,W-2*M,12);doc.setFillColor(...GOLD);doc.roundedRect(M+3.5,y+2.5,9,7,1.5,1.5,'F');doc.setFont('helvetica','bold');doc.setFontSize(6.5);doc.setTextColor(...BG);doc.text('PDF',M+4.9,y+7.1);
+  doc.setFontSize(9.5);doc.setTextColor(...TX);doc.text(doc.splitTextToSize(x.name,W-2*M-60)[0],M+16,y+5.6);doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...MUT);doc.text('Ajouté le '+x.date+(x.size?'  ·  '+kb(x.size):''),M+16,y+9.6);y+=14})}
+d.seances.forEach((s,i)=>{sect('TRAÇABILITÉ  ·  SÉANCE '+(i+1)+'  ·  '+s.date);
+  grid([['TATOUEUR',s.studio],['AIGUILLES',s.aig],['LOT AIGUILLES',s.laig],['ENCRE',s.enc],['LOT ENCRE',s.lenc]]);
+  if(s.notes)grid([['NOTES',s.notes]],1);
+  [['PHOTOS DU TATOUAGE',s.tattoo||[]],['PHOTOS DU MATÉRIEL',s.photos||[]]].forEach(([ttl,arr])=>{if(arr.length){sect(ttl);let x=M,rh=0;const w=(W-2*M-8)/3;
+    arr.forEach(p=>{const q=w*p.h/p.w;if(x+w>W-M+1){x=M;y+=rh+4;rh=0}if(y+q>280){doc.addPage();bg();y=18;x=M;rh=0}doc.addImage(p.url,'JPEG',x,y,w,q);doc.setDrawColor(...GOLD);doc.setLineWidth(.45);doc.roundedRect(x,y,w,q,1.5,1.5,'S');x+=w+4;rh=Math.max(rh,q)});y+=rh+4}})});
 const n=doc.getNumberOfPages();
-for(let i=1;i<=n;i++){doc.setPage(i);doc.setDrawColor(...GOLD);doc.setLineWidth(.3);doc.line(M,287,W-M,287);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text(d.studio+'  ·  @hugo_Smoll',M,292);doc.text(i+' / '+n,W-M,292,{align:'right'});if(moth&&i>1)doc.addImage(moth,'PNG',W-M-14,5,14,14*MR)}
+for(let i=1;i<=n;i++){doc.setPage(i);gbar(doc,M,286.3,W-2*M,.4,40);star(doc,M,289.2,3.6,GOLD);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text((d.studio||'Hugo Smoll')+'  ·  @hugo_Smoll',M+5.5,292);doc.setTextColor(...GHI);doc.text(i+' / '+n,W-M,292,{align:'right'});if(moth&&i>1)doc.addImage(moth,'PNG',W-M-16,4,15,15*MR)}
 return doc.output()}
 
 let cur=null;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let _db;const idb=()=>_db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('consentements',1);r.onupgradeneeded=()=>r.result.createObjectStore('fiches',{keyPath:'id'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
+let _db;const idb=()=>_db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('consentements',2);r.onupgradeneeded=()=>{const db=r.result;['fiches','rdv','todo'].forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n,{keyPath:'id'})})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
 const tx=async(mode,fn)=>{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction('fiches',mode),r=fn(t.objectStore('fiches'));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})};
 const all=()=>tx('readonly',s=>s.getAll()),put=f=>tx('readwrite',s=>s.put(f)),del=id=>tx('readwrite',s=>s.delete(id));
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
@@ -422,7 +579,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 addEventListener('pagehide',()=>{clearTimeout(dtm);saveDraft()});
 const clearDraft=()=>{clearTimeout(dtm);return del(DK).catch(()=>{})};
 (async()=>{try{
-const L=await all(),d=L.find(x=>x.id===DK);if(!d)return;
+const L=await all(),d=L.find(x=>x.id===DK);if(!d){goHome();return}
 [...F1,...F2].forEach(k=>{if(d[k]!=null&&$(k))$(k).value=d[k]});
 document.querySelectorAll('.req').forEach((c,i)=>{c.checked=!!(d.checks&&d.checks[i])});$('photoOk').checked=!!d.photoOk;
 photos=d.photos||[];tphotos=d.tphotos||[];
@@ -433,7 +590,7 @@ stage=2;if(await gate('Merci !','Remets le téléphone à Hugo Smoll.',false))sh
 }catch(e){}})();
 
 // ---- style Aurora : thèmes, fond animé, ondes au toucher
-const PALS=[["nebuleuse","Nébuleuse","#7b5cff","#07061a","#38b6ff"],["sang","Encre & sang","#c8323c","#09090b","#ff8a3d"],["or","Or","#e6b325","#08080a","#ff8f3c"],["emeraude","Émeraude","#2fbf8f","#070b0a","#2bb3e6"],["ivoire","Ivoire","#b07d12","#f2ede3","#c45f34"]];
+const PALS=[["nebuleuse", "Nébuleuse", "#7b5cff", "#07061a", "#38b6ff"], ["sang", "Encre & sang", "#c8323c", "#09090b", "#ff8a3d"], ["or", "Or", "#e6b325", "#08080a", "#ff8f3c"], ["emeraude", "Émeraude", "#2fbf8f", "#070b0a", "#2bb3e6"], ["ivoire", "Ivoire", "#b07d12", "#f2ede3", "#c45f34"], ["couchant", "Coucher de soleil", "#ff5e62", "#140a12", "#b44cff"], ["ocean", "Océan", "#0fa3b1", "#04121a", "#2f6bff"], ["neon", "Néon", "#ff2bd6", "#07050f", "#00f0ff"], ["minuit", "Minuit doré", "#d4a73c", "#070b16", "#5b7cfa"], ["lave", "Lave", "#ff4d1a", "#0b0605", "#c4002b"], ["sakura", "Sakura", "#e0568a", "#fbeef2", "#f29bb8"], ["glacier", "Glacier", "#2b8fd6", "#eaf3f8", "#5ccfe6"]];
 const RM=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}})();
 const curPal=()=>{const p=lsg('pal');return PALS.find(x=>x[0]===p)||PALS[0]};
 function accRGB(){const h=curPal()[2];return[1,3,5].map(i=>parseInt(h.slice(i,i+2),16))}
@@ -484,6 +641,180 @@ new MutationObserver(()=>{if($('lke').textContent){const i=$('lkin');i.classList
 new MutationObserver(()=>{if(!$('s2').hidden&&!RM)setTimeout(burst,150)}).observe($('s2'),{attributes:true,attributeFilter:['hidden']});
 cv.addEventListener('pointerup',()=>{cv.classList.remove('signed');void cv.offsetWidth;cv.classList.add('signed')});
 document.addEventListener('change',e=>{if(e.target.matches&&e.target.matches('.chk input')&&e.target.checked)vib(12)},true);
+
+// ---- accueil, calendrier, projets
+const txs=async(st,mode,fn)=>{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction(st,mode),r=fn(t.objectStore(st));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})};
+const allOf=st=>txs(st,'readonly',s=>s.getAll()).catch(()=>[]),putIn=(st,o)=>txs(st,'readwrite',s=>s.put(o)),delIn=(st,id)=>txs(st,'readwrite',s=>s.delete(id));
+const ICO={cons:'<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 13h6M9 17h4"/>',cli:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',cal:'<rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/>',todo:'<path d="M4 6l2 2 3-3M4 13l2 2 3-3M12 7h8M12 14h8M5 20h15"/>'};
+const isvg=p=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';
+const pad=n=>String(n).padStart(2,'0');
+const dk=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const pd=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const todayLabel=()=>{const t=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});return t.charAt(0).toUpperCase()+t.slice(1)};
+const mins=t=>{const[h,m]=t.split(':').map(Number);return h*60+m};
+const hm=m=>pad(Math.floor(m/60)%24)+':'+pad(m%60);
+const durTxt=m=>m>=480?'Journée':m<60?m+' min':(m%60?Math.floor(m/60)+' h '+pad(m%60):m/60+' h');
+const DURS=[30,60,90,120,180,240,300,360,480];
+let calY,calM,selD=dk(new Date()),editId=null,rDur=120;
+async function goHome(){if(await gate('Espace tatoueur','Entre ton code.',true)){cur=null;show(4);renderHome()}else show(1)}
+async function renderHome(){
+  const [R,T,Fi]=await Promise.all([allOf('rdv'),allOf('todo'),all().catch(()=>[])]);
+  const now=new Date(),t=dk(now),nm=now.getHours()*60+now.getMinutes();
+  const today=R.filter(r=>r.date===t).sort((a,b)=>a.time.localeCompare(b.time));
+  const nextI=today.findIndex(r=>mins(r.time)+r.dur>nm);
+  const tm=new Date(now);tm.setDate(tm.getDate()+1);const tom=R.filter(r=>r.date===dk(tm)).length;
+  const wk=new Date(now);wk.setDate(wk.getDate()+7);const week=R.filter(r=>r.date>=t&&r.date<=dk(wk)).length;
+  let big='Journée libre',sub2=tom?'Demain : '+tom+' rendez-vous':'Aucun rendez-vous demain';
+  if(today.length){const n=today[nextI];big=today.length+' rendez-vous aujourd’hui';
+    if(n){const st=mins(n.time),diff=st-nm;sub2=diff<=0?'En cours : '+n.client:'Prochain : '+n.client+(diff<60?' dans '+diff+' min':' à '+n.time)}else sub2='Journée terminée'+(tom?' · demain : '+tom:'')}
+  $('hToday').innerHTML='<div class="card today"><div class="lab">'+esc(todayLabel())+'</div><div class="big">'+esc(big)+'</div><div class="sub2">'+esc(sub2)+'</div>'+
+    (today.length?'<div style="margin-top:8px">'+today.map((r,i)=>rdHTML(r,i<nextI||nextI<0?'past':'',i===nextI?(mins(r.time)<=nm?'En cours':'Prochain'):'')).join('')+'</div>':'')+'</div>';
+  const fiches=Fi.filter(f=>f.id!=='__draft').length,open=T.filter(x=>!x.done);
+  $('hTiles').innerHTML=[['cons','Nouveau consentement','Pour un client',''],['cli','Fiches clients',fiches+' fiche'+(fiches>1?'s':''),fiches],['cal','Calendrier',week+' rdv sur 7 jours',week],['todo','Projets à faire',open.length?open.length+' en cours':'Rien en attente',open.length]]
+    .map(x=>'<button class="tl" type="button" data-go="'+x[0]+'"><span class="ico">'+isvg(ICO[x[0]])+'</span><b>'+x[1]+'</b><small>'+x[2]+'</small>'+(x[3]?'<span class="n">'+x[3]+'</span>':'')+'</button>').join('');
+  $('hTiles').querySelectorAll('.tl').forEach(b=>b.onclick=()=>{const g=b.dataset.go;if(g==='cons'){cur=null;show(1)}else if(g==='cli')openClients();else if(g==='cal')openCal();else openTodo()});
+  const top=open.sort(tdSort).slice(0,3);
+  $('hTodo').innerHTML=top.length?top.map(tdHTML).join('')+'<button class="lnk" type="button" id="hAll" style="padding:10px 0">Tout voir ›</button>':'<div class="empty2">Aucun projet en attente.</div><button class="lnk" type="button" id="hAll" style="padding:0 0 12px">+ Ajouter un projet</button>';
+  bindTodo($('hTodo'),renderHome);$('hAll').onclick=openTodo;
+  $('hToday').querySelectorAll('.rd').forEach(b=>b.onclick=()=>{const r=today.find(x=>x.id===b.dataset.id);if(r){selD=r.date;openCal(r)}});
+}
+function rdHTML(r,cls,tag){const st=mins(r.time);return '<button class="rd '+(cls||'')+'" type="button" data-id="'+esc(r.id)+'"><span class="tm">'+esc(r.time)+'<small>'+hm(st+r.dur)+'</small></span><span class="bar"></span><span class="who"><b>'+esc(r.client)+'</b><span>'+esc(durTxt(r.dur))+(r.note?' · '+esc(r.note):'')+'</span></span>'+(tag?'<span class="tag '+(tag==='Prochain'?'next':'')+'">'+tag+'</span>':'')+'</button>'}
+// calendrier
+async function openCal(edit){if(!calY){const d=pd(selD);calY=d.getFullYear();calM=d.getMonth()}if(edit){const d=pd(edit.date);calY=d.getFullYear();calM=d.getMonth()}show(5);$('rForm').hidden=true;$('cAdd').hidden=false;await renderCal();if(edit&&edit.id)openForm(edit)}
+async function renderCal(){
+  const R=await allOf('rdv'),by={};R.forEach(r=>{(by[r.date]=by[r.date]||[]).push(r)});
+  const first=new Date(calY,calM,1),off=(first.getDay()+6)%7,nd=new Date(calY,calM+1,0).getDate(),t=dk(new Date());
+  $('cMonth').textContent=first.toLocaleDateString('fr-FR',{month:'long',year:'numeric'});
+  let h=['L','M','M','J','V','S','D'].map(x=>'<span class="wd">'+x+'</span>').join('');
+  for(let i=0;i<off;i++)h+='<span class="dy out"></span>';
+  for(let d=1;d<=nd;d++){const k=calY+'-'+pad(calM+1)+'-'+pad(d),n=(by[k]||[]).length;h+='<button class="dy'+(k===t?' td':'')+(k===selD?' sel':'')+'" type="button" data-k="'+k+'">'+d+'<i>'+'<em></em>'.repeat(Math.min(n,3))+'</i></button>'}
+  $('cGrid').innerHTML=h;
+  $('cGrid').querySelectorAll('.dy[data-k]').forEach(b=>b.onclick=()=>{selD=b.dataset.k;$('rForm').hidden=true;$('cAdd').hidden=false;renderCal()});
+  const L=(by[selD]||[]).sort((a,b)=>a.time.localeCompare(b.time)),dl=pd(selD).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+  $('cDay').textContent=dl+(L.length?' · '+L.length+' rdv':'');
+  $('cList').innerHTML='<div class="card">'+(L.length?L.map(r=>rdHTML(r,'','')+'<div class="rda"><button class="lnk ics" type="button" data-id="'+esc(r.id)+'">+ Calendrier iPhone</button>'+(r.ficheId?'<button class="lnk ofi" type="button" data-f="'+esc(r.ficheId)+'">Fiche client</button>':'')+'</div>').join(''):'<div class="empty2">Aucun rendez-vous ce jour-là.</div>')+'</div>';
+  $('cList').querySelectorAll('.rd').forEach(b=>b.onclick=()=>openForm(L.find(x=>x.id===b.dataset.id)));
+  $('cList').querySelectorAll('.ics').forEach(b=>b.onclick=()=>ics(L.find(x=>x.id===b.dataset.id)));
+  $('cList').querySelectorAll('.ofi').forEach(b=>b.onclick=()=>showDetail(b.dataset.f));
+}
+$('cPrev').onclick=()=>{calM--;if(calM<0){calM=11;calY--}renderCal()};
+$('cNext').onclick=()=>{calM++;if(calM>11){calM=0;calY++}renderCal()};
+function paintDur(){$('rDur').innerHTML=DURS.map(m=>'<button class="dur" type="button" data-m="'+m+'" aria-pressed="'+(m===rDur)+'">'+durTxt(m)+'</button>').join('');$('rDur').querySelectorAll('.dur').forEach(b=>b.onclick=()=>{rDur=+b.dataset.m;paintDur();checkOverlap()})}
+async function openForm(r){
+  const Fi=await all().catch(()=>[]);
+  $('rCliL').innerHTML=Fi.filter(f=>f.id!=='__draft').map(f=>'<option value="'+esc(f.prenom+' '+f.nom)+'">').join('');
+  editId=r?r.id:null;$('rTitle').textContent=r?'Modifier le rendez-vous':'Nouveau rendez-vous';
+  $('rCli').value=r?r.client:'';$('rDate').value=r?r.date:selD;$('rTime').value=r?r.time:'14:00';$('rNote').value=r?r.note||'':'';rDur=r?r.dur:120;paintDur();
+  $('rIcs').checked=lsg('rics')!=='0';$('rDel').hidden=!r;$('rForm').hidden=false;$('cAdd').hidden=true;$('rWarn').hidden=true;checkOverlap();
+  setTimeout(()=>$('rForm').scrollIntoView({behavior:RM?'auto':'smooth',block:'start'}),60);
+}
+async function checkOverlap(){
+  const d=$('rDate').value,t=$('rTime').value;if(!d||!t){$('rWarn').hidden=true;return null}
+  const st=mins(t),en=st+rDur,R=(await allOf('rdv')).filter(r=>r.date===d&&r.id!==editId);
+  const c=R.find(r=>mins(r.time)<en&&mins(r.time)+r.dur>st);
+  $('rWarn').hidden=!c;if(c)$('rWarn').textContent='Attention : chevauche le rendez-vous de '+c.time+' ('+c.client+').';return c}
+['rDate','rTime'].forEach(i=>$(i).addEventListener('change',checkOverlap));
+$('cAdd').onclick=()=>openForm(null);
+$('rCancel').onclick=()=>{$('rForm').hidden=true;$('cAdd').hidden=false};
+$('rSave').onclick=async()=>{
+  const client=$('rCli').value.trim(),date=$('rDate').value,time=$('rTime').value;
+  if(!client||!date||!time)return msg('Indique le client, le jour et l’heure.',1);
+  const Fi=await all().catch(()=>[]),lo=x=>x.toLowerCase().replace(/\s+/g,' ').trim();
+  const f=Fi.find(z=>z.id!=='__draft'&&(lo(z.prenom+' '+z.nom)===lo(client)||lo(z.nom+' '+z.prenom)===lo(client)));
+  const c0=await checkOverlap();const prev=editId?(await allOf('rdv')).find(x=>x.id===editId):null;
+  const r={id:editId||Date.now().toString(36),client,date,time,dur:rDur,note:$('rNote').value.trim(),ficheId:f?f.id:null,seq:prev?(prev.seq||0)+1:0};
+  try{await putIn('rdv',r)}catch(e){return msg('Impossible d’enregistrer le rendez-vous.',1)}
+  const wantIcs=$('rIcs').checked,wasEdit=!!editId;lss('rics',wantIcs?'1':'0');const icsO=wantIcs?icsOpen(r):null;
+  const c=c0;selD=date;const d=pd(date);calY=d.getFullYear();calM=d.getMonth();
+  $('rForm').hidden=true;$('cAdd').hidden=false;await renderCal();scrollTo({top:0,behavior:RM?'auto':'smooth'});
+  const base=(wasEdit?'Rendez-vous modifié':'Rendez-vous ajouté')+(c?'. Il chevauche celui de '+c.time:'')+'. ';if(wantIcs)icsMsg(r,base,icsO);else msg(base.trim())};
+let rArm=false;$('rDel').onclick=async()=>{if(!rArm){rArm=true;$('rDel').textContent='Confirmer la suppression';setTimeout(()=>{rArm=false;$('rDel').textContent='Supprimer'},4000);return}
+  rArm=false;$('rDel').textContent='Supprimer';await delIn('rdv',editId);$('rForm').hidden=true;$('cAdd').hidden=false;await renderCal();msg('Rendez-vous supprimé.')};
+function icsBlob(r){const st=pd(r.date);const[h,m]=r.time.split(':').map(Number);st.setHours(h,m,0,0);const en=new Date(st.getTime()+r.dur*60000);
+  const f=d=>d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'T'+pad(d.getHours())+pad(d.getMinutes())+'00';
+  const e=x=>String(x||'').replace(/[\\,;]/g,c=>'\\'+c).replace(/\n/g,'\\n');
+  const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Hugo Smoll//Consentement//FR','METHOD:PUBLISH','BEGIN:VEVENT','UID:'+r.id+'@hugosmoll','SEQUENCE:'+(r.seq||0),'DTSTAMP:'+f(new Date()),'DTSTART:'+f(st),'DTEND:'+f(en),'SUMMARY:'+e('Tatouage · '+r.client),'DESCRIPTION:'+e(r.note),'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY','DESCRIPTION:Rendez-vous tatouage','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const blob=new Blob([txt],{type:'text/calendar'}),name='rdv-'+clean(r.client)+'-'+r.date+'.ics';return{blob,name,url:URL.createObjectURL(blob)}}
+function icsOpen(r){const o=icsBlob(r);try{const a=document.createElement('a');a.href=o.url;a.target='_blank';a.rel='noopener';document.body.appendChild(a);a.click();a.remove()}catch(e){}return o}
+function icsMsg(r,pre,o){o=o||icsBlob(r);const file=new File([o.blob],o.name,{type:'text/calendar'});
+  msg('',0,'<div>'+esc(pre||'')+'Si l’écran d’Apple ne s’est pas ouvert, touche « Ajouter au calendrier ».</div><div style="display:flex;gap:20px;margin-top:8px"><a href="'+o.url+'" target="_blank" rel="noopener" style="font-weight:600">Ajouter au calendrier</a><button id="ish" class="lnk" type="button">Partager</button></div>');
+  $('ish').onclick=async()=>{try{await navigator.share({files:[file],title:o.name})}catch(e){if(!(e&&e.name==='AbortError'))window.open(o.url,'_blank')}}}
+function ics(r){if(!r)return;const o=icsOpen(r);icsMsg(r,'Rendez-vous de '+r.client+'. ',o)}
+// projets
+const tdSort=(a,b)=>(a.due||'9999').localeCompare(b.due||'9999')||a.id.localeCompare(b.id);
+function tdHTML(x){const t=dk(new Date()),late=x.due&&!x.done&&x.due<t;return '<div class="td-it'+(x.done?' done':'')+'" data-id="'+esc(x.id)+'"><input type="checkbox" '+(x.done?'checked':'')+' aria-label="Terminé"><span class="tt">'+esc(x.title)+(x.due?'<small class="'+(late?'late':'')+'">'+(late?'En retard · ':'')+'pour le '+esc(pd(x.due).toLocaleDateString('fr-FR',{day:'numeric',month:'short'}))+'</small>':'')+'</span><button class="x" type="button" aria-label="Supprimer">×</button></div>'}
+function bindTodo(root,after){root.querySelectorAll('.td-it').forEach(el=>{const id=el.dataset.id;
+  el.querySelector('input').onchange=async e=>{const T=await allOf('todo'),x=T.find(z=>z.id===id);if(!x)return;x.done=e.target.checked;x.doneAt=x.done?Date.now():null;await putIn('todo',x);if(x.done){vib(15);if(!RM)burst()}setTimeout(after,x.done?450:0)};
+  el.querySelector('.x').onclick=async()=>{await delIn('todo',id);after()}})}
+async function openTodo(){show(6);await renderTodo()}
+async function renderTodo(){const T=await allOf('todo'),o=T.filter(x=>!x.done).sort(tdSort),d=T.filter(x=>x.done).sort((a,b)=>(b.doneAt||0)-(a.doneAt||0)).slice(0,20);
+  $('tOpen').innerHTML=o.length?o.map(tdHTML).join(''):'<div class="empty2">Rien à faire pour l’instant.</div>';
+  $('tDone').innerHTML=d.length?d.map(tdHTML).join(''):'<div class="empty2">Aucun projet terminé.</div>';
+  bindTodo($('tOpen'),renderTodo);bindTodo($('tDone'),renderTodo)}
+async function addTodo(){const t=$('tTitle').value.trim();if(!t)return msg('Écris le projet à faire.',1);
+  const x={id:Date.now().toString(36),title:t,due:$('tDue').value||null,done:false};await putIn('todo',x);$('tTitle').value='';$('tDue').value='';await renderTodo();
+  const el=document.querySelector('#tOpen .td-it[data-id="'+x.id+'"]');if(el)el.classList.add('new');vib(10)}
+$('tAdd').onclick=addTodo;$('tTitle').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();addTodo()}};
+document.querySelectorAll('.tohome').forEach(b=>b.onclick=()=>{show(4);renderHome()});
+$('toClients').onclick=goHome;
+$('newCons').textContent='‹ Accueil';$('newCons').onclick=()=>{cur=null;show(4);renderHome()};
+setInterval(()=>{if(!$('s4').hidden&&document.visibilityState==='visible')renderHome()},60000);
+
+// ---- accueil dynamique (remplace l'ancien rendu)
+let HT=[],HA=8*60,HB=21*60;
+async function renderHome(){
+  const [R,T,Fi]=await Promise.all([allOf('rdv'),allOf('todo'),all().catch(()=>[])]);
+  const now=new Date(),t=dk(now);
+  HT=R.filter(r=>r.date===t).sort((a,b)=>a.time.localeCompare(b.time));
+  HA=8*60;HB=21*60;HT.forEach(r=>{HA=Math.min(HA,Math.floor(mins(r.time)/60)*60);HB=Math.max(HB,Math.ceil((mins(r.time)+r.dur)/60)*60)});HB=Math.min(HB,1440);
+  const pc=m=>((m-HA)/(HB-HA)*100).toFixed(2);
+  const step=(HB-HA)>720?180:120;let ticks='';for(let m=HA;m<=HB;m+=step)ticks+='<span style="left:'+pc(m)+'%">'+Math.floor(m/60)+'h</span>';
+  $('hToday').innerHTML='<div class="card today">'+
+    '<div class="hrow"><div><div class="lab">'+esc(todayLabel())+'</div><div class="clock" id="hClock"></div></div>'+
+    '<div class="hring"><svg width="74" height="74" viewBox="0 0 74 74"><defs><linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--hi)"/><stop offset=".5" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:var(--acc2)"/></linearGradient></defs><circle cx="37" cy="37" r="30" fill="none" style="stroke:var(--fill)" stroke-width="7"/><circle class="arc" id="hArc" cx="37" cy="37" r="30" fill="none" stroke="url(#hg)" stroke-width="7" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="188.5"/></svg><span id="hRingT"></span></div></div>'+
+    '<div class="cd" id="hCd"><span class="pulse"></span><div><b id="hCdB"></b><span id="hCdS"></span></div></div>'+
+    '<div class="tline">'+HT.map((r,i)=>'<span class="blk" data-i="'+i+'" style="left:'+pc(mins(r.time))+'%;width:'+Math.max(2,pc(HA+r.dur)).toString()+'%;animation-delay:0s,'+(i*.12)+'s">'+esc(r.client.split(' ')[0])+'</span>').join('')+'<span class="now" id="hNow"></span></div>'+
+    '<div class="tticks">'+ticks+'</div>'+
+    (HT.length?'<div style="margin-top:8px;position:relative;z-index:1" id="hList"></div>':'')+'</div>';
+  // semaine
+  const W=[];for(let i=0;i<7;i++){const d=new Date(now);d.setDate(d.getDate()+i);const k=dk(d);W.push({d,k,n:R.filter(r=>r.date===k).length,m:R.filter(r=>r.date===k).reduce((a,r)=>a+r.dur,0)})}
+  const mx=Math.max(240,...W.map(w=>w.m));
+  $('hWeek').innerHTML='<div class="wkg">'+W.map((w,i)=>'<button class="wk'+(i===0?' on':'')+'" type="button" data-k="'+w.k+'" style="animation-delay:'+(i*.05)+'s"><small>'+w.d.toLocaleDateString('fr-FR',{weekday:'short'}).replace('.','')+'</small><b>'+w.d.getDate()+'</b><span class="wb"><i style="height:'+Math.round(w.m/mx*100)+'%;animation-delay:'+(.2+i*.06)+'s"></i></span><em>'+(w.n?w.n:'')+'</em></button>').join('')+'</div>';
+  $('hWeek').querySelectorAll('.wk').forEach(b=>b.onclick=()=>{selD=b.dataset.k;const d=pd(selD);calY=d.getFullYear();calM=d.getMonth();openCal()});
+  // tuiles
+  const fiches=Fi.filter(f=>f.id!=='__draft').length,open=T.filter(x=>!x.done);
+  const wk=new Date(now);wk.setDate(wk.getDate()+7);const week=R.filter(r=>r.date>=t&&r.date<=dk(wk)).length;
+  $('hTiles').innerHTML=[['cons','Nouveau consentement','Pour un client',''],['cli','Fiches clients',fiches+' fiche'+(fiches>1?'s':''),fiches],['cal','Calendrier',week+' rdv sur 7 jours',week],['todo','Projets à faire',open.length?open.length+' en cours':'Rien en attente',open.length]]
+    .map(x=>'<button class="tl" type="button" data-go="'+x[0]+'"><span class="ico">'+isvg(ICO[x[0]])+'</span><b>'+x[1]+'</b><small>'+x[2]+'</small>'+(x[3]?'<span class="n" data-to="'+x[3]+'">'+x[3]+'</span>':'')+'</button>').join('');
+  $('hTiles').querySelectorAll('.tl').forEach(b=>b.onclick=()=>{const g=b.dataset.go;if(g==='cons'){cur=null;show(1)}else if(g==='cli')openClients();else if(g==='cal')openCal();else openTodo()});
+  if(!RM)$('hTiles').querySelectorAll('.n').forEach(el=>{const to=+el.dataset.to,t0=performance.now();const st=k=>{const q=Math.min(1,(k-t0)/800);el.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(st)};el.textContent='0';requestAnimationFrame(st)});
+  const top=open.sort(tdSort).slice(0,3);
+  $('hTodo').innerHTML=top.length?top.map(tdHTML).join('')+'<button class="lnk" type="button" id="hAll" style="padding:10px 0">Tout voir ›</button>':'<div class="empty2">Aucun projet en attente.</div><button class="lnk" type="button" id="hAll" style="padding:0 0 12px">+ Ajouter un projet</button>';
+  bindTodo($('hTodo'),renderHome);$('hAll').onclick=openTodo;
+  homeTick(true);
+}
+function homeTick(full){
+  if($('s4').hidden||!$('hClock'))return;
+  const now=new Date(),nm=now.getHours()*60+now.getMinutes()+now.getSeconds()/60;
+  $('hClock').innerHTML=pad(now.getHours())+'<span class="colon">:</span>'+pad(now.getMinutes());
+  const n=$('hNow');if(n){n.hidden=nm<HA||nm>HB;n.style.left=((nm-HA)/(HB-HA)*100).toFixed(3)+'%'}
+  const done=HT.filter(r=>mins(r.time)+r.dur<=nm).length,tot=HT.length;
+  const frac=tot?done/tot:Math.max(0,Math.min(1,(nm-HA)/(HB-HA)));
+  const arc=$('hArc');if(arc)arc.setAttribute('stroke-dashoffset',(188.5*(1-frac)).toFixed(1));
+  $('hRingT').innerHTML=tot?done+'/'+tot+'<small>faits</small>':Math.round(frac*100)+'%<small>journée</small>';
+  const live=HT.find(r=>mins(r.time)<=nm&&mins(r.time)+r.dur>nm),next=HT.find(r=>mins(r.time)>nm);
+  const fmt=m=>{m=Math.max(0,Math.ceil(m));return m>=60?Math.floor(m/60)+' h '+pad(m%60):m+' min'};
+  let B,S;
+  if(live){B='En cours : '+live.client;S='Fin à '+hm(mins(live.time)+live.dur)+' · encore '+fmt(mins(live.time)+live.dur-nm)}
+  else if(next){B=next.client+' dans '+fmt(mins(next.time)-nm);S='À '+next.time+' · '+durTxt(next.dur)+(next.note?' · '+next.note:'')}
+  else if(tot){B='Journée terminée';S=tot+' rendez-vous aujourd’hui'}
+  else{const tm=new Date(now);tm.setDate(tm.getDate()+1);B='Journée libre';S='Ajoute un rendez-vous depuis le calendrier'}
+  $('hCdB').textContent=B;$('hCdS').textContent=S;
+  document.querySelectorAll('.tline .blk').forEach(el=>{const r=HT[+el.dataset.i];if(r)el.classList.toggle('done',mins(r.time)+r.dur<=nm)});
+  if(full&&$('hList')){$('hList').innerHTML=HT.map(r=>{const st=mins(r.time),cls=st+r.dur<=nm?'past':'',tag=(live&&live.id===r.id)?'En cours':(next&&next.id===r.id?'Prochain':'');return rdHTML(r,cls,tag)}).join('');
+    $('hList').querySelectorAll('.rd').forEach(b=>b.onclick=()=>{const r=HT.find(x=>x.id===b.dataset.id);if(r){selD=r.date;openCal(r)}})}
+}
+setInterval(()=>{if(document.visibilityState==='visible')homeTick(false)},1000);
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
