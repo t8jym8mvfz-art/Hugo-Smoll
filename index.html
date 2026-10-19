@@ -148,10 +148,10 @@ cv.addEventListener('pointermove',e=>{if(!drawing)return;const[x,y]=pt(e);cx.lin
 ['pointerup','pointercancel'].forEach(n=>cv.addEventListener(n,()=>drawing=false));
 $('clr').onclick=()=>{cx.clearRect(0,0,cv.width,cv.height);signed=false};
 function shrink(file,m0){return new Promise(res=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{const m=m0||900,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res({url:c.toDataURL('image/jpeg',.8),w:c.width,h:c.height})};im.onerror=()=>res(null);im.src=u})}
-$('files').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f);if(p){photos.push(p);const i=new Image();i.src=p.url;$('ph').appendChild(i)}}e.target.value=''};
+$('files').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f);if(p){photos.push(p);const i=new Image();i.src=p.url;$('ph').appendChild(i)}}e.target.value='';qd()};
 let mtm;function msg(t,bad,html){const m=$('msg');clearTimeout(mtm);if(html)m.innerHTML=html;else m.textContent=t||'';m.className=bad?'err':'';if(t&&!bad&&!html)mtm=setTimeout(()=>{m.textContent=''},9000)}
 $('msg').onclick=e=>{if(!e.target.closest('a,button'))$('msg').textContent=''};
-function show(n){if(n===1)unlocked=false;for(let i=1;i<=3;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients'][n];$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
+function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=3;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients'][n];$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
 const v=id=>$(id).value.trim();
 $('next').onclick=async()=>{
 if(!v('nom')||!v('prenom')||!v('naiss'))return msg('Merci de renseigner nom, prénom et date de naissance.',1);
@@ -235,7 +235,7 @@ async function savePDF(f,pre){offered=true;
 const blob=await buildPDF(f,SP.a),name='consentement'+clean(f.nom)+clean(f.prenom)+'.pdf';
 offer(blob,name,pre||'');return name}
 function clearTrace(){['aig','laig','enc','lenc','notes'].forEach(i=>$(i).value='');$('ph').innerHTML='';photos=[];$('ph2').innerHTML='';tphotos=[]}
-function resetAll(){document.querySelectorAll('input[type=text],input[type=date],input[type=tel],input[type=email],textarea').forEach(i=>{if(i.id!=='studio'&&i.id!=='q')i.value=''});document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);clearTrace();cx.clearRect(0,0,cv.width,cv.height);signed=false;cur=null;show(1)}
+function resetAll(){document.querySelectorAll('input[type=text],input[type=date],input[type=tel],input[type=email],textarea').forEach(i=>{if(i.id!=='studio'&&i.id!=='q')i.value=''});document.querySelectorAll('input[type=checkbox]').forEach(c=>c.checked=false);clearTrace();cx.clearRect(0,0,cv.width,cv.height);signed=false;cur=null;clearDraft();show(1)}
 
 $('go').onclick=async()=>{
 if(!window.PDFLib)return msg('Le module PDF ne s\'est pas chargé. Vérifiez la connexion et rechargez.',1);
@@ -246,6 +246,7 @@ const again=!!cur;let f=cur;
 if(!f){const cks=[...document.querySelectorAll('.req')];f={id:Date.now().toString(36),nom:v('nom'),prenom:v('prenom'),naiss:new Date(v('naiss')).toLocaleDateString('fr-FR'),tel:v('tel'),mail:v('mail'),adr:v('adr'),sante:v('sante'),photoOk:$('photoOk').checked,decl:cks.map(c=>c.nextElementSibling.textContent),sig:cv.toDataURL('image/png'),date:now.toLocaleDateString('fr-FR')+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),seances:[]}}
 f.seances.push(sea);f.studio=sea.studio;
 let saved=true;try{await put(f)}catch(e){saved=false}
+if(saved)await clearDraft();
 const pre=saved?'Fiche enregistrée. ':'Stockage indisponible : fiche non enregistrée. ';
 if(again){clearTrace();await showDetail(f.id)}else resetAll();
 const name=await savePDF(f,pre);
@@ -254,7 +255,7 @@ if(!offered)msg(pre+(name?'PDF : '+name:'PDF non enregistré : retrouve-le dans 
 async function renderList(){
 const q=$('q').value.trim().toLowerCase();let L=[];
 try{L=await all()}catch(e){msg('Stockage indisponible sur ce navigateur.',1)}
-L=L.filter(f=>(f.nom+' '+f.prenom).toLowerCase().includes(q)).sort((a,b)=>(a.nom+a.prenom).localeCompare(b.nom+b.prenom));
+L=L.filter(f=>f.id!=='__draft'&&(f.nom+' '+f.prenom).toLowerCase().includes(q)).sort((a,b)=>(a.nom+a.prenom).localeCompare(b.nom+b.prenom));
 $('rows').innerHTML=L.length?'<div class="card">'+L.map(f=>'<button class="it" type="button" data-id="'+esc(f.id)+'"><span>'+esc(f.prenom)+' '+esc(f.nom)+'<small>'+f.seances.length+' séance'+(f.seances.length>1?'s':'')+' · dernière le '+esc(f.seances[f.seances.length-1].date)+'</small></span><span style="color:var(--mut)">›</span></button>').join('')+'</div>':'<p style="text-align:center;color:var(--mut)">Aucune fiche pour le moment.</p>'}
 async function openClients(){cur=null;show(3);$('det').hidden=true;$('list').hidden=false;await renderList()}
 async function showDetail(id){
@@ -270,7 +271,7 @@ $('dl').onclick=async()=>{const n=await savePDF(f,'');if(!offered)msg(n?'PDF : '
 let armed=false;$('rm').onclick=async()=>{if(!armed){armed=true;$('rm').textContent='Appuyer à nouveau pour confirmer';return}await del(f.id);openClients();msg('Fiche supprimée.')}}
 
 let tphotos=[];
-$('files2').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f,1200);if(p){tphotos.push(p);const i=new Image();i.src=p.url;$('ph2').appendChild(i)}}e.target.value=''};
+$('files2').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f,1200);if(p){tphotos.push(p);const i=new Image();i.src=p.url;$('ph2').appendChild(i)}}e.target.value='';qd()};
 let unlocked=false,last=Date.now(),busy=null,fails=0;
 const PK='pinh',SK='pins';
 const cy=s=>{let a=0xdeadbeef,b=0x41c6ce57;for(let i=0;i<s.length;i++){const c=s.charCodeAt(i);a=Math.imul(a^c,2654435761);b=Math.imul(b^c,1597334677)}a=Math.imul(a^(a>>>16),2246822507)^Math.imul(b^(b>>>13),3266489909);b=Math.imul(b^(b>>>16),2246822507)^Math.imul(a^(a>>>13),3266489909);return(4294967296*(2097151&b)+(a>>>0)).toString(16)};
@@ -305,6 +306,30 @@ $('newCons').onclick=()=>{cur=null;show(1)};
 $('q').oninput=renderList;
 $('rows').onclick=e=>{const b=e.target.closest('.it');if(b)showDetail(b.dataset.id)};
 $('back').onclick=()=>cur?showDetail(cur.id):show(1);
+// ---- brouillon : survit à un redémarrage de l'app
+const DK='__draft',F1=['nom','prenom','naiss','tel','mail','adr','sante'],F2=['studio','aig','laig','enc','lenc','notes'];
+let dtm=null,stage=1;
+async function saveDraft(){try{
+const o={id:DK,stage,cur:stage===2&&cur?cur.id:null,t:Date.now(),photos,tphotos,photoOk:$('photoOk').checked,checks:[...document.querySelectorAll('.req')].map(c=>c.checked),sig:signed?cv.toDataURL('image/png'):null};
+[...F1,...F2].forEach(k=>{o[k]=$(k).value});
+const has=o.sig||o.photos.length||o.tphotos.length||o.checks.some(Boolean)||[...F1,...F2].some(k=>k!=='studio'&&String(o[k]).trim());
+if(has)await put(o);else await del(DK)}catch(e){}}
+const qd=()=>{clearTimeout(dtm);dtm=setTimeout(saveDraft,700)};
+['input','change'].forEach(e=>addEventListener(e,ev=>{if(ev.target.closest&&ev.target.closest('#s1,#s2'))qd()},true));
+cv.addEventListener('pointerup',qd);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){clearTimeout(dtm);saveDraft()}});
+addEventListener('pagehide',()=>{clearTimeout(dtm);saveDraft()});
+const clearDraft=()=>{clearTimeout(dtm);return del(DK).catch(()=>{})};
+(async()=>{try{
+const L=await all(),d=L.find(x=>x.id===DK);if(!d)return;
+[...F1,...F2].forEach(k=>{if(d[k]!=null&&$(k))$(k).value=d[k]});
+document.querySelectorAll('.req').forEach((c,i)=>{c.checked=!!(d.checks&&d.checks[i])});$('photoOk').checked=!!d.photoOk;
+photos=d.photos||[];tphotos=d.tphotos||[];
+photos.forEach(p=>{const i=new Image();i.src=p.url;$('ph').appendChild(i)});tphotos.forEach(p=>{const i=new Image();i.src=p.url;$('ph2').appendChild(i)});
+if(d.sig){const im=new Image();im.onload=()=>{const r=cv.getBoundingClientRect();cx.drawImage(im,0,0,r.width,r.height);signed=true};im.src=d.sig}
+if(d.stage===2){if(d.cur){const f=L.find(x=>x.id===d.cur);if(f)cur=f}
+stage=2;if(await gate('Merci !','Remets le téléphone à Hugo Smoll.',false))show(2)}
+}catch(e){}})();
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
