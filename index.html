@@ -196,6 +196,76 @@ input::-webkit-date-and-time-value{text-align:left}
 main.fade{animation:fadeView .28s ease-out}
 
 
+
+:root[data-pal="bordeaux"]{color-scheme:dark;--bg:#0f0608;--card:#1d0d11;--fill:#281318;--tx:#f7ece9;--mut:#ad8f92;--bd:rgba(220,170,90,.15);--gold:#8e1b32;--hi:#e3b65a;--acc2:#c9973a;--on:#fff;--gold2:#c9973a;--err:#ffb0a6;--bar:rgba(15,6,8,.62);--aura:.55}
+:root[data-pal="jade"]{color-scheme:dark;--bg:#04100d;--card:#0b1e19;--fill:#112a23;--tx:#eafaf4;--mut:#84a89b;--bd:rgba(110,240,200,.14);--gold:#00a37a;--hi:#6ff0c8;--acc2:#00c2d1;--on:#02120c;--gold2:#00c2d1;--err:#ff9a8a;--bar:rgba(4,16,13,.62);--aura:.6}
+:root[data-pal="encre"]{color-scheme:dark;--bg:#050814;--card:#0c1226;--fill:#121a36;--tx:#edf1ff;--mut:#8a93b8;--bd:rgba(120,150,255,.14);--gold:#2f5bff;--hi:#9bb2ff;--acc2:#00b3ff;--on:#fff;--gold2:#00b3ff;--err:#ff8fa0;--bar:rgba(5,8,20,.62);--aura:.6}
+:root[data-pal="sable"]{color-scheme:light;--bg:#f5efe4;--card:#fffbf4;--fill:#ece3d3;--tx:#2b2318;--mut:#85775f;--bd:rgba(90,70,30,.1);--gold:#c08a3e;--hi:#8f5f1d;--acc2:#d9b26a;--on:#fff;--gold2:#d9b26a;--err:#b93a2e;--bar:rgba(245,239,228,.75);--aura:.38}
+
+/* ===== éditeur de fiche de soins ===== */
+.cb{align-items:flex-start}
+.cb .drag{margin-top:4px}
+.cb .cbm{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.cb .cbt{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--hi)}
+.cb textarea{width:100%;min-height:1.6em;resize:none;overflow:hidden;font:inherit;font-size:15px;line-height:1.4;color:var(--tx);background:transparent;border:0;outline:0;padding:2px 0}
+.cb.t-title textarea{font-weight:700;font-size:17px}
+.cb.t-note{background:color-mix(in srgb,var(--gold) 10%,var(--surf-a));border-radius:12px;padding-left:6px;padding-right:6px;margin:4px 0}
+.cb .x{flex:none;background:none;color:var(--mut);font-size:20px;padding:2px 6px;margin-top:2px}
+.cb.new{animation:rise .4s both}
+.ceadd{display:flex;flex-wrap:wrap;gap:8px;margin:12px 4px 0}
+.celib{display:flex;flex-direction:column;padding:4px 0 8px}
+.celib button{text-align:left;background:none;color:var(--tx);padding:10px 0;border-bottom:.5px solid var(--bd);font-size:14px;display:flex;gap:10px;align-items:flex-start}
+.celib button:last-child{border-bottom:0}
+.celib button b{flex:none;color:var(--hi);font-size:12px;min-width:74px;padding-top:1px}
+
+/* ===== atelier de couleurs ===== */
+.aurora{opacity:calc(var(--aura,.5) * var(--auraK,1))}
+.cpick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:14px 0 6px}
+.cpick label{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;font-size:12px;color:var(--mut);cursor:pointer}
+.cpick input{-webkit-appearance:none;appearance:none;width:54px;height:54px;border-radius:50%;border:0;padding:0;background:none;cursor:pointer;box-shadow:0 0 0 2px var(--bd),0 6px 16px rgba(0,0,0,.3)}
+.cpick input::-webkit-color-swatch-wrapper{padding:0}
+.cpick input::-webkit-color-swatch{border:0;border-radius:50%}
+.cpick input::-moz-color-swatch{border:0;border-radius:50%}
+.cprev{display:flex;gap:10px;align-items:stretch;padding:12px;margin:6px 0;border-radius:16px;background:var(--cpbg,#0b0a12)}
+.cprev .cpb{flex:1;display:grid;place-items:center;border-radius:12px;font-weight:700;font-size:14px;color:var(--cpon,#fff);background:var(--cpgrad);padding:12px 6px;text-align:center}
+.cprev .cpc{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 12px;border-radius:12px;background:var(--cpcard)}
+.cprev .cpc b{color:var(--cptx);font-size:14px}.cprev .cpc small{color:var(--cpmut);font-size:12px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin:6px 0}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:var(--fill)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;margin-top:-10px;background:var(--grad);box-shadow:0 2px 8px rgba(0,0,0,.35),0 0 0 3px var(--card)}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:var(--fill)}
+input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radius:50%;background:var(--gold)}
+:root.solid .pri,:root.solid .tl .ico,:root.solid .dy.sel,:root.solid .dur[aria-pressed="true"],:root.solid .sw2 input:checked,:root.solid .slist .srow input:checked,:root.solid .srow .si,:root.solid .dic,:root.solid .rd .tag:not(.next),:root.solid .tline .blk,:root.solid .wk .wb i{background:var(--gold)!important}
+:root.solid .clock,:root.solid .lkt{background:none!important;-webkit-text-fill-color:var(--hi);color:var(--hi)}
+:root.calm .aurora b,:root.calm .aurora s,:root.calm .moth,:root.calm .tl::after,:root.calm .tl .ico,:root.calm .pri::after,:root.calm .today::after,:root.calm .hmsg::before,:root.calm .gear svg,:root.calm .hd svg,:root.calm h1,:root.calm .pri,:root.calm .colon,:root.calm .cd .pulse,:root.calm .tline .blk,:root.calm .hd img{animation:none!important}
+
+/* ===== mineurs, registre, stock, soins ===== */
+.mnote{font-size:14px;color:var(--mut)}
+.mnote b{display:block;color:var(--hi);font-size:16px;margin-bottom:4px}
+#sig2{height:170px;background:#fff}
+.pickf select{width:100%;font:inherit;font-size:15px;padding:10px 12px;border-radius:12px;border:1px solid var(--bd);background:var(--fill);color:var(--tx);-webkit-appearance:none;appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--hi) 50%),linear-gradient(135deg,var(--hi) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 12px) 50%;background-size:6px 6px;background-repeat:no-repeat}
+.kwarn{margin:10px 6px 0;color:var(--err);font-size:14px}
+.rg{display:block;width:100%;text-align:left;background:none;color:var(--tx);padding:12px 0;border-bottom:.5px solid var(--bd)}
+.rg:last-child{border-bottom:0}
+.rg .rh{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.rg .rh b{font-size:16px;overflow-wrap:anywhere}
+.rg .rh span{flex:none;font-size:13px;color:var(--hi);font-variant-numeric:tabular-nums}
+.rg .rl{font-size:13px;color:var(--mut);margin-top:3px;overflow-wrap:anywhere}
+.rg .rl em{font-style:normal;color:var(--tx)}
+.ki{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:.5px solid var(--bd)}
+.ki:last-child{border-bottom:0}
+.ki .kt{flex:1;min-width:0;overflow-wrap:anywhere}
+.ki .kt b{display:block;font-size:15px}
+.ki .kt small{display:block;color:var(--mut);font-size:12px}
+.pill{flex:none;font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--fill);color:var(--mut)}
+.pill.ok{background:color-mix(in srgb,#5fe3b0 18%,transparent);color:#5fe3b0}
+.pill.soon{background:color-mix(in srgb,#ffb02e 20%,transparent);color:#ffb02e}
+.pill.bad{background:color-mix(in srgb,var(--err) 20%,transparent);color:var(--err)}
+.ki .x{flex:none;background:none;color:var(--mut);font-size:20px;padding:2px 6px}
+.kal{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:18px;background:color-mix(in srgb,var(--err) 14%,var(--surf-a));box-shadow:0 0 0 1px color-mix(in srgb,var(--err) 40%,transparent);margin-bottom:6px;animation:rise .5s both}
+.kal b{display:block}.kal span{font-size:13px;color:var(--mut)}
+.care2{display:flex;flex-wrap:wrap;gap:22px}
+
 /* ===== Accueil personnalisable ===== */
 .slist{display:flex;flex-direction:column}
 .srow{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:.5px solid var(--bd);background:var(--surf-a);position:relative;touch-action:pan-y}
@@ -365,6 +435,15 @@ main.fade{animation:fadeView .28s ease-out}
 <label class="chk"><input type="checkbox" id="photoOk"><span>J'autorise la prise de photos de mon tatouage (facultatif).</span></label>
 </div>
 
+<div id="minor" hidden>
+<h2>Représentant légal *</h2>
+<div class="card"><div class="f mnote"><b id="mAge"></b>La loi impose l’accord écrit d’un parent ou du tuteur, conservé 3 ans.</div>
+<div class="row f"><div><label class="l">Nom *</label><input type="text" id="tnom" autocomplete="off"></div><div><label class="l">Prénom *</label><input type="text" id="tprenom" autocomplete="off"></div></div>
+<div class="f"><label class="l">Lien avec le client *</label><div class="durs" id="tlienB"></div><input type="hidden" id="tlien"></div>
+<label class="chk"><input type="checkbox" id="tid"><span>Pièce d’identité du représentant légal vérifiée.</span></label>
+<label class="chk"><input type="checkbox" id="tok"><span>J’autorise ce tatouage. J’ai pris connaissance des risques et des soins à suivre.</span></label>
+<div class="f"><label class="l">Signature du représentant légal *</label><canvas id="sig2"></canvas><div class="bar"><span></span><button class="lnk" id="clr2" type="button">Effacer</button></div></div>
+</div></div>
 <h2>Signature du client *</h2>
 <div class="card" style="padding-bottom:6px">
 <canvas id="sig"></canvas>
@@ -376,8 +455,8 @@ main.fade{animation:fadeView .28s ease-out}
 <h2>Matériel</h2>
 <div class="card">
 <div class="f"><label class="l">Tatoueur</label><input type="text" id="studio" value="Hugo Smoll"></div>
-<div class="row f"><div><label class="l">Aiguilles (réf. / taille)</label><input type="text" id="aig"></div><div><label class="l">N° de lot aiguilles</label><input type="text" id="laig"></div></div>
-<div class="row f"><div><label class="l">Encre (marque / couleur)</label><input type="text" id="enc"></div><div><label class="l">N° de lot encre</label><input type="text" id="lenc"></div></div>
+<div class="f pickf"><select id="pkAig" aria-label="Aiguilles du stock"></select></div><div class="row f"><div><label class="l">Aiguilles (réf. / taille)</label><input type="text" id="aig"></div><div><label class="l">N° de lot aiguilles</label><input type="text" id="laig"></div></div>
+<div class="f pickf"><select id="pkEnc" aria-label="Encres du stock"></select></div><div class="row f"><div><label class="l">Encre (marque / couleur)</label><input type="text" id="enc"></div><div><label class="l">N° de lot encre</label><input type="text" id="lenc"></div></div><p class="kwarn" id="kWarn" hidden></p>
 </div>
 <h2>Photos du matériel</h2>
 <div class="card"><div class="f"><label class="l">Aiguilles, encres, lots…</label><input type="file" id="files" accept="image/*" multiple><div class="ph" id="ph"></div></div></div>
@@ -425,6 +504,15 @@ main.fade{animation:fadeView .28s ease-out}
 <div id="s7" hidden>
 <button class="lnk tohome" type="button">‹ Accueil</button>
 <h2>Couleurs</h2><div class="card"><div class="pals" id="pals"></div></div>
+<h2>Mon thème</h2><div class="card">
+<div class="cpick"><label><input type="color" id="cuA" value="#ff6a3d"><span>Couleur principale</span></label><label><input type="color" id="cuB" value="#7b5cff"><span>Couleur du dégradé</span></label><label><input type="color" id="cuBg" value="#0b0a12"><span>Fond</span></label></div>
+<label class="chk sw2"><span>Fond clair</span><input type="checkbox" id="cuLight"></label>
+<div class="cprev" id="cuPrev"><span class="cpb">Aperçu du bouton</span><span class="cpc"><b>Carte</b><small>Texte secondaire</small></span></div>
+<div class="f" style="display:flex;gap:20px;flex-wrap:wrap"><button class="lnk" id="cuUse" type="button">Utiliser mon thème</button><button class="lnk" id="cuSurprise" type="button">Couleurs au hasard</button></div></div>
+<h2>Effets</h2><div class="card">
+<div class="f"><label class="l">Intensité de l’aurore en fond · <span id="auV"></span></label><input type="range" id="auK" min="0" max="150" step="10"></div>
+<label class="chk sw2"><span>Boutons en couleur unie (sans dégradé)</span><input type="checkbox" id="fxSolid"></label>
+<label class="chk sw2"><span>Animations calmes</span><input type="checkbox" id="fxCalm"></label></div>
 <h2>Personnaliser l’accueil</h2><div class="card">
 <div class="f"><label class="l">Titre de l’accueil</label><input type="text" id="cfTitle" placeholder="Accueil" maxlength="40" autocomplete="off"></div>
 <div class="f"><label class="l">Petit message (facultatif)</label><input type="text" id="cfMsg" placeholder="Ex. Bonne journée au salon !" maxlength="90" autocomplete="off"></div></div>
@@ -433,6 +521,9 @@ main.fade{animation:fadeView .28s ease-out}
 <h2>Raccourcis</h2><div class="card"><div class="slist" id="cfTiles"></div></div>
 <p class="note">Touche ☰ et fais glisser pour changer l’ordre. L’interrupteur affiche ou masque.</p>
 <div style="text-align:center;margin:8px 0 4px"><button class="lnk" id="cfReset" type="button">Rétablir l’accueil par défaut</button></div>
+<h2>Soins et suivi</h2><div class="card"><div class="f"><button class="lnk" id="cfOpenCare" type="button">Modifier ma fiche de soins ›</button></div><textarea id="cfCare" hidden></textarea>
+<div class="f"><label class="l">Message de suivi · {prenom} et {date} sont remplacés automatiquement</label><textarea id="cfFollow" rows="4"></textarea></div>
+<div class="f"><button class="lnk" id="cfCareReset" type="button">Remettre le message par défaut</button></div></div>
 <h2>Code et sécurité</h2><div class="card">
 <label class="chk sw2"><span>Demander le code à l’ouverture de l’appli</span><input type="checkbox" id="optAsk"></label>
 <label class="chk sw2"><span>Verrouiller après 2 minutes sans utilisation</span><input type="checkbox" id="optIdle"></label>
@@ -440,6 +531,39 @@ main.fade{animation:fadeView .28s ease-out}
 <h2>Balayage</h2><div class="card"><label class="chk sw2"><span>Glisser le doigt pour changer de rubrique</span><input type="checkbox" id="optSwipe"></label></div>
 <p class="note">Le code est toujours demandé pour revenir à ton espace après un consentement, et pour ouvrir les fiches depuis le formulaire client.</p>
 <div class="card" hidden><div class="f" style="font-size:15px;color:var(--mut)">Glisse le doigt vers la droite pour revenir en arrière, vers la gauche pour revenir en avant. Dans le calendrier, glisse sur le mois pour en changer.</div></div>
+</div>
+<div id="s8" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<div class="card"><div class="f"><div class="durs" id="gQuick"></div></div>
+<div class="row f"><div><label class="l">Du</label><input type="date" id="gFrom"></div><div><label class="l">Au</label><input type="date" id="gTo"></div></div>
+<div class="f"><input type="text" id="gQ" placeholder="Client ou n° de lot" autocomplete="off"></div></div>
+<h2 id="gCount"></h2><div id="gList"></div>
+<button class="pri" id="gPdf" type="button" style="margin-top:14px">Exporter le registre en PDF</button>
+</div>
+<div id="s9" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<div id="kAlert"></div>
+<h2>Ajouter un produit</h2><div class="card">
+<div class="f"><label class="l">Type</label><div class="durs" id="kType"></div></div>
+<div class="f"><label class="l">Référence *</label><input type="text" id="kRef" placeholder="Ex. Dynamic Triple Black, RL 9…" autocomplete="off"></div>
+<div class="row f"><div><label class="l">N° de lot *</label><input type="text" id="kLot" autocomplete="off"></div><div><label class="l">Péremption</label><input type="date" id="kExp"></div></div>
+<div class="f"><button class="pri" id="kAdd" type="button">Ajouter au stock</button></div></div>
+<h2>Encres</h2><div class="card" id="kEnc"></div>
+<h2>Aiguilles</h2><div class="card" id="kAig"></div>
+<h2>Autres produits</h2><div class="card" id="kOth"></div>
+</div>
+<div id="s10" hidden>
+<button class="lnk tohome" type="button">‹ Accueil</button>
+<h2>En-tête</h2><div class="card">
+<div class="f"><label class="l">Titre du PDF</label><input type="text" id="ceTitle" maxlength="50" autocomplete="off"></div>
+<div class="f"><label class="l">Pour (facultatif)</label><input type="text" id="ceFor" list="ceForL" placeholder="Nom du client" autocomplete="off"><datalist id="ceForL"></datalist></div>
+<div class="f"><label class="l">Introduction</label><textarea id="ceIntro" rows="2"></textarea></div></div>
+<h2>Contenu de la fiche</h2><div class="card"><div class="slist" id="ceList"></div></div>
+<div class="ceadd"><button class="dur" type="button" data-t="title">+ Titre</button><button class="dur" type="button" data-t="tip">+ Consigne</button><button class="dur" type="button" data-t="note">+ Encadré important</button></div>
+<h2>Éléments tout prêts</h2><div class="card"><div class="f" style="font-size:13px;color:var(--mut)">Touche un élément pour l’ajouter à la fin, puis modifie son texte.</div><div class="celib" id="ceLib"></div></div>
+<h2>Fin de la fiche</h2><div class="card"><div class="f"><label class="l">Message de fin</label><textarea id="ceOutro" rows="2"></textarea></div></div>
+<button class="pri" id="cePdf" type="button" style="margin-top:16px">Créer le PDF et l’envoyer</button>
+<div style="text-align:center;margin-top:12px"><button class="lnk" id="ceReset" type="button">Remettre la fiche par défaut</button></div>
 </div>
 <div id="s6" hidden>
 <button class="lnk tohome" type="button">‹ Accueil</button>
@@ -479,7 +603,7 @@ function shrink(file,m0){return new Promise(res=>{const u=URL.createObjectURL(fi
 $('files').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f);if(p){photos.push(p);const i=new Image();i.src=p.url;$('ph').appendChild(i)}}e.target.value='';qd()};
 let mtm;function msg(t,bad,html){const m=$('msg');clearTimeout(mtm);if(html)m.innerHTML=html;else m.textContent=t||'';m.className=bad?'err':'';if(t&&!bad&&!html)mtm=setTimeout(()=>{m.textContent=''},9000)}
 $('msg').onclick=e=>{if(!e.target.closest('a,button'))$('msg').textContent=''};
-function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=7;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients','Accueil','Calendrier','Projets','Réglages'][n];$('gear').hidden=n<3||n===7;$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':n>=4?todayLabel():'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
+function show(n){if(n===1){unlocked=false;stage=1}else if(n===2)stage=2;if(n!==3)qd();for(let i=1;i<=10;i++)$('s'+i).hidden=i!==n;$('d1').hidden=n!==1;$('d2').hidden=n!==2;$('h1').textContent=['','Consentement','Traçabilité','Clients','Accueil','Calendrier','Projets','Réglages','Registre','Matériel','Fiche de soins'][n];$('gear').hidden=n<3||n===7;$('sub').textContent=n==2&&cur?cur.prenom+' '+cur.nom+' · séance '+(cur.seances.length+1):n==2?'Espace tatoueur':n>=4?todayLabel():'Hugo Smoll · @hugo_Smoll';$('back').textContent=cur?'Retour à la fiche':'Retour au formulaire client';document.body.classList.toggle('t2',n!=1);msg('');scrollTo(0,0)}
 const v=id=>$(id).value.trim();
 $('next').onclick=async()=>{
 if(!v('nom')||!v('prenom')||!v('naiss'))return msg('Merci de renseigner nom, prénom et date de naissance.',1);
@@ -555,6 +679,7 @@ if(d.sig){sect('SIGNATURE DU CLIENT');need(48);
   doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...GHI);doc.text(((d.prenom||'')+' '+(d.nom||'')).trim(),M+102,y+30);
   doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text('Signé le '+d.date,M+102,y+36);y+=47}
 else{sect('CONSENTEMENT');grid([['CONSENTEMENT SIGNÉ',(d.docs&&d.docs.length?'Voir le PDF joint : '+d.docs.map(x=>x.name).join(', '):'Document joint à la fiche')]],1)}
+if(d.tut){sect('REPRÉSENTANT LÉGAL  ·  CLIENT MINEUR ('+d.tut.age+' ANS)');grid([['NOM',d.tut.nom],['PRÉNOM',d.tut.prenom],['LIEN AVEC LE CLIENT',d.tut.lien],['PIÈCE D’IDENTITÉ',d.tut.idOk?'Vérifiée':'Non vérifiée']]);grid([['DÉCLARATION','J’autorise ce tatouage. J’ai pris connaissance des risques et des soins à suivre.']],1);if(d.tut.sig){need(48);doc.setFillColor(...PAPER);doc.roundedRect(M,y,96,42,3.5,3.5,'F');doc.setDrawColor(...GOLD);doc.setLineWidth(.5);doc.roundedRect(M,y,96,42,3.5,3.5,'S');doc.addImage(d.tut.sig,'PNG',M+4,y+3,88,36);doc.setFont('helvetica','bold');doc.setFontSize(9);doc.setTextColor(...GHI);doc.text(d.tut.prenom+' '+d.tut.nom,M+102,y+30);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text('Représentant légal · '+d.date,M+102,y+36);y+=47}}
 if(d.docs&&d.docs.length){sect('DOCUMENTS JOINTS');d.docs.forEach(x=>{need(14);card(M,y,W-2*M,12);doc.setFillColor(...GOLD);doc.roundedRect(M+3.5,y+2.5,9,7,1.5,1.5,'F');doc.setFont('helvetica','bold');doc.setFontSize(6.5);doc.setTextColor(...BG);doc.text('PDF',M+4.9,y+7.1);
   doc.setFontSize(9.5);doc.setTextColor(...TX);doc.text(doc.splitTextToSize(x.name,W-2*M-60)[0],M+16,y+5.6);doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(...MUT);doc.text('Ajouté le '+x.date+(x.size?'  ·  '+kb(x.size):''),M+16,y+9.6);y+=14})}
 d.seances.forEach((s,i)=>{sect('TRAÇABILITÉ  ·  SÉANCE '+(i+1)+'  ·  '+s.date);
@@ -568,7 +693,7 @@ return doc.output()}
 
 let cur=null;
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let _db;const idb=()=>_db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('consentements',2);r.onupgradeneeded=()=>{const db=r.result;['fiches','rdv','todo'].forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n,{keyPath:'id'})})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
+let _db;const idb=()=>_db||(_db=new Promise((res,rej)=>{const r=indexedDB.open('consentements',3);r.onupgradeneeded=()=>{const db=r.result;['fiches','rdv','todo','stock'].forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n,{keyPath:'id'})})};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)}));
 const tx=async(mode,fn)=>{const d=await idb();return new Promise((res,rej)=>{const t=d.transaction('fiches',mode),r=fn(t.objectStore('fiches'));t.oncomplete=()=>res(r&&r.result);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})};
 const all=()=>tx('readonly',s=>s.getAll()),put=f=>tx('readwrite',s=>s.put(f)),del=id=>tx('readwrite',s=>s.delete(id));
 try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}catch(e){}
@@ -589,7 +714,7 @@ try{localStorage.setItem('studio',v('studio'))}catch(e){}
 msg('Création du PDF…');
 const now=new Date(),sea={date:now.toLocaleDateString('fr-FR'),studio:v('studio')||'Hugo Smoll',aig:v('aig'),laig:v('laig'),enc:v('enc'),lenc:v('lenc'),notes:v('notes'),photos:photos.slice(),tattoo:tphotos.slice()};
 const again=!!cur;let f=cur;
-if(!f){const cks=[...document.querySelectorAll('.req')];f={id:Date.now().toString(36),nom:v('nom'),prenom:v('prenom'),naiss:new Date(v('naiss')).toLocaleDateString('fr-FR'),tel:v('tel'),mail:v('mail'),adr:v('adr'),sante:v('sante'),photoOk:$('photoOk').checked,decl:cks.map(c=>c.nextElementSibling.textContent),sig:cv.toDataURL('image/png'),date:now.toLocaleDateString('fr-FR')+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),seances:[]}}
+if(!f){const cks=[...document.querySelectorAll('.req')];f={id:Date.now().toString(36),nom:v('nom'),prenom:v('prenom'),naiss:new Date(v('naiss')).toLocaleDateString('fr-FR'),tel:v('tel'),mail:v('mail'),adr:v('adr'),sante:v('sante'),photoOk:$('photoOk').checked,decl:cks.map(c=>c.nextElementSibling.textContent),sig:cv.toDataURL('image/png'),date:now.toLocaleDateString('fr-FR')+' à '+now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),seances:[]};if(isMinor())f.tut={nom:v('tnom'),prenom:v('tprenom'),lien:$('tlien').value,idOk:$('tid').checked,sig:cv2.toDataURL('image/png'),age:ageOf($('naiss').value)}}
 f.seances.push(sea);f.studio=sea.studio;
 let saved=true;try{await put(f)}catch(e){saved=false}
 if(saved)await clearDraft();
@@ -610,11 +735,11 @@ if(!f)return openClients();
 cur=f;show(3);$('list').hidden=true;$('det').hidden=false;
 $('det').innerHTML='<button class="lnk" id="bk" type="button">‹ Clients</button><h2>'+esc(f.prenom)+' '+esc(f.nom)+'</h2><div class="card"><div class="f"><label class="l">Né(e) le</label>'+esc(f.naiss)+'</div><div class="f"><label class="l">Contact</label>'+esc([f.tel,f.mail].filter(Boolean).join(' · ')||'—')+'</div><div class="f"><label class="l">Allergies / santé</label>'+esc(f.sante||'Rien à signaler')+'</div><div class="f"><label class="l">'+(f.imported?'Consentement':'Consentement signé le')+'</label>'+esc(f.imported?'PDF importé ('+f.date+')':f.date)+'</div></div>'
 +f.seances.map((s,i)=>'<h2>Séance '+(i+1)+' · '+esc(s.date)+'</h2><div class="card"><div class="f">Aiguilles : '+esc(s.aig||'—')+' (lot '+esc(s.laig||'—')+')<br>Encre : '+esc(s.enc||'—')+' (lot '+esc(s.lenc||'—')+')'+(s.notes?'<br>'+esc(s.notes):'')+'<br><span style="color:var(--mut)">'+(s.tattoo||[]).length+' photo(s) tatouage · '+s.photos.length+' photo(s) matériel</span>'+((s.tattoo||[]).length?'<div class="ph" style="padding:10px 0 0">'+s.tattoo.map(p=>'<img src="'+p.url+'">').join('')+'</div>':'')+'</div></div>').join('')
-+'<h2>Documents</h2><div class="card">'+docsHTML(f)+'<div class="f"><label class="lnk addpdf">+ Ajouter un PDF depuis Fichiers<input class="vh" type="file" id="pdfin" accept="application/pdf,.pdf" multiple></label></div></div>'+'<button class="pri" id="ns" type="button" style="margin-top:18px">Nouvelle séance</button><button class="lnk" id="dl" type="button" style="display:block;margin:14px auto 0">Télécharger le PDF</button><button class="lnk" id="rm" type="button" style="display:block;margin:14px auto 0;color:var(--err)">Supprimer la fiche</button>';
++(f.tut?'<h2>Représentant légal</h2><div class="card"><div class="f">'+esc(f.tut.prenom+' '+f.tut.nom)+' · '+esc(f.tut.lien)+'<br><span style="color:var(--mut);font-size:14px">Client mineur ('+esc(f.tut.age)+' ans) · pièce d’identité '+(f.tut.idOk?'vérifiée':'non vérifiée')+'</span></div></div>':'')+'<h2>Après la séance</h2><div class="card"><div class="f care2"><button class="lnk" id="careP" type="button">Consignes de soins (PDF)</button><button class="lnk" id="careM" type="button">Message de suivi</button></div></div>'+'<h2>Documents</h2><div class="card">'+docsHTML(f)+'<div class="f"><label class="lnk addpdf">+ Ajouter un PDF depuis Fichiers<input class="vh" type="file" id="pdfin" accept="application/pdf,.pdf" multiple></label></div></div>'+'<button class="pri" id="ns" type="button" style="margin-top:18px">Nouvelle séance</button><button class="lnk" id="dl" type="button" style="display:block;margin:14px auto 0">Télécharger le PDF</button><button class="lnk" id="rm" type="button" style="display:block;margin:14px auto 0;color:var(--err)">Supprimer la fiche</button>';
 $('bk').onclick=openClients;
 $('ns').onclick=()=>{clearTrace();show(2)};
 $('dl').onclick=async()=>{const n=await savePDF(f,'');if(!offered)msg(n?'PDF : '+n:'PDF non enregistré.',!n)};
-let armed=false;$('rm').onclick=async()=>{if(!armed){armed=true;$('rm').textContent='Appuyer à nouveau pour confirmer';return}await del(f.id);openClients();msg('Fiche supprimée.')};bindDocs(f)}
+let armed=false;$('rm').onclick=async()=>{if(!armed){armed=true;$('rm').textContent='Appuyer à nouveau pour confirmer';return}await del(f.id);openClients();msg('Fiche supprimée.')};bindDocs(f);$('careP').onclick=()=>carePDF(f);$('careM').onclick=()=>careMsg(f)}
 
 let tphotos=[];
 $('files2').onchange=async e=>{for(const f of e.target.files){const p=await shrink(f,1200);if(p){tphotos.push(p);const i=new Image();i.src=p.url;$('ph2').appendChild(i)}}e.target.value='';qd()};
@@ -653,7 +778,7 @@ $('q').oninput=renderList;
 $('rows').onclick=e=>{const b=e.target.closest('.it');if(b)showDetail(b.dataset.id)};
 $('back').onclick=()=>cur?showDetail(cur.id):show(1);
 // ---- brouillon : survit à un redémarrage de l'app
-const DK='__draft',F1=['nom','prenom','naiss','tel','mail','adr','sante'],F2=['studio','aig','laig','enc','lenc','notes'];
+const DK='__draft',F1=['nom','prenom','naiss','tel','mail','adr','sante','tnom','tprenom','tlien'],F2=['studio','aig','laig','enc','lenc','notes'];
 let dtm=null,stage=1;
 async function saveDraft(){try{
 const o={id:DK,stage,cur:stage===2&&cur?cur.id:null,t:Date.now(),photos,tphotos,photoOk:$('photoOk').checked,checks:[...document.querySelectorAll('.req')].map(c=>c.checked),sig:signed?cv.toDataURL('image/png'):null};
@@ -678,7 +803,7 @@ stage=2;if(await gate('Merci !','Remets le téléphone à Hugo Smoll.',false))sh
 }catch(e){}})();
 
 // ---- style Aurora : thèmes, fond animé, ondes au toucher
-const PALS=[["nebuleuse", "Nébuleuse", "#7b5cff", "#07061a", "#38b6ff"], ["sang", "Encre & sang", "#c8323c", "#09090b", "#ff8a3d"], ["or", "Or", "#e6b325", "#08080a", "#ff8f3c"], ["emeraude", "Émeraude", "#2fbf8f", "#070b0a", "#2bb3e6"], ["ivoire", "Ivoire", "#b07d12", "#f2ede3", "#c45f34"], ["couchant", "Coucher de soleil", "#ff5e62", "#140a12", "#b44cff"], ["ocean", "Océan", "#0fa3b1", "#04121a", "#2f6bff"], ["neon", "Néon", "#ff2bd6", "#07050f", "#00f0ff"], ["minuit", "Minuit doré", "#d4a73c", "#070b16", "#5b7cfa"], ["lave", "Lave", "#ff4d1a", "#0b0605", "#c4002b"], ["sakura", "Sakura", "#e0568a", "#fbeef2", "#f29bb8"], ["glacier", "Glacier", "#2b8fd6", "#eaf3f8", "#5ccfe6"], ["rubis", "Rubis", "#e0245e", "#12060a", "#9b1b5a"], ["amethyste", "Améthyste", "#9d4edd", "#0d0716", "#ff6ec7"], ["foret", "Forêt", "#3a9d5d", "#060d09", "#c9b458"], ["cuivre", "Cuivre", "#c8743c", "#0e0907", "#8c3b1e"], ["arctique", "Arctique", "#5aa9e6", "#050b12", "#7f5af0"], ["mono", "Noir & blanc", "#d9d9d9", "#0a0a0a", "#7a7a7a"], ["peche", "Pêche", "#f08a5d", "#fdf0e8", "#f5b971"], ["lilas", "Lilas", "#8b5cf6", "#f3eefb", "#e879f9"]];
+const PALS=[["nebuleuse", "Nébuleuse", "#7b5cff", "#07061a", "#38b6ff"], ["sang", "Encre & sang", "#c8323c", "#09090b", "#ff8a3d"], ["or", "Or", "#e6b325", "#08080a", "#ff8f3c"], ["emeraude", "Émeraude", "#2fbf8f", "#070b0a", "#2bb3e6"], ["ivoire", "Ivoire", "#b07d12", "#f2ede3", "#c45f34"], ["couchant", "Coucher de soleil", "#ff5e62", "#140a12", "#b44cff"], ["ocean", "Océan", "#0fa3b1", "#04121a", "#2f6bff"], ["neon", "Néon", "#ff2bd6", "#07050f", "#00f0ff"], ["minuit", "Minuit doré", "#d4a73c", "#070b16", "#5b7cfa"], ["lave", "Lave", "#ff4d1a", "#0b0605", "#c4002b"], ["sakura", "Sakura", "#e0568a", "#fbeef2", "#f29bb8"], ["glacier", "Glacier", "#2b8fd6", "#eaf3f8", "#5ccfe6"], ["rubis", "Rubis", "#e0245e", "#12060a", "#9b1b5a"], ["amethyste", "Améthyste", "#9d4edd", "#0d0716", "#ff6ec7"], ["foret", "Forêt", "#3a9d5d", "#060d09", "#c9b458"], ["cuivre", "Cuivre", "#c8743c", "#0e0907", "#8c3b1e"], ["arctique", "Arctique", "#5aa9e6", "#050b12", "#7f5af0"], ["mono", "Noir & blanc", "#d9d9d9", "#0a0a0a", "#7a7a7a"], ["peche", "Pêche", "#f08a5d", "#fdf0e8", "#f5b971"], ["lilas", "Lilas", "#8b5cf6", "#f3eefb", "#e879f9"], ["bordeaux", "Bordeaux & or", "#8e1b32", "#0f0608", "#e3b65a"], ["jade", "Jade", "#00a37a", "#04100d", "#00c2d1"], ["encre", "Encre bleue", "#2f5bff", "#050814", "#00b3ff"], ["sable", "Sable", "#c08a3e", "#f5efe4", "#d9b26a"], ["perso", "Mon thème", "#ff6a3d", "#0b0a12", "#7b5cff"]];
 const RM=(()=>{try{return matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){return false}})();
 const curPal=()=>{const p=lsg('pal');return PALS.find(x=>x[0]===p)||PALS[0]};
 function accRGB(){const h=curPal()[2];return[1,3,5].map(i=>parseInt(h.slice(i,i+2),16))}
@@ -920,7 +1045,7 @@ function route(fn){if(NAV.replay)return;const top=NAV.st[NAV.i];if(top&&top.k===
 function navGo(d){const j=NAV.i+d;if(j<0||j>=NAV.st.length)return false;NAV.i=j;NAV.replay=true;try{const m=document.querySelector('main');m.classList.remove('fade');void m.offsetWidth;m.classList.add('fade');NAV.st[j]()}finally{NAV.replay=false}return true}
 let sw0=null;
 document.addEventListener('pointerdown',e=>{if(lsg('swipe')==='0'){sw0=null;return}if(e.pointerType==='mouse'&&e.button!==0)return;if(!$('lock').hidden){sw0=null;return}
-  if(e.target.closest('canvas,input,textarea,select,.drag,.srow')){sw0=null;return}sw0={x:e.clientX,y:e.clientY,t:Date.now(),cal:!!e.target.closest('#cGrid,.calh')}},{passive:true});
+  if(e.target.closest('canvas,input,textarea,select,.drag,.srow,.cpick')){sw0=null;return}sw0={x:e.clientX,y:e.clientY,t:Date.now(),cal:!!e.target.closest('#cGrid,.calh')}},{passive:true});
 document.addEventListener('pointerup',e=>{if(!sw0)return;const dx=e.clientX-sw0.x,dy=e.clientY-sw0.y,dt=Date.now()-sw0.t,c=sw0.cal;sw0=null;
   if(dt>700||Math.abs(dx)<70||Math.abs(dy)>Math.abs(dx)*.6)return;
   if(c&&!$('s5').hidden){(dx<0?$('cNext'):$('cPrev')).click();return}
@@ -948,7 +1073,7 @@ const DRAG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 function cfgGet(){let c={};try{c=JSON.parse(lsg('homecfg')||'{}')||{}}catch(e){}
   const merge=(arr,keys,defOn)=>{const out=(Array.isArray(arr)?arr:[]).filter(x=>keys.includes(x.k));keys.forEach(k=>{if(!out.find(x=>x.k===k))out.push({k,on:defOn(k)})});return out};
   c.blocks=merge(c.blocks,Object.keys(BLOCKS),()=>true);
-  c.tiles=merge(c.tiles,Object.keys(TILES),k=>['cons','cli','cal','todo'].includes(k));
+  c.tiles=merge(c.tiles,Object.keys(TILES),k=>['cons','cli','cal','todo','reg','stock','soin'].includes(k));
   if(c.tline===undefined)c.tline=true;return c}
 const cfgSet=c=>lss('homecfg',JSON.stringify(c));
 async function applyHome(){
@@ -971,7 +1096,7 @@ async function applyHome(){
     else if(g==='rdv'){await openCal();openForm(null)}else if(g==='set')openSettings();else if(g==='imp'){await openClients();$('impF').hidden=false;$('impF').scrollIntoView({block:'center'})}});
   if(!RM)$('hTiles').querySelectorAll('.n').forEach(e=>{const to=+e.dataset.to,t0=performance.now();const st=k=>{const q=Math.min(1,(k-t0)/800);e.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(st)};e.textContent='0';requestAnimationFrame(st)});
 }
-(()=>{const orig=window.renderHome;window.renderHome=async function(...a){const r=await orig.apply(this,a);await applyHome();return r}})();
+(()=>{const orig=window.renderHome;window.renderHome=async function(...a){const r=await orig.apply(this,a);await window.applyHome();return r}})();
 function rowHTML(k,name,subt,on,ico){return '<div class="srow'+(on?'':' off')+'" data-k="'+k+'"><span class="drag" aria-label="Déplacer">'+DRAG+'</span>'+(ico?'<span class="si">'+isvg(ico)+'</span>':'')+'<span class="sn">'+esc(name)+(subt?'<small>'+esc(subt)+'</small>':'')+'</span><input type="checkbox" '+(on?'checked':'')+' aria-label="Afficher"></div>'}
 function sortable(list,save){list.querySelectorAll('.drag').forEach(h=>{h.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();const li=h.closest('.srow');let y0=e.clientY;li.classList.add('dragging');try{h.setPointerCapture(e.pointerId)}catch(_){}
   const mv=ev=>{const dy=ev.clientY-y0,nx=li.nextElementSibling,pv=li.previousElementSibling;
@@ -992,6 +1117,240 @@ $('cfTline').onchange=e=>{const c=cfgGet();c.tline=e.target.checked;cfgSet(c)};
 let cfArm=false;$('cfReset').onclick=()=>{if(!cfArm){cfArm=true;$('cfReset').textContent='Toucher à nouveau pour confirmer';setTimeout(()=>{cfArm=false;$('cfReset').textContent='Rétablir l’accueil par défaut'},4000);return}
   cfArm=false;$('cfReset').textContent='Rétablir l’accueil par défaut';lss('homecfg','{}');renderHomeCfg();msg('Accueil rétabli.')};
 new MutationObserver(()=>{if(!$('s7').hidden)renderHomeCfg()}).observe($('s7'),{attributes:true,attributeFilter:['hidden']});
+
+// ================= mineurs =================
+const DECL18='Je certifie avoir 18 ans ou plus et être en capacité de donner mon consentement.',DECLMIN='Je suis mineur(e) : mon représentant légal donne son accord écrit ci-dessous.';
+function ageOf(v){if(!v)return null;const[y,m,d]=String(v).split('-').map(Number);if(!y)return null;const t=new Date();let a=t.getFullYear()-y;if(t.getMonth()+1<m||(t.getMonth()+1===m&&t.getDate()<d))a--;return a}
+const isMinor=()=>{const a=ageOf($('naiss').value);return a!==null&&a>=0&&a<18};
+const cv2=$('sig2'),cx2=cv2.getContext('2d');let signed2=false,dr2=false;
+function fit2(){const r=cv2.getBoundingClientRect();if(!r.width)return;const d=window.devicePixelRatio||1;cv2.width=r.width*d;cv2.height=r.height*d;cx2.setTransform(1,0,0,1,0,0);cx2.scale(d,d);cx2.lineWidth=2.4;cx2.lineCap='round';cx2.lineJoin='round';cx2.strokeStyle='#111';signed2=false}
+const pt2=e=>{const r=cv2.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+cv2.addEventListener('pointerdown',e=>{dr2=true;cv2.setPointerCapture(e.pointerId);const[x,y]=pt2(e);cx2.beginPath();cx2.moveTo(x,y);cx2.lineTo(x+.1,y+.1);cx2.stroke();signed2=true});
+cv2.addEventListener('pointermove',e=>{if(!dr2)return;const[x,y]=pt2(e);cx2.lineTo(x,y);cx2.stroke()});
+['pointerup','pointercancel'].forEach(n=>cv2.addEventListener(n,()=>{dr2=false;cv2.classList.remove('signed');void cv2.offsetWidth;cv2.classList.add('signed')}));
+$('clr2').onclick=()=>{cx2.clearRect(0,0,cv2.width,cv2.height);signed2=false};
+const LIENS=['Mère','Père','Tuteur légal','Tutrice légale'];
+function paintLien(){$('tlienB').innerHTML=LIENS.map(l=>'<button class="dur" type="button" data-l="'+l+'" aria-pressed="'+($('tlien').value===l)+'">'+l+'</button>').join('');$('tlienB').querySelectorAll('.dur').forEach(b=>b.onclick=()=>{$('tlien').value=b.dataset.l;paintLien();qd()})}
+function updMinor(){const m=isMinor(),was=!$('minor').hidden;$('minor').hidden=!m;const sp=document.querySelector('.req').nextElementSibling;if(sp)sp.textContent=m?DECLMIN:DECL18;
+  if(m){$('mAge').textContent='Client mineur : '+ageOf($('naiss').value)+' ans.';paintLien();if(!was)setTimeout(fit2,60)}}
+['change','input','blur'].forEach(ev=>$('naiss').addEventListener(ev,updMinor));
+setTimeout(updMinor,400);setTimeout(updMinor,1500);
+(()=>{const n0=$('next').onclick;$('next').onclick=async e=>{const a=ageOf($('naiss').value);
+  if(a!==null&&(a<0||a>120))return msg('Vérifie la date de naissance.',1);
+  if(isMinor()){if(!v('tnom')||!v('tprenom')||!$('tlien').value)return msg('Indique le nom, le prénom et le lien du représentant légal.',1);
+    if(!$('tid').checked||!$('tok').checked)return msg('Le représentant légal doit cocher ses deux cases.',1);
+    if(!signed2)return msg('La signature du représentant légal est obligatoire.',1)}
+  return n0(e)}})();
+(()=>{const ra=window.resetAll;window.resetAll=function(...a){const r=ra.apply(this,a);$('tlien').value='';cx2.clearRect(0,0,cv2.width,cv2.height);signed2=false;updMinor();return r}})();
+
+// ================= stock =================
+const KT={enc:'Encre',aig:'Aiguilles',oth:'Autre'};let kType='enc';
+function expState(x){if(!x.exp)return['','Sans date'];const d=Math.round((pd(x.exp)-pd(dk(new Date())))/864e5);
+  if(d<0)return['bad','Périmé'];if(d<=60)return['soon','Expire dans '+d+' j'];return['ok','OK']}
+function paintKType(){$('kType').innerHTML=Object.entries(KT).map(([k,l])=>'<button class="dur" type="button" data-k="'+k+'" aria-pressed="'+(k===kType)+'">'+l+'</button>').join('');$('kType').querySelectorAll('.dur').forEach(b=>b.onclick=()=>{kType=b.dataset.k;paintKType()})}
+async function openStockRaw(){show(9);paintKType();await renderStock()}
+async function renderStock(){const K=(await allOf('stock')).sort((a,b)=>(a.exp||'9999').localeCompare(b.exp||'9999'));
+  const row=x=>{const[c,t]=expState(x);return '<div class="ki" data-id="'+esc(x.id)+'"><span class="kt"><b>'+esc(x.ref)+'</b><small>Lot '+esc(x.lot)+(x.exp?' · péremption '+esc(pd(x.exp).toLocaleDateString('fr-FR')):'')+'</small></span><span class="pill '+c+'">'+t+'</span><button class="x" type="button" aria-label="Retirer">×</button></div>'};
+  [['enc','kEnc'],['aig','kAig'],['oth','kOth']].forEach(([t,id])=>{const L=K.filter(x=>x.type===t);$(id).innerHTML=L.length?L.map(row).join(''):'<div class="empty2">Aucun produit.</div>'});
+  const al=K.filter(x=>['bad','soon'].includes(expState(x)[0]));
+  $('kAlert').innerHTML=al.length?'<div class="kal"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="var(--err)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg><div><b>'+al.length+' produit'+(al.length>1?'s':'')+' à vérifier</b><span>'+esc(al.map(x=>x.ref+' ('+expState(x)[1].toLowerCase()+')').join(', '))+'</span></div></div>':'';
+  document.querySelectorAll('#s9 .ki').forEach(el=>{let arm=false;el.querySelector('.x').onclick=async()=>{const b=el.querySelector('.x');if(!arm){arm=true;b.textContent='Retirer ?';b.style.color='var(--err)';b.style.fontSize='13px';return}await delIn('stock',el.dataset.id);renderStock()}})}
+$('kAdd').onclick=async()=>{const ref=$('kRef').value.trim(),lot=$('kLot').value.trim();if(!ref||!lot)return msg('Indique la référence et le numéro de lot.',1);
+  await putIn('stock',{id:Date.now().toString(36),type:kType,ref,lot,exp:$('kExp').value||null});$('kRef').value='';$('kLot').value='';$('kExp').value='';await renderStock();msg('Produit ajouté au stock.')};
+async function fillPickers(){const K=await allOf('stock');
+  const opt=(t,ph)=>'<option value="">'+ph+'</option>'+K.filter(x=>x.type===t).sort((a,b)=>a.ref.localeCompare(b.ref)).map(x=>{const[c,tt]=expState(x);return '<option value="'+esc(x.id)+'"'+(c==='bad'?' disabled':'')+'>'+esc(x.ref)+' · lot '+esc(x.lot)+(c==='bad'?' (périmé)':c==='soon'?' (expire bientôt)':'')+'</option>'}).join('');
+  $('pkAig').innerHTML=opt('aig',K.some(x=>x.type==='aig')?'Choisir des aiguilles dans mon stock…':'Aucune aiguille en stock (ajoute-les dans Matériel)');
+  $('pkEnc').innerHTML=opt('enc',K.some(x=>x.type==='enc')?'Ajouter une encre de mon stock…':'Aucune encre en stock (ajoute-les dans Matériel)');
+  const pick=(sel,f1,f2)=>{sel.onchange=()=>{const x=K.find(z=>z.id===sel.value);if(!x)return;const add=(id,val)=>{const el=$(id);el.value=el.value.trim()?el.value.trim()+', '+val:val};add(f1,x.ref);add(f2,x.lot);sel.value='';qd();
+    const[c,t]=expState(x);$('kWarn').hidden=c!=='soon';if(c==='soon')$('kWarn').textContent='Attention : '+x.ref+' (lot '+x.lot+') '+t.toLowerCase()+'.';vib(10)}};
+  pick($('pkAig'),'aig','laig');pick($('pkEnc'),'enc','lenc')}
+new MutationObserver(()=>{if(!$('s2').hidden){fillPickers();$('kWarn').hidden=true}}).observe($('s2'),{attributes:true,attributeFilter:['hidden']});
+
+// ================= registre =================
+let gRange='mois';
+const frD=s=>{const m=/^(\d{2})\/(\d{2})\/(\d{4})/.exec(s||'');return m?m[3]+'-'+m[2]+'-'+m[1]:''};
+const RANGES={mois:'Ce mois',prec:'Mois dernier',trim:'3 derniers mois',an:'Cette année',tout:'Tout'};
+function setRange(k){gRange=k;const t=new Date(),y=t.getFullYear(),m=t.getMonth();let a='',b='';
+  if(k==='mois'){a=dk(new Date(y,m,1));b=dk(new Date(y,m+1,0))}else if(k==='prec'){a=dk(new Date(y,m-1,1));b=dk(new Date(y,m,0))}
+  else if(k==='trim'){a=dk(new Date(y,m-2,1));b=dk(new Date(y,m+1,0))}else if(k==='an'){a=y+'-01-01';b=y+'-12-31'}
+  $('gFrom').value=a;$('gTo').value=b;paintRange();renderReg()}
+function paintRange(){$('gQuick').innerHTML=Object.entries(RANGES).map(([k,l])=>'<button class="dur" type="button" data-k="'+k+'" aria-pressed="'+(k===gRange)+'">'+l+'</button>').join('');$('gQuick').querySelectorAll('.dur').forEach(b=>b.onclick=()=>setRange(b.dataset.k))}
+async function regRows(){const Fi=(await all().catch(()=>[])).filter(f=>f.id!=='__draft'),R=[];
+  Fi.forEach(f=>(f.seances||[]).forEach((s,i)=>R.push({k:frD(s.date),date:s.date,client:(f.prenom+' '+f.nom).trim(),fid:f.id,n:i+1,studio:s.studio||'',aig:s.aig||'',laig:s.laig||'',enc:s.enc||'',lenc:s.lenc||''})));
+  const a=$('gFrom').value,b=$('gTo').value,q=$('gQ').value.trim().toLowerCase();
+  return R.filter(r=>(!a||r.k>=a)&&(!b||r.k<=b)&&(!q||(r.client+' '+r.laig+' '+r.lenc+' '+r.aig+' '+r.enc).toLowerCase().includes(q))).sort((x,y)=>y.k.localeCompare(x.k))}
+async function renderReg(){const R=await regRows();$('gCount').textContent=R.length+' séance'+(R.length>1?'s':'');
+  $('gList').innerHTML='<div class="card">'+(R.length?R.map(r=>'<button class="rg" type="button" data-f="'+esc(r.fid)+'"><span class="rh"><b>'+esc(r.client)+'</b><span>'+esc(r.date)+' · séance '+r.n+'</span></span><span class="rl" style="display:block">Aiguilles : <em>'+esc(r.aig||'—')+'</em> · lot <em>'+esc(r.laig||'—')+'</em></span><span class="rl" style="display:block">Encre : <em>'+esc(r.enc||'—')+'</em> · lot <em>'+esc(r.lenc||'—')+'</em></span></button>').join(''):'<div class="empty2">Aucune séance sur cette période.</div>')+'</div>';
+  $('gList').querySelectorAll('.rg').forEach(b=>b.onclick=()=>showDetail(b.dataset.f))}
+async function openRegRaw(){show(8);paintRange();if(!$('gFrom').value&&!$('gTo').value&&gRange==='mois')setRange('mois');else await renderReg()}
+['gFrom','gTo'].forEach(i=>$(i).addEventListener('change',()=>{gRange='';paintRange();renderReg()}));
+$('gQ').addEventListener('input',()=>renderReg());
+$('gPdf').onclick=async()=>{if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);const R=await regRows();if(!R.length)return msg('Aucune séance à exporter sur cette période.',1);
+  const a=$('gFrom').value,b=$('gTo').value,lab=(a?pd(a).toLocaleDateString('fr-FR'):'début')+' au '+(b?pd(b).toLocaleDateString('fr-FR'):'aujourd’hui');
+  msg('Création du registre…');const blob=await buildRegPDF(R.slice().reverse(),lab);offer(blob,'registre-tracabilite-'+(a||'debut')+'-'+(b||'fin')+'.pdf','')};
+async function goldDoc(title,sub){const doc=await MiniPDF.create(),W=210,M=16;
+  const bg=()=>{doc.setFillColor(...BG);doc.rect(0,0,W,297,'F')};bg();
+  doc.setFillColor(...HEAD);doc.rect(0,0,W,40,'F');goldStar(doc,M,9,20);
+  doc.setTextColor(...TX);doc.setFont('helvetica','bold');doc.setFontSize(19);doc.text(title,M+27,18);
+  doc.setFontSize(9.5);doc.setTextColor(...GHI);doc.text('HUGO SMOLL   ·   @hugo_Smoll',M+27,25);
+  doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(...MUT);doc.text(sub,M+27,31.5);
+  if(SP.a)doc.addImage(SP.a,'PNG',W-M-34,6,32,32*MR);gbar(doc,0,40,W,1.4,90);
+  return{doc,W,M,bg}}
+function goldFoot(doc,W,M,txt){const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);gbar(doc,M,286.3,W-2*M,.4,40);star(doc,M,289.2,3.6,GOLD);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text(txt,M+5.5,292);doc.setTextColor(...GHI);doc.text(i+' / '+n,W-M,292,{align:'right'})}}
+async function buildRegPDF(R,lab){const{doc,W,M,bg}=await goldDoc('Registre de traçabilité','Du '+lab+'  ·  '+R.length+' séance'+(R.length>1?'s':'')+'  ·  édité le '+new Date().toLocaleDateString('fr-FR'));
+  const cols=[['DATE',22],['CLIENT',38],['AIGUILLES',36],['LOT AIG.',22],['ENCRE',36],['LOT ENCRE',24]],X=[];let x=M;cols.forEach(c=>{X.push(x);x+=c[1]});
+  let y=50;const head=()=>{doc.setFillColor(...HEAD);doc.roundedRect(M,y,W-2*M,8,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(...GHI);cols.forEach((c,i)=>doc.text(c[0],X[i]+2,y+5.3));y+=10};head();
+  R.forEach((r,k)=>{doc.setFont('helvetica','normal');doc.setFontSize(8.5);const vals=[r.date,r.client,r.aig||'—',r.laig||'—',r.enc||'—',r.lenc||'—'],L=vals.map((v,i)=>doc.splitTextToSize(v,cols[i][1]-4)),h=Math.max(...L.map(l=>l.length))*3.9+4;
+    if(y+h>280){doc.addPage();bg();y=16;head()}
+    if(k%2===0){doc.setFillColor(...CARD);doc.rect(M,y,W-2*M,h,'F')}
+    L.forEach((l,i)=>{doc.setTextColor(...(i===1?TX:i%2?TX:MUT));doc.setFont('helvetica',i===1?'bold':'normal');doc.text(l,X[i]+2,y+4.2)});y+=h});
+  y+=8;if(y<270){doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUT);doc.text('Document généré depuis l’application de consentement Hugo Smoll.',M,y)}
+  goldFoot(doc,W,M,'Registre de traçabilité  ·  Hugo Smoll');return doc.output()}
+
+// ================= consignes de soins =================
+const CARE_DEF=['Garde le film protecteur le temps indiqué lors de la séance.','Lave-toi bien les mains avant chaque soin.','Nettoie le tatouage 2 à 3 fois par jour à l’eau tiède et au savon neutre, sans frotter.','Sèche en tapotant avec un essuie-tout propre.','Applique une fine couche de crème cicatrisante.','Ne gratte pas et n’arrache pas les petites croûtes : laisse-les tomber seules.','Pendant environ 3 semaines : pas de bain, de piscine, de mer, de sauna ni de hammam.','Évite le soleil pendant la cicatrisation, puis protège ton tatouage avec un écran total.','Porte des vêtements amples et propres sur la zone tatouée.','En cas de rougeur qui s’étend, de chaleur, de pus ou de fièvre, consulte un médecin et préviens-moi.'].join('\n');
+const FOLLOW_DEF='Bonjour {prenom}, c’est Hugo Smoll. Comment se passe la cicatrisation de ton tatouage du {date} ? N’hésite pas à m’envoyer une photo si tu as le moindre doute. Pense à bien l’hydrater et à le protéger du soleil. À bientôt !';
+const careTxt=()=>lsg('care')||CARE_DEF,followTxt=()=>lsg('follow')||FOLLOW_DEF;
+const lastDate=f=>(f.seances&&f.seances.length?f.seances[f.seances.length-1].date:new Date().toLocaleDateString('fr-FR'));
+async function carePDF(f){if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);msg('Création des consignes…');
+  const{doc,W,M}=await goldDoc('Consignes de soins','Pour '+(f.prenom+' '+f.nom).trim()+'  ·  séance du '+lastDate(f));
+  let y=54;doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...TX);doc.text('Pour une belle cicatrisation',M,y);y+=4;gbar(doc,M,y,60,.5,30);y+=8;
+  careTxt().split('\n').map(t=>t.trim()).filter(Boolean).forEach((t,i)=>{doc.setFont('helvetica','normal');doc.setFontSize(10.5);const l=doc.splitTextToSize(t,W-2*M-18),h=l.length*5+7;if(y+h>270)return;
+    doc.setFillColor(...CARD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');doc.setFillColor(...GOLD);doc.roundedRect(M+3.5,y+h/2-3.5,7,7,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...BG);doc.text(String(i+1),M+7,y+h/2+1.2,{align:'right'});
+    doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...TX);doc.text(l,M+15,y+5.6);y+=h+3});
+  y+=6;if(y<262){doc.setFont('helvetica','bold');doc.setFontSize(10);doc.setTextColor(...GHI);doc.text('Une question ? Écris-moi sur Instagram : @hugo_Smoll',M,y)}
+  goldFoot(doc,W,M,'Consignes de soins  ·  Hugo Smoll');const blob=await doc.output();offer(blob,'soins'+clean(f.nom)+clean(f.prenom)+'.pdf','')}
+function careMsg(f){const t=followTxt().replace(/\{prenom\}/g,f.prenom||'').replace(/\{date\}/g,lastDate(f));
+  msg('',0,'<div style="white-space:pre-wrap">'+esc(t)+'</div><div style="display:flex;gap:20px;margin-top:10px"><button class="lnk" id="fmS" type="button">Envoyer</button><button class="lnk" id="fmC" type="button">Copier</button></div>');
+  $('fmS').onclick=async()=>{try{await navigator.share({text:t})}catch(e){if(!(e&&e.name==='AbortError'))msg('Partage indisponible : utilise « Copier ».',1)}};
+  $('fmC').onclick=async()=>{try{await navigator.clipboard.writeText(t);msg('Message copié.')}catch(e){msg('Copie impossible sur cet appareil.',1)}}}
+function paintCareCfg(){$('cfCare').value=careTxt();$('cfFollow').value=followTxt()}
+let cfC;['cfCare','cfFollow'].forEach(id=>$(id).addEventListener('input',()=>{clearTimeout(cfC);cfC=setTimeout(()=>{lss('care',$('cfCare').value);lss('follow',$('cfFollow').value)},300)}));
+$('cfCareReset').onclick=()=>{lss('follow','');paintCareCfg();msg('Message remis par défaut.')};
+new MutationObserver(()=>{if(!$('s7').hidden)paintCareCfg()}).observe($('s7'),{attributes:true,attributeFilter:['hidden']});
+
+// ================= tuiles et navigation =================
+Object.assign(TILES,{reg:['Registre','Traçabilité des séances'],stock:['Matériel','Encres, aiguilles, lots'],soin:['Fiche de soins','Créer et envoyer']});
+Object.assign(ICO,{reg:'<path d="M5 4h11l3 3v13H5z"/><path d="M8 10h8M8 14h8M8 18h5"/>',stock:'<path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>'});
+function navWrap(k,raw){return function(...a){const f=()=>raw.apply(null,a);f.k=k;route(f);return raw.apply(this,a)}}
+window.openReg=navWrap('reg',openRegRaw);window.openStock=navWrap('stock',openStockRaw);
+(()=>{const ap=window.applyHome;window.applyHome=async function(){await ap();if($('s4').hidden)return;
+  const K=await allOf('stock'),al=K.filter(x=>['bad','soon'].includes(expState(x)[0])).length;
+  const Fi=(await all().catch(()=>[])).filter(f=>f.id!=='__draft'),t=new Date(),m0=dk(new Date(t.getFullYear(),t.getMonth(),1));
+  const ns=Fi.reduce((a,f)=>a+(f.seances||[]).filter(s=>frD(s.date)>=m0).length,0);
+  const set=(k,sub,n)=>{const b=document.querySelector('#hTiles .tl[data-go="'+k+'"]');if(!b)return;b.querySelector('small').textContent=sub;if(n&&!b.querySelector('.n'))b.insertAdjacentHTML('beforeend','<span class="n">'+n+'</span>');b.onclick=()=>k==='reg'?openReg():openStock()};
+  (()=>{const b=document.querySelector('#hTiles .tl[data-go="soin"]');if(b)b.onclick=()=>openCare()})();set('reg',ns+' séance'+(ns>1?'s':'')+' ce mois',0);set('stock',al?al+' produit'+(al>1?'s':'')+' à vérifier':K.length+' produit'+(K.length>1?'s':''),al);
+  const st=document.querySelector('#hTiles .tl[data-go="stock"] .n');if(st&&al)st.style.background='var(--err)',st.style.color='#fff'}})();
+
+// ================= atelier de couleurs =================
+const hx=h=>{h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');return[0,2,4].map(i=>parseInt(h.slice(i,i+2),16))};
+const toHx=a=>'#'+a.map(v=>Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0')).join('');
+const mixH=(a,b,t)=>{const A=hx(a),B=hx(b);return toHx(A.map((v,i)=>v+(B[i]-v)*t))};
+const lum=h=>{const[r,g,b]=hx(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*r+.7152*g+.0722*b};
+const rgba=(h,a)=>{const[r,g,b]=hx(h);return 'rgba('+r+','+g+','+b+','+a+')'};
+const CU_KEYS=['--bg','--card','--fill','--tx','--mut','--bd','--gold','--hi','--acc2','--on','--gold2','--err','--bar','--aura','color-scheme'];
+function cuGet(){let c={};try{c=JSON.parse(lsg('custom')||'{}')||{}}catch(e){}return{a:c.a||'#ff6a3d',b:c.b||'#7b5cff',bg:c.bg||'#0b0a12',light:!!c.light}}
+function cuTokens(c){const L=c.light,bg=c.bg,tx=L?'#1b1a20':'#f4f3f8';
+  return{'--bg':bg,'--card':L?mixH(bg,'#ffffff',.65):mixH(bg,'#ffffff',.06),'--fill':L?mixH(bg,'#000000',.06):mixH(bg,'#ffffff',.11),'--tx':tx,'--mut':mixH(tx,bg,.45),
+    '--bd':L?'rgba(0,0,0,.09)':'rgba(255,255,255,.11)','--gold':c.a,'--hi':L?mixH(c.a,'#000000',.28):mixH(c.a,'#ffffff',.42),'--acc2':c.b,'--gold2':c.b,
+    '--on':lum(c.a)>.45?'#141414':'#ffffff','--err':L?'#c62a3a':'#ff8a8a','--bar':rgba(bg,L?.75:.62),'--aura':L?'.38':'.6','color-scheme':L?'light':'dark'}}
+function cuApplyVars(on){const r=document.documentElement;if(!on){CU_KEYS.forEach(k=>r.style.removeProperty(k));return}const t=cuTokens(cuGet());Object.entries(t).forEach(([k,v])=>r.style.setProperty(k,v))}
+function cuSyncPal(){const c=cuGet(),e=PALS.find(x=>x[0]==='perso');if(e){e[2]=c.a;e[3]=c.bg;e[4]=c.b}}
+cuSyncPal();
+(()=>{const ap=window.applyPal;window.applyPal=function(...a){cuSyncPal();const r=ap.apply(this,a);cuApplyVars(curPal()[0]==='perso');const p=curPal();if(p[0]==='perso')document.querySelectorAll('meta[name="theme-color"]').forEach(m=>m.setAttribute('content',cuGet().bg));return r}})();
+function cuPreview(){const c=cuGet(),t=cuTokens(c),pv=$('cuPrev');
+  pv.style.setProperty('--cpbg',t['--bg']);pv.style.setProperty('--cpcard',t['--card']);pv.style.setProperty('--cptx',t['--tx']);pv.style.setProperty('--cpmut',t['--mut']);pv.style.setProperty('--cpon',t['--on']);
+  pv.style.setProperty('--cpgrad','linear-gradient(120deg,'+t['--hi']+','+c.a+' 45%,'+c.b+')')}
+function cuPaint(){const c=cuGet();$('cuA').value=c.a;$('cuB').value=c.b;$('cuBg').value=c.bg;$('cuLight').checked=c.light;cuPreview()}
+let cuT;function cuSave(){const c={a:$('cuA').value,b:$('cuB').value,bg:$('cuBg').value,light:$('cuLight').checked};lss('custom',JSON.stringify(c));cuPreview();clearTimeout(cuT);cuT=setTimeout(()=>{lss('pal','perso');applyPal()},120)}
+['cuA','cuB','cuBg'].forEach(id=>$(id).addEventListener('input',cuSave));
+$('cuLight').onchange=()=>{const L=$('cuLight').checked,bg=$('cuBg').value;if(L&&lum(bg)<.3)$('cuBg').value=mixH($('cuA').value,'#ffffff',.92);if(!L&&lum(bg)>.5)$('cuBg').value=mixH($('cuA').value,'#000000',.92);cuSave()};
+$('cuUse').onclick=()=>{lss('pal','perso');applyPal();msg('Ton thème est appliqué.')};
+$('cuSurprise').onclick=()=>{const hsl=(h,s,l)=>{s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return toHx([f(0),f(8),f(4)].map(v=>v*255))};
+  const h=Math.random()*360,L=$('cuLight').checked;$('cuA').value=hsl(h,80,58);$('cuB').value=hsl((h+40+Math.random()*120)%360,80,60);$('cuBg').value=L?hsl(h,35,95):hsl(h,40,5);cuSave();vib(12)};
+// effets
+function fxApply(){const r=document.documentElement,k=lsg('auraK');r.style.setProperty('--auraK',k===null||k===''?1:(+k)/100);r.classList.toggle('solid',lsg('solid')==='1');r.classList.toggle('calm',lsg('calm')==='1')}
+function fxPaint(){const k=lsg('auraK');$('auK').value=k===null||k===''?100:k;$('auV').textContent=$('auK').value+' %';$('fxSolid').checked=lsg('solid')==='1';$('fxCalm').checked=lsg('calm')==='1'}
+$('auK').addEventListener('input',()=>{lss('auraK',$('auK').value);$('auV').textContent=$('auK').value+' %';fxApply()});
+$('fxSolid').onchange=e=>{lss('solid',e.target.checked?'1':'0');fxApply()};
+$('fxCalm').onchange=e=>{lss('calm',e.target.checked?'1':'0');fxApply()};
+fxApply();applyPal();
+new MutationObserver(()=>{if(!$('s7').hidden){cuPaint();fxPaint()}}).observe($('s7'),{attributes:true,attributeFilter:['hidden']});
+
+// ================= fiche de soins personnalisable =================
+const CREME='Mets de la crème seulement quand tu en ressens le besoin : quand ça tire, que ça gratte ou que la peau est sèche. Une fine couche suffit, tu n’es pas obligé(e) d’en mettre plusieurs fois par jour.';
+const CARE_TPL_DEF={title:'Consignes de soins',intro:'Merci pour ta confiance ! Voici comment prendre soin de ton tatouage pour qu’il cicatrise bien.',outro:'Une question, un doute ? Écris-moi sur Instagram : @hugo_Smoll',blocks:[
+ {t:'title',x:'Les premiers jours'},
+ {t:'tip',x:'Garde le film protecteur le temps indiqué lors de la séance.'},
+ {t:'tip',x:'Lave-toi bien les mains avant de toucher ton tatouage.'},
+ {t:'tip',x:'Nettoie-le à l’eau tiède et au savon neutre, sans frotter, puis sèche en tapotant avec un essuie-tout propre.'},
+ {t:'tip',x:CREME},
+ {t:'title',x:'Pendant la cicatrisation (environ 3 semaines)'},
+ {t:'tip',x:'Ne gratte pas et n’arrache pas les petites croûtes : laisse-les tomber seules.'},
+ {t:'tip',x:'Pas de bain, de piscine, de mer, de sauna ni de hammam. Les douches courtes restent possibles.'},
+ {t:'tip',x:'Évite le soleil, puis protège ton tatouage avec un écran total une fois cicatrisé.'},
+ {t:'tip',x:'Porte des vêtements amples et propres sur la zone tatouée.'},
+ {t:'note',x:'En cas de rougeur qui s’étend, de chaleur, de pus ou de fièvre, consulte un médecin et préviens-moi.'}]};
+const CARE_LIB=[
+ ['Titre','title','Les premiers jours'],['Titre','title','Pendant la cicatrisation (environ 3 semaines)'],['Titre','title','Après la cicatrisation'],
+ ['Film','tip','Garde le film protecteur le temps indiqué lors de la séance.'],
+ ['Film 2e peau','tip','Garde le film seconde peau 3 à 5 jours. S’il se décolle ou que du liquide s’accumule, retire-le doucement sous la douche.'],
+ ['Mains','tip','Lave-toi bien les mains avant de toucher ton tatouage.'],
+ ['Lavage','tip','Nettoie-le à l’eau tiède et au savon neutre, sans frotter, puis sèche en tapotant avec un essuie-tout propre.'],
+ ['Crème','tip',CREME],
+ ['Croûtes','tip','Ne gratte pas et n’arrache pas les petites croûtes : laisse-les tomber seules.'],
+ ['Démangeaisons','tip','Si ça gratte, tapote doucement la zone au lieu de te gratter.'],
+ ['Bain','tip','Pas de bain, de piscine, de mer, de sauna ni de hammam pendant environ 3 semaines.'],
+ ['Soleil','tip','Évite le soleil, puis protège ton tatouage avec un écran total une fois cicatrisé.'],
+ ['Vêtements','tip','Porte des vêtements amples et propres sur la zone tatouée.'],
+ ['Sport','tip','Évite le sport intense et la transpiration pendant les premiers jours.'],
+ ['Animaux','tip','Évite le contact avec les animaux et dors dans des draps propres.'],
+ ['Retouche','tip','Une retouche peut être utile après cicatrisation : contacte-moi pour en parler.'],
+ ['Alerte','note','En cas de rougeur qui s’étend, de chaleur, de pus ou de fièvre, consulte un médecin et préviens-moi.'],
+ ['Important','note','Chaque peau cicatrise différemment : écoute la tienne et n’hésite pas à me poser tes questions.']];
+const TLAB={title:'Titre',tip:'Consigne',note:'Encadré important'};
+function careTplGet(){let t=null;try{t=JSON.parse(lsg('careTpl')||'null')}catch(e){}
+  if(!t||!Array.isArray(t.blocks)){t=JSON.parse(JSON.stringify(CARE_TPL_DEF));const old=lsg('care');if(old&&old.trim()){t.blocks=old.split('\n').map(x=>x.trim()).filter(Boolean).map(x=>({t:'tip',x:/crème cicatrisante/i.test(x)?CREME:x}))}}
+  return t}
+const careTplSet=t=>lss('careTpl',JSON.stringify(t));
+const grow=ta=>{ta.style.height='auto';ta.style.height=ta.scrollHeight+'px'};
+function ceRow(b){return '<div class="srow cb t-'+b.t+'" data-t="'+b.t+'"><span class="drag" aria-label="Déplacer">'+DRAG+'</span><div class="cbm"><span class="cbt">'+TLAB[b.t]+'</span><textarea rows="1">'+esc(b.x)+'</textarea></div><button class="x" type="button" aria-label="Supprimer">×</button></div>'}
+function ceRead(){const t=careTplGet();t.title=$('ceTitle').value.trim()||'Consignes de soins';t.intro=$('ceIntro').value.trim();t.outro=$('ceOutro').value.trim();
+  t.blocks=[...$('ceList').children].map(r=>({t:r.dataset.t,x:r.querySelector('textarea').value.trim()})).filter(b=>b.x);return t}
+let ceT;const ceSave=()=>{clearTimeout(ceT);ceT=setTimeout(()=>careTplSet(ceRead()),250)};
+function ceBind(){$('ceList').querySelectorAll('.cb').forEach(r=>{const ta=r.querySelector('textarea');grow(ta);ta.oninput=()=>{grow(ta);ceSave()};
+  let arm=false;r.querySelector('.x').onclick=()=>{const b=r.querySelector('.x');if(!arm&&ta.value.trim()){arm=true;b.textContent='Suppr. ?';b.style.fontSize='12px';b.style.color='var(--err)';return}r.remove();careTplSet(ceRead());vib(10)}});
+  sortable($('ceList'),()=>careTplSet(ceRead()))}
+function ceAdd(t,x){$('ceList').insertAdjacentHTML('beforeend',ceRow({t,x:x||''}));const r=$('ceList').lastElementChild;r.classList.add('new');ceBind();careTplSet(ceRead());
+  const ta=r.querySelector('textarea');setTimeout(()=>{r.scrollIntoView({block:'center',behavior:RM?'auto':'smooth'});if(!x)ta.focus()},60);vib(10)}
+async function openCareRaw(name){show(10);const t=careTplGet();$('ceTitle').value=t.title||'';$('ceIntro').value=t.intro||'';$('ceOutro').value=t.outro||'';if(typeof name==='string')$('ceFor').value=name;
+  $('ceList').innerHTML=t.blocks.map(ceRow).join('');ceBind();
+  $('ceLib').innerHTML=CARE_LIB.map((l,i)=>'<button type="button" data-i="'+i+'"><b>'+esc(l[0])+'</b><span>'+esc(l[2])+'</span></button>').join('');
+  $('ceLib').querySelectorAll('button').forEach(b=>b.onclick=()=>{const l=CARE_LIB[+b.dataset.i];ceAdd(l[1],l[2])});
+  const Fi=await all().catch(()=>[]);$('ceForL').innerHTML=Fi.filter(f=>f.id!=='__draft').map(f=>'<option value="'+esc(f.prenom+' '+f.nom)+'">').join('');
+  setTimeout(()=>{$('ceList').querySelectorAll('textarea').forEach(grow);grow($('ceIntro'));grow($('ceOutro'))},50)}
+window.openCare=navWrap('soin',openCareRaw);
+document.querySelectorAll('.ceadd .dur').forEach(b=>b.onclick=()=>ceAdd(b.dataset.t,''));
+['ceTitle','ceIntro','ceOutro'].forEach(id=>$(id).addEventListener('input',()=>{if($(id).tagName==='TEXTAREA')grow($(id));ceSave()}));
+let ceArm=false;$('ceReset').onclick=()=>{if(!ceArm){ceArm=true;$('ceReset').textContent='Toucher à nouveau pour confirmer';setTimeout(()=>{ceArm=false;$('ceReset').textContent='Remettre la fiche par défaut'},4000);return}
+  ceArm=false;$('ceReset').textContent='Remettre la fiche par défaut';lss('care','');careTplSet(JSON.parse(JSON.stringify(CARE_TPL_DEF)));openCareRaw();msg('Fiche de soins remise par défaut.')};
+$('cfOpenCare').onclick=()=>openCare();
+async function buildCarePDF(t,who,date){const sub=(who?'Pour '+who+'  ·  ':'')+(date?'séance du '+date:'remis le '+new Date().toLocaleDateString('fr-FR'));
+  const{doc,W,M,bg}=await goldDoc(t.title||'Consignes de soins',sub);let y=52;
+  const need=h=>{if(y+h>278){doc.addPage();bg();y=18}};
+  if(t.intro){doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...TX);const l=doc.splitTextToSize(t.intro,W-2*M);need(l.length*5+4);doc.text(l,M,y+4);y+=l.length*5+6}
+  let n=0;
+  t.blocks.forEach(b=>{if(b.t==='title'){n=n;need(16);y+=4;star(doc,M,y-.4,4.6,GOLD);doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(...GHI);doc.text(b.x,M+7,y+3.4);gbar(doc,M,y+6,W-2*M,.35,40);y+=11}
+    else if(b.t==='tip'){n++;doc.setFont('helvetica','normal');doc.setFontSize(10.5);const l=doc.splitTextToSize(b.x,W-2*M-18),h=l.length*5+7;need(h+3);
+      doc.setFillColor(...CARD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');doc.setFillColor(...GOLD);doc.roundedRect(M+3.5,y+h/2-3.5,7,7,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(...BG);doc.text(String(n),M+8.6,y+h/2+1.2,{align:'right'});
+      doc.setFont('helvetica','normal');doc.setFontSize(10.5);doc.setTextColor(...TX);doc.text(l,M+15,y+5.6);y+=h+3}
+    else{doc.setFont('helvetica','bold');doc.setFontSize(10.5);const l=doc.splitTextToSize(b.x,W-2*M-16),h=l.length*5+9;need(h+4);y+=1;
+      doc.setFillColor(...HEAD);doc.roundedRect(M,y,W-2*M,h,3,3,'F');doc.setDrawColor(...GOLD);doc.setLineWidth(.6);doc.roundedRect(M,y,W-2*M,h,3,3,'S');star(doc,M+4,y+h/2-2.8,5.6,GOLD);doc.setTextColor(...GHI);doc.text(l,M+13,y+6.6);y+=h+4}});
+  if(t.outro){y+=4;doc.setFont('helvetica','bold');doc.setFontSize(10);const l=doc.splitTextToSize(t.outro,W-2*M);need(l.length*5+4);doc.setTextColor(...GHI);doc.text(l,M,y+4);y+=l.length*5}
+  goldFoot(doc,W,M,(t.title||'Consignes de soins')+'  ·  Hugo Smoll');return doc.output()}
+$('cePdf').onclick=async()=>{if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);const t=ceRead();careTplSet(t);if(!t.blocks.length)return msg('Ajoute au moins une consigne.',1);
+  msg('Création de la fiche de soins…');const who=$('ceFor').value.trim();const blob=await buildCarePDF(t,who,'');offer(blob,'soins'+(who?clean(who):'')+'.pdf','')};
+window.carePDF=async function(f){if(!window.PDFLib)return msg('Le module PDF ne s’est pas chargé.',1);msg('Création des consignes…');const blob=await buildCarePDF(careTplGet(),(f.prenom+' '+f.nom).trim(),lastDate(f));offer(blob,'soins'+clean(f.nom)+clean(f.prenom)+'.pdf','')};
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script>
 </body>
