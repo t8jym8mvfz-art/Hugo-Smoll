@@ -1548,6 +1548,7 @@ html.nosplash #splash{display:none}
 #splash .st span{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(6px)}
 #splash .su{font-size:14px;color:var(--mut);letter-spacing:.2em;text-transform:uppercase;opacity:0}
 #splash.go .sline{animation:spDraw .9s cubic-bezier(.6,0,.3,1) forwards}
+#splash.noline .sline{display:none}
 #splash.go .liq{animation:spRise 2.1s cubic-bezier(.4,.05,.55,.95) .5s forwards}
 #splash.go .sg{animation:spGlow 1.4s ease-out .75s forwards}
 #splash.go .spk{animation:spSpk 1.1s ease-out forwards}
@@ -1704,7 +1705,8 @@ html.nosplash #splash{display:none}
 <label class="chk sw2"><span>Boutons en couleur unie (sans dégradé)</span><input type="checkbox" id="fxSolid"></label>
 <label class="chk sw2"><span>Animations calmes</span><input type="checkbox" id="fxCalm"></label>
 <label class="chk sw2"><span>Écrans qui se construisent à l’ouverture</span><input type="checkbox" id="fxBuild"></label>
-<label class="chk sw2"><span>Animation de l’étoile au lancement</span><input type="checkbox" id="fxSplash"></label></div>
+<label class="chk sw2"><span>Animation de l’étoile au lancement</span><input type="checkbox" id="fxSplash"></label>
+<label class="chk sw2"><span>Tracer le contour de l’étoile</span><input type="checkbox" id="fxLine"></label></div>
 <h2>Style des icônes</h2><div class="icPick" id="icPick"></div>
 <h2>Couleur des icônes</h2><div class="card"><div class="lyopt" id="iccOpt"><button type="button" data-v="pal"><b>Palette</b><small>Les couleurs de ta palette, en alternance</small></button><button type="button" data-v="uni"><b>Couleur principale</b><small>Toutes dans ta couleur principale</small></button><button type="button" data-v="mono"><b>Monochrome</b><small>Gris neutre, sobre</small></button><button type="button" data-v="perso"><b>Couleur au choix</b><small>Choisis ta propre couleur</small></button></div><div class="f" id="iccPick" hidden><label class="l">Ta couleur pour les icônes</label><div class="cpick" style="grid-template-columns:auto 1fr;align-items:center"><label><input type="color" id="iccIn" value="#e6b325"></label><span style="font-size:14px;color:var(--mut)">Touche le rond pour choisir</span></div></div></div>
 <h2>Personnaliser l’accueil</h2><div class="card">
@@ -3172,6 +3174,8 @@ iccApply();
 // ================= écran de lancement =================
 (()=>{const sp=$('splash');if(!sp)return;const fx=$('fxSplash');
   if(fx){fx.checked=lsg('splash')!=='0';fx.onchange=()=>{lss('splash',fx.checked?'1':'0');try{vib(8)}catch(e){}if(fx.checked)msg('L’animation se jouera au prochain lancement.')}}
+  const fl=$('fxLine');if(fl){fl.checked=lsg('splashLine')==='1';fl.onchange=()=>{lss('splashLine',fl.checked?'1':'0');try{vib(8)}catch(e){}msg('Visible au prochain lancement.')}}
+  if(lsg('splashLine')!=='1')sp.classList.add('noline');
   if(lsg('splash')==='0'){sp.remove();return}
   const quick=RM;
   const name='Hugo Smoll';$('spT').innerHTML=[...name].map((c,i)=>'<span style="animation-delay:'+(1.15+i*.05).toFixed(2)+'s">'+(c===' '?'&nbsp;':esc(c))+'</span>').join('');
