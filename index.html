@@ -6,7 +6,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Consentement"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Consentement"><meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <style>
@@ -1249,6 +1249,7 @@ html.vpshort #tabbar{bottom:10px}
 html.vpshort.hastab #scin{padding-bottom:90px}
 html.vpshort #side{padding-bottom:16px!important}
 html.vpshort .dock{padding-bottom:12px!important}
+@media (max-width:767px){html.nside.hasside #msg{left:64px}}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
 </head>
@@ -2727,7 +2728,7 @@ lyApply();tbarSync();
 // ---- correctif : sur iPhone en mode app, mesurer la vraie hauteur de l'écran
 (()=>{const iOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
   const std=()=>navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
-  function gapFix(){let g=0;try{if(iOS&&std()){const pr=document.createElement('div');pr.style.cssText='position:fixed;top:0;bottom:0;left:0;width:1px;visibility:hidden;pointer-events:none';document.body.appendChild(pr);const h=pr.getBoundingClientRect().height;pr.remove();
+  function gapFix(){let g=0;try{if(iOS&&std()){const pr=document.createElement('div');pr.style.cssText='position:fixed;top:0;bottom:0;left:0;width:1px;visibility:hidden;pointer-events:none';document.body.appendChild(pr);const h=pr.getBoundingClientRect().height;pr.style.cssText='position:fixed;top:0;left:0;width:1px;height:0;padding-top:env(safe-area-inset-top,0px);visibility:hidden';const st=pr.getBoundingClientRect().height;pr.remove();if(st<1){document.documentElement.classList.remove('vpshort');return}
       const portrait=innerHeight>=innerWidth,sh=portrait?Math.max(screen.width,screen.height):Math.min(screen.width,screen.height),d=Math.round(sh-h);if(d>1&&d<130)g=d}}catch(e){}
     document.documentElement.classList.toggle('vpshort',g>0)}
   gapFix();addEventListener('resize',gapFix);addEventListener('orientationchange',()=>setTimeout(gapFix,350));addEventListener('pageshow',gapFix);setTimeout(gapFix,600)})();
