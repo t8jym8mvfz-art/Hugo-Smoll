@@ -1249,7 +1249,9 @@ html.nside.hasside .tohome,html.nside.hasside #gear{display:none!important}
 html{height:100%;overflow:hidden}
 body{height:100%;height:100dvh;height:var(--app-h,100dvh);overflow:hidden}
 #scroller,.aurora,#lock,#side,#sideDim{bottom:auto!important;height:var(--app-h,100dvh)!important}
-#tabbar{bottom:auto!important;height:66px;top:calc(var(--app-h,100dvh) - 76px - env(safe-area-inset-bottom,0px))}
+#tabbar{bottom:auto!important;height:66px;top:calc(var(--app-h,100dvh) - 74px)}
+html.fullh #tabbar{top:calc(var(--app-h,100dvh) - 76px - env(safe-area-inset-bottom,0px))}
+html:not(.fullh).hastab #scin{padding-bottom:86px}
 @media (max-width:767px){html.nside.hasside #msg{left:64px}}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
@@ -1397,6 +1399,7 @@ body{height:100%;height:100dvh;height:var(--app-h,100dvh);overflow:hidden}
 <div class="f"><button class="lnk" id="bkRest" type="button" style="padding:4px 0">Restaurer une sauvegarde…</button><input type="file" id="bkFile" accept=".json,application/json" hidden></div>
 <div class="f mnote" style="font-size:13px">Fiches clients, signatures, photos, PDF importés, rendez-vous, projets, matériel, registre et réglages. Ton code n’est pas inclus : tu le redéfinis après une restauration.</div>
 </div>
+<h2>Diagnostic écran</h2><div class="card"><div class="f"><button class="lnk" id="diagB" type="button">Afficher les mesures de l’écran</button></div></div>
 <h2>Code et sécurité</h2><div class="card">
 <label class="chk sw2"><span>Demander le code à l’ouverture de l’appli</span><input type="checkbox" id="optAsk"></label>
 <label class="chk sw2"><span>Verrouiller après 2 minutes sans utilisation</span><input type="checkbox" id="optIdle"></label>
@@ -2727,9 +2730,24 @@ $('nvOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('navMode',b.
 lyApply();tbarSync();
 
 // ---- hauteur réelle de l'écran (même méthode que l'app de révision)
-(()=>{function fitScreen(){const h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;document.documentElement.style.setProperty('--app-h',h+'px')}
+(()=>{function fitScreen(){const h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;document.documentElement.style.setProperty('--app-h',h+'px');const sh=innerHeight>=innerWidth?Math.max(screen.width,screen.height):Math.min(screen.width,screen.height);document.documentElement.classList.toggle('fullh',sh-h<10)}
   fitScreen();addEventListener('resize',fitScreen);addEventListener('orientationchange',()=>setTimeout(fitScreen,150));addEventListener('pageshow',fitScreen);
   if(window.visualViewport)visualViewport.addEventListener('resize',fitScreen);setTimeout(fitScreen,500)})();
+
+// ---- diagnostic écran
+$('diagB').onclick=()=>{const old=$('diagO');if(old){old.remove();document.querySelectorAll('.diagS').forEach(x=>x.remove());return}
+  const pr=(css)=>{const d=document.createElement('div');d.style.cssText='position:fixed;left:0;top:0;width:1px;visibility:hidden;pointer-events:none;'+css;document.body.appendChild(d);const h=d.getBoundingClientRect().height;d.remove();return Math.round(h)};
+  const vv=window.visualViewport;
+  const L=[['Mode app',String(!!navigator.standalone)+' / '+(matchMedia('(display-mode: standalone)').matches?'standalone':'navigateur')],
+   ['Écran (screen)',screen.width+' × '+screen.height],['innerHeight',innerHeight],['visualViewport',vv?Math.round(vv.height)+' (décalage '+Math.round(vv.offsetTop)+')':'—'],
+   ['clientHeight',document.documentElement.clientHeight],['fixed top0 bottom0',pr('bottom:0')],['100vh',pr('height:100vh')],['100dvh',pr('height:100dvh')],['100lvh',pr('height:100lvh')],
+   ['marge haute (env)',pr('height:0;padding-top:env(safe-area-inset-top,0px)')],['marge basse (env)',pr('height:0;padding-top:env(safe-area-inset-bottom,0px)')],
+   ['--app-h',getComputedStyle(document.documentElement).getPropertyValue('--app-h')||'—'],['Barre d’état',(document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]')||{}).content],['iOS',(navigator.userAgent.match(/OS (\d+[_\d]*)/)||[])[1]||'?']];
+  const o=document.createElement('div');o.id='diagO';o.style.cssText='position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 60px);z-index:9999;background:#000;color:#0f0;font:13px/1.5 ui-monospace,Menlo,monospace;padding:12px 14px;border-radius:14px;box-shadow:0 0 0 2px #0f0';
+  o.innerHTML='<b style="color:#fff">Fais une capture et envoie-la à Claude</b><br>'+L.map(x=>esc(x[0])+' : <b style="color:#fff">'+esc(String(x[1]))+'</b>').join('<br>')+'<br><span style="color:#f55">Bande rouge</span> = bas « officiel », <span style="color:#39f">bande bleue</span> = bas réel de l’écran<br><button type="button" style="margin-top:8px;padding:6px 12px;border-radius:8px;background:#0f0;color:#000;font-weight:700">Fermer</button>';
+  o.querySelector('button').onclick=()=>$('diagB').click();document.body.appendChild(o);
+  const a=document.createElement('div');a.className='diagS';a.style.cssText='position:fixed;left:0;right:50%;bottom:0;height:14px;background:#f33;z-index:9998';document.body.appendChild(a);
+  const b=document.createElement('div');b.className='diagS';b.style.cssText='position:fixed;left:50%;right:0;top:'+(screen.height-14)+'px;height:14px;background:#39f;z-index:9998';document.body.appendChild(b)};
 </script>
 </body>
 </html>
