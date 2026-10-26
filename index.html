@@ -3156,7 +3156,7 @@ iccApply();
   const BLK='.card,.tl,.hmsg,.kal,.wkc,.segt,.stbar,.qhead,.smhead,.smg,.thseg,#rows .it,#gList .rg,.dock .pri,.pri';
   const KID=':scope>.f,:scope>.chk,:scope>.it,:scope>.ki,:scope>.rd,:scope>.row,:scope>.smr,:scope>div,:scope>b,:scope>small,:scope>span,:scope>.ico';
   let n=0,timers=[];
-  function clear(){document.querySelectorAll('.bi,.bk').forEach(el=>{el.classList.remove('bi','bk','bsk');el.style.removeProperty('--d')})}
+  const BL=['rise','slideIn','bBlock','bKid'];function clear(){document.querySelectorAll('.bi,.bk').forEach(el=>{el.classList.remove('bi','bk','bsk');el.style.removeProperty('--d');const nm=getComputedStyle(el).animationName;if(nm&&BL.some(b=>nm.includes(b)))el.style.animationName=nm.split(',').map(x=>BL.includes(x.trim())?'none':x.trim()).join(',')})}
   function tag(sec){const H=innerHeight;const L=[...sec.querySelectorAll(BLK)].filter(el=>!el.dataset.bt&&!el.closest('.bi')&&el.offsetParent!==null&&el.getBoundingClientRect().top<H+40);
     L.forEach(el=>{el.dataset.bt='1';const d=Math.min(n,9)*0.075;n++;el.style.setProperty('--d',d+'s');el.classList.add('bi');
       if(el.matches('.card,.tl,.wkc,.smg,.smhead,.hmsg'))el.classList.add('bsk');
