@@ -1166,6 +1166,89 @@ html.paged #s4>div+div,html.paged #s4>.tiles4{margin-top:10px}
 .lyopt button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px;border-radius:16px;background:var(--fill);color:var(--tx);text-align:left;border:1.5px solid transparent}
 .lyopt button[aria-pressed="true"]{border-color:var(--gold)}
 .lyopt b{font-size:14px}.lyopt small{font-size:12px;color:var(--mut);line-height:1.3}
+
+/* ================= mise en page : autres versions ================= */
+/* --- une question par écran */
+.qhead{display:none}
+html.fqa .qhead{display:block;margin:4px 4px 14px}
+html.fqa .qhead small{display:block;font-size:13px;color:var(--mut);margin-bottom:6px}
+html.fqa .qhead b{display:block;font-size:26px;line-height:1.15;font-weight:700;letter-spacing:-.01em}
+html.fqa .qhead .sts{display:grid;grid-auto-flow:column;gap:3px;margin-top:12px}
+html.fqa .qhead .sts i{height:4px;border-radius:2px;background:var(--fill)}
+html.fqa .qhead .sts i.on{background:var(--gold)}
+html.fqa #s1 .stbar,html.fqa #s1 h2{display:none}
+html.fqa #s1 .qu:not(.qcur),html.fqa #s1 .card.qoff,html.fqa #s1 #minor.qoff{display:none!important}
+html.fqa #s1 .qcur{animation:stpIn .35s cubic-bezier(.2,.8,.2,1)}
+html.fqa #s1 .qcur.back{animation-name:stpBack}
+html.fqa #s1 .qcur label.l{font-size:14px}
+html.fqa #s1 .qcur :is(input,textarea){font-size:21px}
+html.fqa #s1 .chk.qcur{font-size:19px;line-height:1.4;padding:18px 2px;border-bottom:0}
+html.fqa #s1 .chk.qcur input{width:30px;height:30px}
+html.fqa #s1 .row.qcur{grid-template-columns:1fr;gap:10px}
+/* --- cartes à balayer */
+html.fcards #s1{position:relative;isolation:isolate}
+html.fcards #s1::before,html.fcards #s1::after{content:"";position:absolute;left:18px;right:18px;top:64px;bottom:-14px;border-radius:30px;background:color-mix(in srgb,var(--card) 70%,transparent);box-shadow:0 10px 30px -14px rgba(0,0,0,.5);z-index:-1;transform:rotate(-2deg)}
+html.fcards #s1::after{left:34px;right:34px;bottom:-26px;transform:rotate(2.5deg);opacity:.6;z-index:-2}
+html.fcards #s1 .stp.cur{position:relative;background:var(--card);border-radius:30px;padding:4px 12px 16px;box-shadow:0 22px 44px -18px rgba(0,0,0,.55),inset 0 0 0 1px color-mix(in srgb,var(--tx) 8%,transparent);touch-action:pan-y;will-change:transform}
+html.fcards #s1 .stp.cur .card{background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding-left:4px;padding-right:4px}
+html.fcards #s1 .stp.cur .card::after{display:none}
+html.fcards #s1 .stp.cur.drag{transition:none}
+html.fcards #s1 .stp.cur.snap{transition:transform .3s cubic-bezier(.3,1.3,.5,1)}
+html.fcards #s1 .stp.cur.fly{transition:transform .25s ease-in,opacity .25s;opacity:0}
+.swhint{display:none}
+html.fcards .swhint{display:block;text-align:center;font-size:12.5px;color:var(--mut);margin:14px 0 0}
+/* --- écran d'accueil iPhone */
+html.nspring #hWeek,html.nspring #hTodoW{display:none!important}
+:root.nspring:root #hTiles{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:20px 6px!important;margin-top:22px!important;padding-bottom:10px!important}
+:root.nspring:root #hTiles .tl{grid-column:auto!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;text-align:center;min-height:0!important;padding:0!important;gap:7px!important;background:none!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;border-radius:0!important;translate:none!important;margin:0!important;rotate:none!important;overflow:visible;color:var(--tx)!important}
+:root.nspring:root #hTiles .tl::after{display:none!important}
+:root.nspring:root:root #hTiles .tl .ico{width:62px!important;height:62px!important;border-radius:18px!important;margin:0!important}
+:root.nspring:root #hTiles .tl .ico svg{width:32px!important;height:32px!important}
+:root.nspring:root #hTiles .tl b{font-size:11.5px!important;font-weight:500!important;line-height:1.2;font-family:-apple-system,BlinkMacSystemFont,sans-serif!important}
+:root.nspring:root #hTiles .tl small{display:none!important}
+:root.nspring:root #hTiles .tl .n{position:absolute!important;top:-6px!important;right:calc(50% - 38px)!important;left:auto!important;margin:0!important;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:#ff3b30!important;color:#fff!important;font-size:12px}
+:root.nspring:root #hTiles .tl:active .ico{transform:scale(.9)}
+:root.nspring:root #hTiles .tl:last-child:nth-child(odd){flex-direction:column!important}
+/* --- fenêtres du bas */
+html.nsheets.insheet body{background:color-mix(in srgb,var(--bg) 55%,#000)!important}
+html.nsheets.insheet #scroller{top:calc(env(safe-area-inset-top,0px) + 12px);padding-top:26px;border-radius:24px 24px 0 0;background:var(--bg);box-shadow:0 -12px 40px rgba(0,0,0,.45);animation:sheetUp .42s cubic-bezier(.2,.9,.25,1)}
+html.nsheets.insheet #scroller.drag{animation:none;transition:none}
+html.nsheets.insheet #scroller.snap{transition:transform .3s cubic-bezier(.3,1.2,.5,1)}
+@keyframes sheetUp{from{transform:translateY(100%)}to{transform:none}}
+html.nsheets.insheet .aurora,html.nsheets.insheet #tbar{display:none}
+#sgrab{display:none}
+html.nsheets.insheet #sgrab{display:flex;position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 12px);height:34px;z-index:45;justify-content:center;align-items:flex-start;padding-top:9px;touch-action:none}
+#sgrab i{width:40px;height:5px;border-radius:3px;background:color-mix(in srgb,var(--tx) 30%,transparent)}
+#sgrab button{position:absolute;right:14px;top:6px;width:30px;height:30px;border-radius:50%;background:var(--fill);color:var(--mut);font-size:15px;line-height:30px;padding:0}
+#sback{display:none}
+html.nsheets.insheet #sback{display:block;position:fixed;left:22px;right:22px;top:calc(env(safe-area-inset-top,0px) + 2px);height:40px;border-radius:22px 22px 0 0;background:color-mix(in srgb,var(--card) 70%,#000);opacity:.7;z-index:0}
+html.nsheets.insheet .tohome{display:none!important}
+/* --- menu latéral */
+#side{display:none}
+html.nside.hasside #side{display:flex;flex-direction:column;gap:2px;position:fixed;z-index:42;left:0;top:0;bottom:0;width:250px;padding:calc(env(safe-area-inset-top,0px) + 22px) 12px calc(env(safe-area-inset-bottom,0px) + 16px);background:color-mix(in srgb,var(--card) 82%,transparent);-webkit-backdrop-filter:blur(26px) saturate(170%);backdrop-filter:blur(26px) saturate(170%);box-shadow:1px 0 0 var(--bd);overflow-y:auto;transition:transform .35s cubic-bezier(.3,1,.4,1)}
+#side .sdt{font-size:22px;font-weight:700;margin:0 10px 14px}
+#side button{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;background:none;color:var(--tx);font-size:15.5px;font-weight:500;text-align:left}
+#side button svg{width:22px;height:22px;flex:none;color:var(--hi)}
+#side button.on{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--hi);font-weight:700}
+#side .sdc{margin:6px 0 10px;background:var(--gold);color:var(--on)}
+#side .sdc svg{color:var(--on)}
+#sideBtn,#sideDim{display:none}
+@media (min-width:768px){html.nside.hasside #scroller{left:250px}html.nside.hasside .dock{max-width:none}}
+@media (max-width:767px){
+ html.nside.hasside #side{transform:translateX(-105%);box-shadow:none}
+ html.nside.hasside.sideopen #side{transform:none;box-shadow:12px 0 40px rgba(0,0,0,.45)}
+ html.nside.hasside #sideBtn{display:grid;place-items:center;position:fixed;z-index:41;left:12px;top:calc(env(safe-area-inset-top,0px) + 8px);width:42px;height:42px;border-radius:50%;background:color-mix(in srgb,var(--card) 80%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);color:var(--tx);box-shadow:inset 0 0 0 1px var(--bd),0 6px 16px -6px rgba(0,0,0,.4);padding:0}
+ html.nside.hasside #sideBtn svg{width:22px;height:22px}
+ html.nside.hasside.sideopen #sideDim{display:block;position:fixed;inset:0;z-index:41;background:rgba(0,0,0,.4)}
+ html.nside.hasside .hd{padding-left:52px}
+}
+html.nside.hasside .tohome,html.nside.hasside #gear{display:none!important}
+
+/* correctif iPhone (app sur l'écran d'accueil) : la zone d'affichage s'arrêtait avant le bas de l'écran */
+html{--gapB:0px}
+#scroller,.aurora,#lock,#sideDim{bottom:calc(-1 * var(--gapB))!important}
+#side{bottom:calc(-1 * var(--gapB))!important;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 16px)!important}
+#tabbar{bottom:calc(10px + env(safe-area-inset-bottom,0px) - var(--gapB))}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
 </head>
@@ -1177,7 +1260,7 @@ html.paged #s4>div+div,html.paged #s4>.tiles4{margin-top:10px}
 <button type="button" data-t="cons" class="tplus" aria-label="Nouveau consentement"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></button>
 <button type="button" data-t="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda</button>
 <button type="button" data-t="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</button>
-</nav>
+</nav><div id="sback"></div><div id="sgrab"><i></i><button type="button" id="sClose" aria-label="Fermer">✕</button></div><button id="sideBtn" type="button" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div id="sideDim"></div><nav id="side" aria-label="Menu"><div class="sdt">Hugo Smoll</div><button type="button" class="sdc" data-t="cons"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Nouveau consentement</button><button type="button" data-t="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1z"/></svg>Accueil</button><button type="button" data-t="cli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.6"/></svg>Fiches clients</button><button type="button" data-t="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda</button><button type="button" data-t="todo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4.5h6M8.5 11l1.5 1.5 3-3M8.5 16.5h7"/></svg>Projets à faire</button><button type="button" data-t="stock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h5v3h-5z"/><path d="M8.5 5.5h7l1.5 4v10a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2v-10z"/></svg>Matériel</button><button type="button" data-t="reg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h9l3 3V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20z"/><path d="M9 10h6M9 13.5h6M9 17h4"/></svg>Registre</button><button type="button" data-t="soin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg>Fiche de soins</button><button type="button" data-t="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>Réglages</button></nav>
 <div class="aurora" id="aurora" aria-hidden="true"><b></b><b></b><b></b></div>
 <div id="scroller"><div id="scin">
 <div id="deco"><div class="moth m1" data-s="c" style="top:-4px;right:-12px;width:180px;aspect-ratio:420/229;transform:scaleX(-1)"></div>
@@ -1282,7 +1365,7 @@ html.paged #s4>div+div,html.paged #s4>.tiles4{margin-top:10px}
 </div>
 <div id="s7" hidden>
 <button class="lnk tohome" type="button">‹ Accueil</button>
-<h2>Mise en page</h2><div class="card"><div class="lyopt" id="lyOpt"><button type="button" data-l="paged"><b>Étapes</b><small>Formulaire en étapes, espace tatoueur en onglets, rien de trop long</small></button><button type="button" data-l="scroll"><b>Défilement</b><small>Tout sur une page qui défile</small></button></div></div>
+<h2>Formulaire client</h2><div class="card"><div class="lyopt" id="fmOpt"><button type="button" data-v="steps"><b>Étapes</b><small>3 écrans : client, déclarations, signature</small></button><button type="button" data-v="qa"><b>Une question par écran</b><small>Chaque info en grand, une à la fois</small></button><button type="button" data-v="cards"><b>Cartes à balayer</b><small>Glisse la carte vers la gauche pour avancer</small></button><button type="button" data-v="scroll"><b>Défilement</b><small>Tout sur une page qui défile</small></button></div></div><h2>Navigation</h2><div class="card"><div class="lyopt" id="nvOpt"><button type="button" data-v="tabs"><b>Barre d’onglets</b><small>Onglets flottants en bas, comme sur iPhone</small></button><button type="button" data-v="spring"><b>Écran d’accueil iPhone</b><small>Une grille d’icônes d’app pour chaque rubrique</small></button><button type="button" data-v="sheets"><b>Fenêtres du bas</b><small>Les rubriques glissent par-dessus l’accueil</small></button><button type="button" data-v="side"><b>Menu latéral</b><small>Colonne fixe sur iPad, tiroir ☰ sur iPhone</small></button></div></div>
 <h2>Style de l’appli</h2><div class="card"><div class="stys" id="stys"></div><p class="styhint" id="styHint"></p></div>
 <h2>Couleurs</h2><div class="card"><div class="pals" id="pals"></div></div>
 <h2>Mon thème</h2><div class="card">
@@ -1366,7 +1449,7 @@ html.paged #s4>div+div,html.paged #s4>.tiles4{margin-top:10px}
 </div>
 <div id="msg"></div>
 </main>
-<div class="dock" id="d1"><button class="pri" id="next" type="button">Continuer</button><button class="lnk" id="stBack" type="button">‹ Étape précédente</button></div>
+<div class="dock" id="d1"><button class="pri" id="next" type="button">Continuer</button><button class="lnk" id="stBack" type="button">‹ Retour</button></div>
 <div class="dock" id="d2" hidden><button class="pri" id="go" type="button">Soumettre</button><button class="lnk" id="back" type="button" style="display:block;margin:10px auto 0">Retour au formulaire client</button></div>
 
 </div></div>
@@ -2526,30 +2609,72 @@ function sdelInject(){const f=cur,det=$('det');if(!f||!det||det.hidden||!f.seanc
       setTimeout(()=>{if($('sdUndo'))msg('')},7000)}})}
 new MutationObserver(()=>sdelInject()).observe($('det'),{childList:true});
 
-// ================= look « vraie app » =================
-const LY=()=>lsg('layout')==='scroll'?'scroll':'paged';
-function lyApply(){document.documentElement.classList.toggle('paged',LY()==='paged');const o=$('lyOpt');if(o)o.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===LY()));stGo(stI,true);segGo(segI)}
-// --- découpage en groupes (étapes / onglets)
+// ================= look « vraie app » : mises en page au choix =================
+const FM=()=>{const v=lsg('formMode');if(['steps','qa','cards','scroll'].includes(v))return v;return lsg('layout')==='scroll'?'scroll':'steps'};
+const NV=()=>{const v=lsg('navMode');return['tabs','spring','sheets','side'].includes(v)?v:'tabs'};
+const R0=document.documentElement;
 function grp(root,starts){const kids=[...root.children],G=[];let g=null;
   kids.forEach(el=>{const k=starts.findIndex(f=>f(el));if(k>-1||!g){g=document.createElement('div');g.className='stp';G.push(g);root.insertBefore(g,el)}g.appendChild(el)});return G}
 const h2is=t=>el=>el.tagName==='H2'&&el.textContent.trim().startsWith(t);
 const ST1=grp($('s1'),[h2is('Déclarations'),el=>el.id==='minor']);
 const ST1N=['Client','Déclarations','Signature'];
 const stb=document.createElement('div');stb.className='stbar';$('s1').insertBefore(stb,$('s1').firstChild);
+const qh=document.createElement('div');qh.className='qhead';$('s1').insertBefore(qh,stb);
+const swh=document.createElement('p');swh.className='swhint';swh.textContent='Glisse la carte vers la gauche pour continuer, vers la droite pour revenir';$('s1').appendChild(swh);
 let stI=0;
 function stGo(i,silent){i=Math.max(0,Math.min(ST1.length-1,i));const back=i<stI;stI=i;
-  ST1.forEach((g,k)=>{g.classList.toggle('cur',k===i);g.classList.toggle('back',back&&k===i)});
+  ST1.forEach((g,k)=>{g.classList.toggle('cur',k===i);g.classList.toggle('back',back&&k===i);g.style.transform='';g.classList.remove('fly','snap','drag')});
   stb.innerHTML='<div class="stl"><span>Étape <b>'+(i+1)+'</b> sur '+ST1.length+'</span><b>'+ST1N[i]+'</b></div><div class="sts">'+ST1.map((_,k)=>'<i class="'+(k<=i?'on':'')+'"></i>').join('')+'</div>';
-  const paged=LY()==='paged';$('stBack').classList.toggle('show',paged&&i>0);
-  $('next').textContent=paged&&i<ST1.length-1?'Suivant':'Continuer';
-  if(i===ST1.length-1&&!signed){setTimeout(()=>{try{fit()}catch(e){}dispatchEvent(new Event('resize'))},40)}
+  const m=FM();if(m==='qa')return;
+  $('stBack').classList.toggle('show',m!=='scroll'&&i>0);
+  $('next').textContent=m!=='scroll'&&i<ST1.length-1?'Suivant':'Continuer';
+  if(i===ST1.length-1&&!signed)refit();
   if(!silent)scrollTo(0,0)}
-document.addEventListener('click',e=>{if(LY()!=='paged'||e.target.closest('#next')===null||$('s1').hidden)return;
+function refit(){setTimeout(()=>{try{if(!signed)fit()}catch(e){}dispatchEvent(new Event('resize'))},60)}
+// --- une question par écran
+const QP={nom:'Comment tu t’appelles ?',naiss:'Ta date de naissance',tel:'Comment te joindre ?',adr:'Ton adresse',sante:'Quelque chose à signaler pour ta santé ?'};
+function qUnits(){const U=[];$('s1').querySelectorAll('.card>.f,.card>.row.f,.card>.chk').forEach(el=>{if(!el.closest('#minor'))U.push(el)});
+  const sig=$('sig')&&$('sig').closest('.card');const iSig=U.findIndex(el=>sig&&sig.contains(el));
+  const out=U.filter(el=>!(sig&&sig.contains(el)));if(!$('minor').hidden)out.push($('minor'));if(sig)out.push(sig);return out}
+let qEl=null,qBack=false;
+function qPrompt(el,i,N){if(el.id==='minor')return'Accord du représentant légal';if(el.querySelector('#sig'))return'Signe avec ton doigt';
+  const inp=el.querySelector('input,textarea');if(el.classList.contains('chk')){const req=el.querySelectorAll('.req').length||el.querySelector('.req');const D=[...$('s1').querySelectorAll('.chk')];return el.querySelector('#photoOk')?'Photos de ton tatouage':'Déclaration '+(D.indexOf(el)+1)+' sur '+D.filter(d=>d.querySelector('.req')).length}
+  return QP[inp&&inp.id]||(el.querySelector('label.l')||{}).textContent||'Question '+(i+1)}
+function qGo(el,back){const U=qUnits();if(!el||!U.includes(el))el=U[0];qEl=el;const i=U.indexOf(el);
+  $('s1').querySelectorAll('.qu').forEach(x=>x.classList.remove('qu','qcur','back'));
+  U.forEach(x=>{x.classList.add('qu');x.classList.toggle('qcur',x===el)});if(back)el.classList.add('back');
+  $('s1').querySelectorAll('.card').forEach(c=>c.classList.toggle('qoff',!(c===el||c.contains(el))));
+  $('minor').classList.toggle('qoff',el.id!=='minor');
+  const sg=ST1.findIndex(g=>g.contains(el));ST1.forEach((g,k)=>g.classList.toggle('cur',k===sg));
+  qh.innerHTML='<small>Question '+(i+1)+' sur '+U.length+'</small><b>'+esc(qPrompt(el,i,U.length))+'</b><div class="sts">'+U.map((_,k)=>'<i class="'+(k<=i?'on':'')+'"></i>').join('')+'</div>';
+  $('stBack').classList.toggle('show',i>0);$('next').textContent=i<U.length-1?'Suivant':'Continuer';
+  if(el.querySelector('#sig')&&!signed)refit();
+  const f=el.querySelector('input:not([type=checkbox]):not([type=hidden]):not([type=date]),textarea');if(f&&!back)setTimeout(()=>{try{f.focus({preventScroll:true})}catch(e){}},380);
+  scrollTo(0,0)}
+function qOk(el){if(el.querySelector('#nom'))return v('nom')&&v('prenom')?'':'Indique ton nom et ton prénom.';
+  if(el.querySelector('#naiss'))return $('naiss').value?'':'Indique ta date de naissance.';
+  const r=el.querySelector('.req');if(r&&!r.checked)return'Coche la case pour continuer.';return''}
+document.addEventListener('change',e=>{if(FM()!=='qa'||!e.target.classList||!e.target.classList.contains('req'))return;const el=e.target.closest('.chk');if(e.target.checked&&el===qEl)setTimeout(()=>{if(qEl===el)qNext()},380)});
+function qNext(){const U=qUnits(),i=U.indexOf(qEl);if(i<U.length-1){const err=qOk(qEl);if(err)return msg(err,1);try{vib(8)}catch(_){}qGo(U[i+1]);return true}return false}
+// --- clic sur Suivant (étapes, questions, cartes)
+document.addEventListener('click',e=>{const m=FM();if(m==='scroll'||!e.target.closest||!e.target.closest('#next')||$('s1').hidden)return;
+  if(m==='qa'){const U=qUnits();if(U.indexOf(qEl)<U.length-1){e.preventDefault();e.stopPropagation();qNext()}return}
   if(stI>=ST1.length-1)return;
-  if(stI===0&&(!v('nom')||!v('prenom')||!$('naiss').value)){e.preventDefault();e.stopPropagation();return msg('Indique au moins le nom, le prénom et la date de naissance.',1)}
-  if(stI===1&&[...document.querySelectorAll('.req')].some(c=>!c.checked)){e.preventDefault();e.stopPropagation();return msg('Coche toutes les déclarations obligatoires pour continuer.',1)}
-  e.preventDefault();e.stopPropagation();try{vib(8)}catch(_){}stGo(stI+1)},true);
-$('stBack').onclick=()=>{try{vib(6)}catch(e){}stGo(stI-1)};
+  e.preventDefault();e.stopPropagation();
+  if(stI===0&&(!v('nom')||!v('prenom')||!$('naiss').value))return msg('Indique au moins le nom, le prénom et la date de naissance.',1);
+  if(stI===1&&[...document.querySelectorAll('.req')].some(c=>!c.checked))return msg('Coche toutes les déclarations obligatoires pour continuer.',1);
+  try{vib(8)}catch(_){}
+  if(m==='cards'){const g=ST1[stI];g.classList.add('fly');g.style.transform='translateX(-120%) rotate(-12deg)';setTimeout(()=>stGo(stI+1),230)}else stGo(stI+1)},true);
+$('stBack').onclick=()=>{try{vib(6)}catch(e){}if(FM()==='qa'){const U=qUnits(),i=U.indexOf(qEl);if(i>0)qGo(U[i-1],true)}else stGo(stI-1)};
+// --- glisser les cartes
+(()=>{let x0=null,y0=0,g=null,dx=0,lock=null;
+  $('s1').addEventListener('pointerdown',e=>{if(FM()!=='cards'||e.target.closest('input,textarea,canvas,button,select,.durs'))return;g=e.target.closest('.stp.cur');if(!g)return;x0=e.clientX;y0=e.clientY;dx=0;lock=null});
+  addEventListener('pointermove',e=>{if(x0===null||!g)return;const ddx=e.clientX-x0,ddy=e.clientY-y0;if(lock===null&&(Math.abs(ddx)>8||Math.abs(ddy)>8))lock=Math.abs(ddx)>Math.abs(ddy)?'x':'y';if(lock!=='x')return;dx=ddx;g.classList.add('drag');g.classList.remove('snap');g.style.transform='translateX('+dx+'px) rotate('+(dx/22)+'deg)'});
+  const end=()=>{if(x0===null||!g)return;const gg=g;x0=null;g=null;gg.classList.remove('drag');if(lock!=='x')return;
+    if(dx<-90&&stI<ST1.length-1){$('next').click();if(gg.classList.contains('cur')&&!gg.classList.contains('fly')){gg.classList.add('snap');gg.style.transform=''}}
+    else if(dx>90&&stI>0){gg.classList.add('fly');gg.style.transform='translateX(120%) rotate(12deg)';setTimeout(()=>stGo(stI-1),230)}
+    else{gg.classList.add('snap');gg.style.transform=''}};
+  addEventListener('pointerup',end);addEventListener('pointercancel',end)})();
 // --- onglets de l'espace tatoueur
 const SG=grp($('s2'),[h2is('Caps'),h2is('Photos du matériel'),h2is('Notes')]);
 const SGN=['Matériel','Caps','Photos','Notes'];
@@ -2557,24 +2682,55 @@ const seg=document.createElement('div');seg.className='segt';seg.innerHTML=SGN.m
 let segI=0;
 function segGo(i){segI=i;SG.forEach((g,k)=>g.classList.toggle('cur',k===i));seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.k===i))}
 seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{try{vib(6)}catch(e){}segGo(+b.dataset.k);scrollTo(0,0)});
-// --- barre d'onglets + titre compact
+// --- navigation
 let curN=1;
-const TABN={4:'home',3:'cli',5:'cal',7:'set'};
-function tabSync(){const on=curN>=3&&$('lock').hidden;$('tabbar').hidden=!on;document.documentElement.classList.toggle('hastab',on);
-  $('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===TABN[curN]))}
-{const _show=show;show=function(n,...a){const r=_show.call(this,n,...a);curN=n;if(n===1)stGo(0,true);if(n===2)segGo(0);tabSync();tbarSync();return r}}
-new MutationObserver(tabSync).observe($('lock'),{attributes:true,attributeFilter:['hidden']});
-$('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{try{vib(8)}catch(e){}const t=b.dataset.t;
-  if(t==='home')window.homeView();else if(t==='cli')window.openClients();else if(t==='cal')window.openCal();else if(t==='set')window.openSettings();
-  else if(t==='cons'){cur=null;show(1)}});
+const TABN={4:'home',3:'cli',5:'cal',7:'set',6:'todo',8:'reg',9:'stock',10:'soin'};
+const goT=t=>{if(t==='home')homeView();else if(t==='cli')openClients();else if(t==='cal')openCal();else if(t==='set')openSettings();else if(t==='todo')openTodo();
+  else if(t==='stock')openStock();else if(t==='reg')openReg();else if(t==='soin')openCare();else if(t==='cons'){cur=null;show(1)}};
+function navSync(){const tz=curN>=3&&$('lock').hidden,n=NV();
+  const tabOn=tz&&n==='tabs';$('tabbar').hidden=!tabOn;R0.classList.toggle('hastab',tabOn);
+  $('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===TABN[curN]));
+  R0.classList.toggle('hasside',tz&&n==='side');if(!(tz&&n==='side'))R0.classList.remove('sideopen');
+  $('side').querySelectorAll('button[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===TABN[curN]));
+  const ins=tz&&n==='sheets'&&curN!==4;const was=R0.classList.contains('insheet');R0.classList.toggle('insheet',ins);
+  if(ins&&was){const sc=$('scroller');sc.style.animation='none';void sc.offsetWidth;sc.style.animation=''}
+  R0.classList.toggle('nspring',n==='spring');R0.classList.toggle('nsheets',n==='sheets');R0.classList.toggle('nside',n==='side')}
+{const _show=show;show=function(n,...a){const r=_show.call(this,n,...a);curN=n;if(n===1){stGo(0,true);if(FM()==='qa')qGo(null)}if(n===2)segGo(0);navSync();tbarSync();return r}}
+new MutationObserver(navSync).observe($('lock'),{attributes:true,attributeFilter:['hidden']});
+$('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{try{vib(8)}catch(e){}goT(b.dataset.t)});
+$('side').querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{try{vib(8)}catch(e){}R0.classList.remove('sideopen');goT(b.dataset.t)});
+$('sideBtn').onclick=()=>{try{vib(6)}catch(e){}R0.classList.toggle('sideopen')};
+$('sideDim').onclick=()=>R0.classList.remove('sideopen');
+$('sClose').onclick=()=>{try{vib(6)}catch(e){}homeView()};
+(()=>{let y0=null,dy=0;const sc=$('scroller'),gb=$('sgrab');
+  gb.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;y0=e.clientY;dy=0;sc.classList.add('drag');try{gb.setPointerCapture(e.pointerId)}catch(_){}});
+  gb.addEventListener('pointermove',e=>{if(y0===null)return;dy=Math.max(0,e.clientY-y0);sc.style.transform='translateY('+dy+'px)'});
+  const end=()=>{if(y0===null)return;y0=null;sc.classList.remove('drag');sc.classList.add('snap');
+    if(dy>110){sc.style.transform='translateY(100%)';setTimeout(()=>{sc.classList.remove('snap');sc.style.transform='';homeView()},260)}else{sc.style.transform='';setTimeout(()=>sc.classList.remove('snap'),320)}};
+  gb.addEventListener('pointerup',end);gb.addEventListener('pointercancel',end)})();
 const sc0=$('scroller');
 function tbarSync(){$('tbar').textContent=$('h1').textContent;$('tbar').classList.toggle('on',sc0.scrollTop>64)}
 sc0.addEventListener('scroll',()=>{$('tbar').classList.toggle('on',sc0.scrollTop>64)},{passive:true});
 new MutationObserver(tbarSync).observe($('h1'),{childList:true,characterData:true,subtree:true});
-// --- réglage
-$('lyOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('layout',b.dataset.l);try{vib(8)}catch(e){}lyApply();msg(b.dataset.l==='paged'?'Mise en page « Étapes » activée.':'Mise en page « Défilement » activée.')});
-lyApply();
-{const vis=[1,2,3,4,5,6,7,8,9,10].find(k=>$('s'+k)&&!$('s'+k).hidden);if(vis)curN=vis;tabSync();tbarSync()}
+// --- appliquer les réglages
+function lyApply(){const m=FM();R0.classList.toggle('paged',m!=='scroll');R0.classList.toggle('fqa',m==='qa');R0.classList.toggle('fcards',m==='cards');
+  if(m!=='qa'){$('s1').querySelectorAll('.qu,.qoff').forEach(x=>x.classList.remove('qu','qcur','qoff','back'));stGo(stI,true)}else qGo(qEl);
+  segGo(segI);
+  $('fmOpt').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===m));
+  $('nvOpt').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===NV()));navSync()}
+const FMN={steps:'Étapes',qa:'Une question par écran',cards:'Cartes à balayer',scroll:'Défilement'},NVN={tabs:'Barre d’onglets',spring:'Écran d’accueil iPhone',sheets:'Fenêtres du bas',side:'Menu latéral'};
+$('fmOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('formMode',b.dataset.v);try{vib(8)}catch(e){}lyApply();msg('Formulaire client : « '+FMN[b.dataset.v]+' ».')});
+$('nvOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('navMode',b.dataset.v);try{vib(8)}catch(e){}lyApply();msg('Navigation : « '+NVN[b.dataset.v]+' ».')});
+{const vis=[1,2,3,4,5,6,7,8,9,10].find(k=>$('s'+k)&&!$('s'+k).hidden);if(vis)curN=vis}
+lyApply();tbarSync();
+
+// ---- correctif : sur iPhone en mode app, mesurer la vraie hauteur de l'écran
+(()=>{const iOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const std=()=>navigator.standalone||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+  function gapFix(){let g=0;try{if(iOS&&std()){const pr=document.createElement('div');pr.style.cssText='position:fixed;top:0;bottom:0;left:0;width:1px;visibility:hidden;pointer-events:none';document.body.appendChild(pr);const h=pr.getBoundingClientRect().height;pr.remove();
+      const portrait=innerHeight>=innerWidth,sh=portrait?Math.max(screen.width,screen.height):Math.min(screen.width,screen.height),d=Math.round(sh-h);if(d>1&&d<130)g=d}}catch(e){}
+    document.documentElement.style.setProperty('--gapB',g+'px')}
+  gapFix();addEventListener('resize',gapFix);addEventListener('orientationchange',()=>setTimeout(gapFix,350));addEventListener('pageshow',gapFix);setTimeout(gapFix,600)})();
 </script>
 </body>
 </html>
