@@ -1530,12 +1530,50 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 @keyframes bWord{0%{opacity:0;transform:translateY(8px);filter:blur(6px)}100%{opacity:1;transform:none;filter:none}}
 :root.calm :is(.bi,.bk,#h1 .bw){animation:none!important}
 @media (prefers-reduced-motion:reduce){.bi,.bk,#h1 .bw{animation:none!important}}
+
+/* ================= écran de lancement : l'étoile ================= */
+#splash{position:fixed;inset:-2px;z-index:500;display:grid;place-items:center;background:var(--bg);overflow:hidden;-webkit-tap-highlight-color:transparent}
+html.nosplash #splash{display:none}
+#splash .sg{position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--gold) 45%,transparent) 0,color-mix(in srgb,var(--acc2) 18%,transparent) 35%,transparent 65%);opacity:0;transform:scale(.3)}
+#splash .sw{position:relative;display:flex;flex-direction:column;align-items:center;gap:22px}
+#splash .ss{position:relative;width:132px;height:132px}
+#splash svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+#splash .sline{fill:none;stroke:var(--hi);stroke-width:1.2;stroke-linejoin:round;stroke-dasharray:640;stroke-dashoffset:640}
+#splash .sfill{opacity:0;transform-origin:50% 50%;transform:scale(.6) rotate(-45deg)}
+#splash .ray{position:absolute;left:50%;top:50%;width:2px;height:70px;margin:-35px 0 0 -1px;border-radius:2px;background:linear-gradient(var(--hi),transparent);opacity:0;transform-origin:50% 50%}
+#splash .spk{position:absolute;width:14px;height:14px;opacity:0;background:var(--hi);clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+#splash .st{font:700 30px/1.1 -apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;letter-spacing:.02em;color:var(--tx);display:flex}
+#splash .st span{display:inline-block;opacity:0;transform:translateY(10px);filter:blur(6px)}
+#splash .su{font-size:14px;color:var(--mut);letter-spacing:.2em;text-transform:uppercase;opacity:0}
+#splash.go .sline{animation:spDraw .9s cubic-bezier(.6,0,.3,1) forwards}
+#splash.go .sfill{animation:spFill .7s cubic-bezier(.3,1.5,.5,1) .7s forwards}
+#splash.go .sg{animation:spGlow 1.4s ease-out .75s forwards}
+#splash.go .ray{animation:spRay .8s ease-out .95s forwards}
+#splash.go .spk{animation:spSpk 1.1s ease-out forwards}
+#splash.go .st span{animation:spLet .45s ease-out forwards}
+#splash.go .su{animation:spSub .6s ease-out 1.75s forwards}
+#splash.go .ss{animation:spTurn 1.9s cubic-bezier(.4,0,.2,1) .7s both}
+#splash.out{animation:spOut .55s cubic-bezier(.6,0,.4,1) forwards;pointer-events:none}
+#splash.out .ss{animation:spZoom .55s cubic-bezier(.6,0,.4,1) forwards}
+#splash.out :is(.st,.su){transition:opacity .2s;opacity:0!important}
+@keyframes spDraw{to{stroke-dashoffset:0}}
+@keyframes spFill{to{opacity:1;transform:none}}
+@keyframes spGlow{0%{opacity:0;transform:scale(.3)}40%{opacity:1;transform:scale(1)}100%{opacity:.55;transform:scale(1.05)}}
+@keyframes spRay{0%{opacity:0;transform:rotate(var(--r)) translateY(-20px) scaleY(.2)}40%{opacity:.9}100%{opacity:0;transform:rotate(var(--r)) translateY(-120px) scaleY(1)}}
+@keyframes spSpk{0%{opacity:0;transform:scale(0) rotate(0)}30%{opacity:1;transform:scale(1) rotate(45deg)}100%{opacity:0;transform:scale(.2) rotate(120deg)}}
+@keyframes spLet{to{opacity:1;transform:none;filter:none}}
+@keyframes spSub{to{opacity:1}}
+@keyframes spTurn{0%{transform:rotate(0)}100%{transform:rotate(90deg)}}
+@keyframes spZoom{from{transform:rotate(90deg)}to{transform:scale(9) rotate(140deg);opacity:0}}
+@keyframes spOut{0%{opacity:1}100%{opacity:0}}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
 <script>try{if(localStorage.getItem('stybg')==='clair')document.documentElement.classList.add('lightbg')}catch(e){}</script>
 <script>try{var _c=localStorage.getItem('icc');if(_c&&_c!=='pal')document.documentElement.classList.add('ic'+_c);var _cc=localStorage.getItem('iccColor');if(_cc)document.documentElement.style.setProperty('--icc',_cc)}catch(e){}</script>
+<script>try{if(localStorage.getItem('splash')==='0')document.documentElement.classList.add('nosplash')}catch(e){}</script>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><div class="sg"></div><div class="sw"><div class="ss"><i class="ray" style="--r:0deg"></i><i class="ray" style="--r:30deg"></i><i class="ray" style="--r:60deg"></i><i class="ray" style="--r:90deg"></i><i class="ray" style="--r:120deg"></i><i class="ray" style="--r:150deg"></i><i class="ray" style="--r:180deg"></i><i class="ray" style="--r:210deg"></i><i class="ray" style="--r:240deg"></i><i class="ray" style="--r:270deg"></i><i class="ray" style="--r:300deg"></i><i class="ray" style="--r:330deg"></i><svg viewBox="0 0 100 100"><defs><linearGradient id="spg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--hi)"/><stop offset=".5" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:var(--acc2)"/></linearGradient></defs><polygon class="sfill" fill="url(#spg)" points="50,2 53.4,41.7 71.2,28.8 58.3,46.6 98,50 58.3,53.4 71.2,71.2 53.4,58.3 50,98 46.6,58.3 28.8,71.2 41.7,53.4 2,50 41.7,46.6 28.8,28.8 46.6,41.7"/><polygon class="sline" points="50,2 53.4,41.7 71.2,28.8 58.3,46.6 98,50 58.3,53.4 71.2,71.2 53.4,58.3 50,98 46.6,58.3 28.8,71.2 41.7,53.4 2,50 41.7,46.6 28.8,28.8 46.6,41.7"/></svg></div><div class="st" id="spT"></div><div class="su">@hugo_Smoll</div></div></div>
 <div id="tbar" aria-hidden="true"></div>
 <nav id="tabbar" hidden aria-label="Navigation">
 <button type="button" data-t="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1z"/></svg>Accueil</button>
@@ -1660,7 +1698,8 @@ input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus
 <div class="f"><label class="l">Intensité de l’aurore en fond · <span id="auV"></span></label><input type="range" id="auK" min="0" max="150" step="10"></div>
 <label class="chk sw2"><span>Boutons en couleur unie (sans dégradé)</span><input type="checkbox" id="fxSolid"></label>
 <label class="chk sw2"><span>Animations calmes</span><input type="checkbox" id="fxCalm"></label>
-<label class="chk sw2"><span>Écrans qui se construisent à l’ouverture</span><input type="checkbox" id="fxBuild"></label></div>
+<label class="chk sw2"><span>Écrans qui se construisent à l’ouverture</span><input type="checkbox" id="fxBuild"></label>
+<label class="chk sw2"><span>Animation de l’étoile au lancement</span><input type="checkbox" id="fxSplash"></label></div>
 <h2>Style des icônes</h2><div class="icPick" id="icPick"></div>
 <h2>Couleur des icônes</h2><div class="card"><div class="lyopt" id="iccOpt"><button type="button" data-v="pal"><b>Palette</b><small>Les couleurs de ta palette, en alternance</small></button><button type="button" data-v="uni"><b>Couleur principale</b><small>Toutes dans ta couleur principale</small></button><button type="button" data-v="mono"><b>Monochrome</b><small>Gris neutre, sobre</small></button><button type="button" data-v="perso"><b>Couleur au choix</b><small>Choisis ta propre couleur</small></button></div><div class="f" id="iccPick" hidden><label class="l">Ta couleur pour les icônes</label><div class="cpick" style="grid-template-columns:auto 1fr;align-items:center"><label><input type="color" id="iccIn" value="#e6b325"></label><span style="font-size:14px;color:var(--mut)">Touche le rond pour choisir</span></div></div></div>
 <h2>Personnaliser l’accueil</h2><div class="card">
@@ -3124,6 +3163,19 @@ iccApply();
   const fb=$('fxBuild');fb.checked=lsg('buildAnim')!=='0';fb.onchange=()=>{lss('buildAnim',fb.checked?'1':'0');try{vib(8)}catch(e){}if(fb.checked)buildIn($('s7'))};
   {const vis=[...Array(10)].map((_,i)=>$('s'+(i+1))).find(x=>x&&!x.hidden);setTimeout(()=>buildIn(vis),120)}
 })();
+
+// ================= écran de lancement =================
+(()=>{const sp=$('splash');if(!sp)return;const fx=$('fxSplash');
+  if(fx){fx.checked=lsg('splash')!=='0';fx.onchange=()=>{lss('splash',fx.checked?'1':'0');try{vib(8)}catch(e){}if(fx.checked)msg('L’animation se jouera au prochain lancement.')}}
+  if(lsg('splash')==='0'){sp.remove();return}
+  const quick=RM||document.documentElement.classList.contains('calm');
+  const name='Hugo Smoll';$('spT').innerHTML=[...name].map((c,i)=>'<span style="animation-delay:'+(1.15+i*.05).toFixed(2)+'s">'+(c===' '?'&nbsp;':esc(c))+'</span>').join('');
+  const ss=sp.querySelector('.ss');for(let i=0;i<7;i++){const k=document.createElement('i');k.className='spk';const a=Math.random()*Math.PI*2,r=70+Math.random()*60;k.style.left=(66+Math.cos(a)*r-7)+'px';k.style.top=(66+Math.sin(a)*r-7)+'px';k.style.animationDelay=(.9+Math.random()*.7).toFixed(2)+'s';k.style.transform='scale(0)';ss.appendChild(k)}
+  let done=false;const end=()=>{if(done)return;done=true;sp.classList.add('out');try{const v=[...Array(10)].map((_,i)=>$('s'+(i+1))).find(x=>x&&!x.hidden);if(window.buildIn)setTimeout(()=>buildIn(v),80)}catch(e){}setTimeout(()=>sp.remove(),600)};
+  sp.addEventListener('click',end);
+  if(quick){setTimeout(end,350);return}
+  requestAnimationFrame(()=>sp.classList.add('go'));try{setTimeout(()=>vib(12),1450)}catch(e){}
+  setTimeout(end,2600)})();
 </script>
 </body>
 </html>
