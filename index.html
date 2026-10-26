@@ -1121,10 +1121,63 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 
 .sdel{color:var(--err)!important;font-size:14px;padding:6px 0 2px}
 .sdel.arm{font-weight:700}
+
+/* ================= look « vraie app » : barre d'onglets, titre compact, mode étapes ================= */
+#tabbar{position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));z-index:40;max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:center;padding:7px 6px;border-radius:30px;background:color-mix(in srgb,var(--card) 74%,transparent);-webkit-backdrop-filter:blur(24px) saturate(170%);backdrop-filter:blur(24px) saturate(170%);box-shadow:0 14px 34px -12px rgba(0,0,0,.5),inset 0 0 0 1px color-mix(in srgb,var(--tx) 10%,transparent),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .35s cubic-bezier(.3,1.2,.5,1),opacity .25s}
+#tabbar[hidden]{display:grid!important;transform:translateY(130%);opacity:0;pointer-events:none}
+#tabbar button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;border-radius:22px;background:none;color:var(--mut);font-size:10.5px;font-weight:600;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;transition:color .2s,background-color .2s,transform .12s}
+#tabbar button:active{transform:scale(.9)}
+#tabbar svg{width:24px;height:24px}
+#tabbar button.on{color:var(--hi);background:color-mix(in srgb,var(--gold) 16%,transparent)}
+#tabbar .tplus{padding:0;background:none!important}
+#tabbar .tplus i{display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:var(--gold);color:var(--on);box-shadow:0 8px 18px -6px color-mix(in srgb,var(--gold) 70%,transparent)}
+#tabbar .tplus svg{width:26px;height:26px}
+html.hastab #scin{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+html.hastab .tohome,html.hastab #gear{display:none!important}
+#tbar{position:fixed;left:0;right:0;top:0;z-index:30;height:calc(46px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;color:var(--tx);background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(20px) saturate(170%);backdrop-filter:blur(20px) saturate(170%);box-shadow:0 .5px 0 var(--bd);opacity:0;transform:translateY(-6px);transition:opacity .2s,transform .2s;pointer-events:none}
+#tbar.on{opacity:1;transform:none}
+html{-webkit-tap-highlight-color:transparent}
+button,.tl,.it,.sht,.wk,.dy{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+/* mode étapes */
+.stbar{display:none}
+html.paged .stbar{display:block;margin:-4px 0 6px}
+.stbar .stl{display:flex;justify-content:space-between;font-size:13px;color:var(--mut);margin:0 4px 8px}
+.stbar .stl b{color:var(--tx)}
+.stbar .sts{display:grid;grid-auto-flow:column;gap:6px}
+.stbar .sts i{height:5px;border-radius:3px;background:var(--fill);transition:background-color .3s}
+.stbar .sts i.on{background:var(--gold)}
+html.paged .stp:not(.cur){display:none}
+html.paged .stp.cur{animation:stpIn .35s cubic-bezier(.2,.8,.2,1)}
+@keyframes stpIn{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+html.paged .stp.cur.back{animation-name:stpBack}
+@keyframes stpBack{from{opacity:0;transform:translateX(-26px)}to{opacity:1;transform:none}}
+#stBack{display:none;margin:10px auto 0}
+html.paged #stBack.show{display:block}
+.segt{display:none}
+html.paged .segt{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;padding:4px;margin:0 0 6px;border-radius:14px;background:var(--fill);position:sticky;top:calc(52px + env(safe-area-inset-top,0px));z-index:5}
+.segt button{padding:9px 2px;border-radius:11px;background:none;color:var(--mut);font-size:13.5px;font-weight:600}
+.segt button[aria-pressed="true"]{background:var(--card);color:var(--tx);box-shadow:0 2px 8px rgba(0,0,0,.18)}
+html.paged #s2>.stp>h2:first-child{display:none}
+html.paged #s2 .stp>.card:first-of-type{margin-top:10px}
+html.paged .today{padding:14px 16px}
+html.paged .today .clock{font-size:42px}
+html.paged #s4>div+div,html.paged #s4>.tiles4{margin-top:10px}
+.lyopt{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 0 8px}
+.lyopt button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px;border-radius:16px;background:var(--fill);color:var(--tx);text-align:left;border:1.5px solid transparent}
+.lyopt button[aria-pressed="true"]{border-color:var(--gold)}
+.lyopt b{font-size:14px}.lyopt small{font-size:12px;color:var(--mut);line-height:1.3}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
 </head>
 <body>
+<div id="tbar" aria-hidden="true"></div>
+<nav id="tabbar" hidden aria-label="Navigation">
+<button type="button" data-t="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 4l8.5 6.5V20a1 1 0 0 1-1 1h-5v-6h-5v6h-5a1 1 0 0 1-1-1z"/></svg>Accueil</button>
+<button type="button" data-t="cli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M17 14.6c2.4.2 4 1.8 4.6 4.6"/></svg>Clients</button>
+<button type="button" data-t="cons" class="tplus" aria-label="Nouveau consentement"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></i></button>
+<button type="button" data-t="cal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Agenda</button>
+<button type="button" data-t="set"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Réglages</button>
+</nav>
 <div class="aurora" id="aurora" aria-hidden="true"><b></b><b></b><b></b></div>
 <div id="scroller"><div id="scin">
 <div id="deco"><div class="moth m1" data-s="c" style="top:-4px;right:-12px;width:180px;aspect-ratio:420/229;transform:scaleX(-1)"></div>
@@ -1229,6 +1282,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 </div>
 <div id="s7" hidden>
 <button class="lnk tohome" type="button">‹ Accueil</button>
+<h2>Mise en page</h2><div class="card"><div class="lyopt" id="lyOpt"><button type="button" data-l="paged"><b>Étapes</b><small>Formulaire en étapes, espace tatoueur en onglets, rien de trop long</small></button><button type="button" data-l="scroll"><b>Défilement</b><small>Tout sur une page qui défile</small></button></div></div>
 <h2>Style de l’appli</h2><div class="card"><div class="stys" id="stys"></div><p class="styhint" id="styHint"></p></div>
 <h2>Couleurs</h2><div class="card"><div class="pals" id="pals"></div></div>
 <h2>Mon thème</h2><div class="card">
@@ -1312,7 +1366,7 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 </div>
 <div id="msg"></div>
 </main>
-<div class="dock" id="d1"><button class="pri" id="next" type="button">Continuer</button></div>
+<div class="dock" id="d1"><button class="pri" id="next" type="button">Continuer</button><button class="lnk" id="stBack" type="button">‹ Étape précédente</button></div>
 <div class="dock" id="d2" hidden><button class="pri" id="go" type="button">Soumettre</button><button class="lnk" id="back" type="button" style="display:block;margin:10px auto 0">Retour au formulaire client</button></div>
 
 </div></div>
@@ -2471,6 +2525,56 @@ function sdelInject(){const f=cur,det=$('det');if(!f||!det||det.hidden||!f.seanc
       $('sdUndo').onclick=async()=>{f.seances.splice(i,0,rm);await put(f);await showDetail(f.id);msg('Séance restaurée.')};
       setTimeout(()=>{if($('sdUndo'))msg('')},7000)}})}
 new MutationObserver(()=>sdelInject()).observe($('det'),{childList:true});
+
+// ================= look « vraie app » =================
+const LY=()=>lsg('layout')==='scroll'?'scroll':'paged';
+function lyApply(){document.documentElement.classList.toggle('paged',LY()==='paged');const o=$('lyOpt');if(o)o.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===LY()));stGo(stI,true);segGo(segI)}
+// --- découpage en groupes (étapes / onglets)
+function grp(root,starts){const kids=[...root.children],G=[];let g=null;
+  kids.forEach(el=>{const k=starts.findIndex(f=>f(el));if(k>-1||!g){g=document.createElement('div');g.className='stp';G.push(g);root.insertBefore(g,el)}g.appendChild(el)});return G}
+const h2is=t=>el=>el.tagName==='H2'&&el.textContent.trim().startsWith(t);
+const ST1=grp($('s1'),[h2is('Déclarations'),el=>el.id==='minor']);
+const ST1N=['Client','Déclarations','Signature'];
+const stb=document.createElement('div');stb.className='stbar';$('s1').insertBefore(stb,$('s1').firstChild);
+let stI=0;
+function stGo(i,silent){i=Math.max(0,Math.min(ST1.length-1,i));const back=i<stI;stI=i;
+  ST1.forEach((g,k)=>{g.classList.toggle('cur',k===i);g.classList.toggle('back',back&&k===i)});
+  stb.innerHTML='<div class="stl"><span>Étape <b>'+(i+1)+'</b> sur '+ST1.length+'</span><b>'+ST1N[i]+'</b></div><div class="sts">'+ST1.map((_,k)=>'<i class="'+(k<=i?'on':'')+'"></i>').join('')+'</div>';
+  const paged=LY()==='paged';$('stBack').classList.toggle('show',paged&&i>0);
+  $('next').textContent=paged&&i<ST1.length-1?'Suivant':'Continuer';
+  if(i===ST1.length-1&&!signed){setTimeout(()=>{try{fit()}catch(e){}dispatchEvent(new Event('resize'))},40)}
+  if(!silent)scrollTo(0,0)}
+document.addEventListener('click',e=>{if(LY()!=='paged'||e.target.closest('#next')===null||$('s1').hidden)return;
+  if(stI>=ST1.length-1)return;
+  if(stI===0&&(!v('nom')||!v('prenom')||!$('naiss').value)){e.preventDefault();e.stopPropagation();return msg('Indique au moins le nom, le prénom et la date de naissance.',1)}
+  if(stI===1&&[...document.querySelectorAll('.req')].some(c=>!c.checked)){e.preventDefault();e.stopPropagation();return msg('Coche toutes les déclarations obligatoires pour continuer.',1)}
+  e.preventDefault();e.stopPropagation();try{vib(8)}catch(_){}stGo(stI+1)},true);
+$('stBack').onclick=()=>{try{vib(6)}catch(e){}stGo(stI-1)};
+// --- onglets de l'espace tatoueur
+const SG=grp($('s2'),[h2is('Caps'),h2is('Photos du matériel'),h2is('Notes')]);
+const SGN=['Matériel','Caps','Photos','Notes'];
+const seg=document.createElement('div');seg.className='segt';seg.innerHTML=SGN.map((n,k)=>'<button type="button" data-k="'+k+'">'+n+'</button>').join('');$('s2').insertBefore(seg,$('s2').firstChild);
+let segI=0;
+function segGo(i){segI=i;SG.forEach((g,k)=>g.classList.toggle('cur',k===i));seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.k===i))}
+seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{try{vib(6)}catch(e){}segGo(+b.dataset.k);scrollTo(0,0)});
+// --- barre d'onglets + titre compact
+let curN=1;
+const TABN={4:'home',3:'cli',5:'cal',7:'set'};
+function tabSync(){const on=curN>=3&&$('lock').hidden;$('tabbar').hidden=!on;document.documentElement.classList.toggle('hastab',on);
+  $('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===TABN[curN]))}
+{const _show=show;show=function(n,...a){const r=_show.call(this,n,...a);curN=n;if(n===1)stGo(0,true);if(n===2)segGo(0);tabSync();tbarSync();return r}}
+new MutationObserver(tabSync).observe($('lock'),{attributes:true,attributeFilter:['hidden']});
+$('tabbar').querySelectorAll('button[data-t]').forEach(b=>b.onclick=()=>{try{vib(8)}catch(e){}const t=b.dataset.t;
+  if(t==='home')window.homeView();else if(t==='cli')window.openClients();else if(t==='cal')window.openCal();else if(t==='set')window.openSettings();
+  else if(t==='cons'){cur=null;show(1)}});
+const sc0=$('scroller');
+function tbarSync(){$('tbar').textContent=$('h1').textContent;$('tbar').classList.toggle('on',sc0.scrollTop>64)}
+sc0.addEventListener('scroll',()=>{$('tbar').classList.toggle('on',sc0.scrollTop>64)},{passive:true});
+new MutationObserver(tbarSync).observe($('h1'),{childList:true,characterData:true,subtree:true});
+// --- réglage
+$('lyOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('layout',b.dataset.l);try{vib(8)}catch(e){}lyApply();msg(b.dataset.l==='paged'?'Mise en page « Étapes » activée.':'Mise en page « Défilement » activée.')});
+lyApply();
+{const vis=[1,2,3,4,5,6,7,8,9,10].find(k=>$('s'+k)&&!$('s'+k).hidden);if(vis)curN=vis;tabSync();tbarSync()}
 </script>
 </body>
 </html>
