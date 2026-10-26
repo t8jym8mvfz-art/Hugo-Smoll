@@ -1244,14 +1244,19 @@ html.nside.hasside #side{display:flex;flex-direction:column;gap:2px;position:fix
 }
 html.nside.hasside .tohome,html.nside.hasside #gear{display:none!important}
 
-/* hauteur d'écran mesurée (même méthode que l'app de révision) */
+/* iOS : bug des conteneurs « position:fixed » plein écran (bande vide en bas des apps installées).
+   Comme l'app de révision : plus de conteneur fixe plein écran, le défilement se fait dans un bloc normal du body. */
 :root{padding-top:0!important;padding-bottom:0!important}
 html{height:100%;overflow:hidden}
-body{height:100%;height:100dvh;height:var(--app-h,100dvh);overflow:hidden}
-#scroller,.aurora,#lock,#side,#sideDim{bottom:auto!important;height:var(--app-h,100dvh)!important}
-#tabbar{bottom:auto!important;height:66px;top:calc(var(--app-h,100dvh) - 74px)}
-html.fullh #tabbar{top:calc(var(--app-h,100dvh) - 76px - env(safe-area-inset-bottom,0px))}
-html:not(.fullh).hastab #scin{padding-bottom:86px}
+body{position:relative;height:100%;height:100dvh;height:var(--app-h,100dvh);overflow:hidden;display:flex;flex-direction:column;margin:0}
+:root #scroller{position:relative!important;inset:auto!important;top:auto!important;left:auto!important;right:auto!important;bottom:auto!important;flex:1 1 auto;min-height:0;height:auto!important;width:100%}
+:root .aurora,:root #lock,:root #sideDim{position:absolute!important;inset:0!important;height:auto!important}
+:root #side{position:absolute!important;top:0!important;bottom:0!important;height:auto!important}
+:root #tabbar{position:absolute!important;top:auto!important;height:auto;bottom:calc(8px + env(safe-area-inset-bottom,0px))!important}
+html.hastab #scin{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+:root[data-sty] body::before,:root[data-sty] body::after{position:absolute}
+html.nsheets.insheet #scroller{margin-top:calc(env(safe-area-inset-top,0px) + 12px)}
+@media (min-width:768px){html.nside.hasside #scroller{margin-left:250px;width:auto}}
 @media (max-width:767px){html.nside.hasside #msg{left:64px}}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
@@ -2730,7 +2735,7 @@ $('nvOpt').querySelectorAll('button').forEach(b=>b.onclick=()=>{lss('navMode',b.
 lyApply();tbarSync();
 
 // ---- hauteur réelle de l'écran (même méthode que l'app de révision)
-(()=>{function fitScreen(){const h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;document.documentElement.style.setProperty('--app-h',h+'px');const sh=innerHeight>=innerWidth?Math.max(screen.width,screen.height):Math.min(screen.width,screen.height);document.documentElement.classList.toggle('fullh',sh-h<10)}
+(()=>{function fitScreen(){const h=(window.visualViewport&&window.visualViewport.height)||window.innerHeight;document.documentElement.style.setProperty('--app-h',h+'px');}
   fitScreen();addEventListener('resize',fitScreen);addEventListener('orientationchange',()=>setTimeout(fitScreen,150));addEventListener('pageshow',fitScreen);
   if(window.visualViewport)visualViewport.addEventListener('resize',fitScreen);setTimeout(fitScreen,500)})();
 
