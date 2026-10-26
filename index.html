@@ -1118,6 +1118,9 @@ input[type=range]::-moz-range-thumb{width:26px;height:26px;border:0;border-radiu
 [data-ic="platreu"] .ico svg,:root:root:root #hTiles[data-ic="platreu"] .tl .ico svg{width:34px!important;height:34px!important;filter:drop-shadow(1.5px 2px 1.3px var(--pls)) drop-shadow(-1px -1px 0 var(--plh))}
 [data-ic="platreu"] .ix .f{fill:var(--pl)}[data-ic="platreu"] .ix .s{stroke:var(--pl)}[data-ic="platreu"] .ix .a{fill:var(--pl)}[data-ic="platreu"] .ix .as{stroke:var(--pl)}[data-ic="platreu"] .ix .k{fill:var(--plh)}
 .icp[data-ic="platreu"] .ico{transform:scale(.7);margin:-8px}
+
+.sdel{color:var(--err)!important;font-size:14px;padding:6px 0 2px}
+.sdel.arm{font-weight:700}
 </style>
 <script>try{var _s=localStorage.getItem('sty'),_r=document.documentElement;if(_s&&_s!=='aurora'){_r.setAttribute('data-sty',_s);if(['velours','serre','lunaire','blocs','vision','pastel','contraste','prestige'].indexOf(_s)>-1)_r.classList.add('styflat')}}catch(e){}</script>
 </head>
@@ -2454,6 +2457,20 @@ function renderStys(){const el=$('stys');if(!el)return;const c=curSty();
   else h.textContent='Le style change la forme, la matière et la typo. Tes couleurs se règlent juste en dessous, avec n’importe quel style.'}
 {const _rp=renderPals;renderPals=function(){_rp();renderStys()}}
 applySty();
+
+// ---- supprimer une seule séance depuis la fiche client
+function sdelInject(){const f=cur,det=$('det');if(!f||!det||det.hidden||!f.seances)return;
+  const hs=[...det.querySelectorAll(':scope>h2')].filter(h=>/^Séance \d+/.test(h.textContent));
+  hs.forEach((h,i)=>{const c=h.nextElementSibling;if(!c||!c.classList.contains('card')||c.querySelector('.sdel'))return;
+    const w=document.createElement('div');w.className='f';w.innerHTML='<button class="lnk sdel" type="button">Supprimer cette séance</button>';c.appendChild(w);
+    const b=w.firstChild;let arm=false;
+    b.onclick=async()=>{if(!arm){arm=true;b.classList.add('arm');b.textContent='Appuyer à nouveau pour supprimer la séance '+(i+1);try{vib(8)}catch(e){}setTimeout(()=>{if(b.isConnected){arm=false;b.classList.remove('arm');b.textContent='Supprimer cette séance'}},4000);return}
+      const rm=f.seances.splice(i,1)[0];try{await put(f)}catch(e){f.seances.splice(i,0,rm);return msg('Impossible de supprimer la séance.',1)}
+      try{vib(14)}catch(e){}await showDetail(f.id);
+      msg('',0,'<div>Séance '+(i+1)+' du '+esc(rm.date||'')+' supprimée.</div><div style="margin-top:8px"><button class="lnk" id="sdUndo" type="button" style="color:var(--gold);font-weight:600">Annuler</button></div>');
+      $('sdUndo').onclick=async()=>{f.seances.splice(i,0,rm);await put(f);await showDetail(f.id);msg('Séance restaurée.')};
+      setTimeout(()=>{if($('sdUndo'))msg('')},7000)}})}
+new MutationObserver(()=>sdelInject()).observe($('det'),{childList:true});
 </script>
 </body>
 </html>
