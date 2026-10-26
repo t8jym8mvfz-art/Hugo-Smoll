@@ -1657,6 +1657,98 @@ html.paged .segt{grid-template-columns:repeat(5,minmax(0,1fr))}
 .znl{display:flex;align-items:center;gap:8px;font-weight:600;margin-bottom:6px}
 .znl i{width:22px;height:22px;font-size:12px}
 </style>
+<style>
+/* ================= styles « Verre sombre », « Violet cosmique », « Nuit illustrée » — toujours sur tes couleurs ================= */
+:root[data-pal="saphir"]{color-scheme:dark;--bg:#08090f;--card:#151826;--fill:#1d2133;--tx:#eef1fb;--mut:#9aa1b8;--bd:rgba(140,170,255,.14);--gold:#4d7bff;--hi:#8fb0ff;--acc2:#7a3dff;--on:#fff;--gold2:#7a3dff;--err:#ff6f91;--bar:rgba(8,9,15,.66);--aura:.6}
+:root[data-pal="cosmos"]{color-scheme:dark;--bg:#0f0818;--card:#1a1029;--fill:#251838;--tx:#f3eefc;--mut:#b3a9cc;--bd:rgba(203,184,255,.16);--gold:#b79cff;--hi:#ffd7b5;--acc2:#9a5fe0;--on:#1d1030;--gold2:#ffd7b5;--err:#ff8fb0;--bar:rgba(15,8,24,.66);--aura:.6}
+:root[data-pal="nuit"]{color-scheme:dark;--bg:#2a2c30;--card:#1b1c1f;--fill:#34363b;--tx:#eceae4;--mut:#a9a69d;--bd:rgba(244,220,143,.14);--gold:#f4dc8f;--hi:#8ee6c9;--acc2:#7d7aa0;--on:#1b1c1f;--gold2:#8ee6c9;--err:#f4a18f;--bar:rgba(42,44,48,.72);--aura:.3}
+
+/* — Verre sombre : noir profond, cartes vitrées, halos lumineux */
+:root[data-sty="verre"] body::before{display:block;right:-110px;top:260px;width:320px;height:320px;border-radius:50%;background:var(--gold);opacity:.26;filter:blur(80px)}
+:root[data-sty="verre"] body::after{display:block;left:-120px;top:20px;width:280px;height:280px;border-radius:50%;background:var(--acc2);opacity:.22;filter:blur(80px)}
+:root[data-sty="verre"] h1{font-weight:700;letter-spacing:-.015em}
+:root[data-sty="verre"] h2{text-transform:none;letter-spacing:0;font-size:17px;font-weight:700;color:var(--tx);margin-left:6px}
+:root[data-sty="verre"] :is(.card,.tl,.hmsg,.kal){background:color-mix(in srgb,var(--card) 76%,transparent)!important;-webkit-backdrop-filter:blur(22px) saturate(140%);backdrop-filter:blur(22px) saturate(140%);border-radius:24px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px color-mix(in srgb,var(--tx) 7%,transparent),0 18px 40px rgba(0,0,0,.5)!important}
+:root[data-sty="verre"] .tl .ico{background:color-mix(in srgb,var(--gold) 18%,transparent)!important;color:var(--hi)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 35%,transparent);animation:none!important}
+:root[data-sty="verre"] .pri{background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 78%,#fff),var(--gold))!important;color:var(--on)!important;border-radius:18px!important;animation:none!important;box-shadow:0 12px 28px -6px color-mix(in srgb,var(--gold) 70%,transparent),inset 0 1px 0 rgba(255,255,255,.35)!important}
+:root[data-sty="verre"] .wk{border-radius:16px;background:color-mix(in srgb,var(--tx) 4%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tx) 6%,transparent)}
+:root[data-sty="verre"] .wk.on{background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 75%,#fff),var(--gold));color:var(--on);box-shadow:0 10px 24px -4px color-mix(in srgb,var(--gold) 65%,transparent),inset 0 1px 0 rgba(255,255,255,.3)}
+:root[data-sty="verre"] .wk.on :is(b,small,em){color:inherit}
+:root[data-sty="verre"] .dur[aria-pressed="true"]{background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 78%,#fff),var(--gold))!important;color:var(--on)!important;box-shadow:0 8px 20px -6px color-mix(in srgb,var(--gold) 70%,transparent)}
+:root[data-sty="verre"] :is(.sht,.styb,.pal){border-radius:18px;background:color-mix(in srgb,var(--tx) 4%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tx) 7%,transparent)}
+:root[data-sty="verre"] .sht.on{box-shadow:0 0 0 1.5px var(--gold),0 0 16px color-mix(in srgb,var(--gold) 45%,transparent)}
+:root[data-sty="verre"] #tabbar{border-radius:28px}
+:root[data-sty="verre"] #tabbar .tplus i{background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--gold) 45%,#fff),var(--gold) 65%);box-shadow:0 0 0 6px color-mix(in srgb,var(--gold) 16%,transparent),0 12px 30px color-mix(in srgb,var(--gold) 70%,transparent)}
+:root[data-sty="verre"] canvas{border-radius:20px}
+.sp[data-s="verre"]{background:radial-gradient(60% 55% at 90% 75%,color-mix(in srgb,var(--gold) 45%,transparent),transparent 70%),radial-gradient(50% 45% at 0 0,color-mix(in srgb,var(--acc2) 40%,transparent),transparent 70%),var(--bg)}
+.sp[data-s="verre"] .c{border-radius:12px;background:color-mix(in srgb,var(--card) 70%,transparent);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 0 1px color-mix(in srgb,var(--tx) 10%,transparent)}
+.sp[data-s="verre"] .b{border-radius:8px;background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 75%,#fff),var(--gold));box-shadow:0 4px 12px color-mix(in srgb,var(--gold) 70%,transparent)}
+
+/* — Violet cosmique : sphères lumineuses, typo fine */
+:root[data-sty="cosmos"] body::before{display:block;right:-120px;top:-80px;width:310px;height:310px;border-radius:50%;background:radial-gradient(circle at 30% 70%,color-mix(in srgb,var(--hi) 80%,#fff) 0%,var(--hi) 10%,var(--acc2) 34%,color-mix(in srgb,var(--acc2) 35%,var(--bg)) 60%,var(--bg) 78%);box-shadow:0 0 80px color-mix(in srgb,var(--acc2) 35%,transparent);opacity:.9;animation:lfloat 12s ease-in-out infinite alternate}
+:root[data-sty="cosmos"] body::after{display:block;left:-60px;top:360px;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 80% 25%,var(--hi) 0%,var(--acc2) 30%,color-mix(in srgb,var(--acc2) 30%,var(--bg)) 65%,transparent 72%);opacity:.55}
+:root[data-sty="cosmos"] h1{font-weight:300;font-size:36px;letter-spacing:-.02em}
+:root[data-sty="cosmos"] h2{text-transform:uppercase;letter-spacing:.22em;font-size:11px;font-weight:500;color:var(--gold)}
+:root[data-sty="cosmos"] :is(.card,.hmsg,.kal){background:color-mix(in srgb,var(--card) 88%,transparent)!important;border-radius:26px!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--tx) 9%,transparent),0 16px 36px rgba(0,0,0,.5)!important}
+:root[data-sty="cosmos"] .tl{background:color-mix(in srgb,var(--card) 90%,transparent)!important;border-radius:26px!important;box-shadow:0 0 0 1px color-mix(in srgb,var(--tx) 9%,transparent),0 16px 36px rgba(0,0,0,.5)!important}
+:root[data-sty="cosmos"] .tl::before{content:"";position:absolute;right:-34px;top:-34px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle at 28% 72%,var(--hi) 0%,var(--acc2) 36%,color-mix(in srgb,var(--acc2) 25%,transparent) 62%,transparent 72%);opacity:.6;pointer-events:none}
+:root[data-sty="cosmos"] .tl .ico{background:var(--gold)!important;color:var(--on)!important;border-radius:50%!important;animation:none!important}
+:root[data-sty="cosmos"] .pri{background:var(--gold)!important;color:var(--on)!important;border-radius:999px!important;font-weight:500;animation:none!important;box-shadow:0 14px 30px -10px color-mix(in srgb,var(--gold) 60%,transparent)!important}
+:root[data-sty="cosmos"] .wk{border-radius:999px}
+:root[data-sty="cosmos"] .wk.on{background:var(--gold);color:var(--on)}
+:root[data-sty="cosmos"] .wk.on :is(b,small,em){color:inherit}
+:root[data-sty="cosmos"] .dur[aria-pressed="true"]{background:var(--gold)!important;color:var(--on)!important}
+:root[data-sty="cosmos"] :is(.sht,.styb,.pal){border-radius:20px}
+:root[data-sty="cosmos"] #tabbar{background:var(--tx)!important;border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.6)!important}
+:root[data-sty="cosmos"] #tabbar button{color:color-mix(in srgb,var(--bg) 65%,var(--tx))}
+:root[data-sty="cosmos"] #tabbar button.on{background:var(--bg);color:var(--tx)}
+:root[data-sty="cosmos"] #tabbar .tplus i{background:var(--gold);color:var(--on);box-shadow:none}
+:root[data-sty="cosmos"] canvas{border-radius:22px}
+.sp[data-s="cosmos"]{background:var(--bg)}
+.sp[data-s="cosmos"]::after{content:"";position:absolute;right:-18px;top:-18px;width:62px;height:62px;border-radius:50%;background:radial-gradient(circle at 30% 70%,#fff 0%,var(--hi) 12%,var(--acc2) 42%,transparent 72%)}
+.sp[data-s="cosmos"] .h{width:44%;height:7px;opacity:.75}
+.sp[data-s="cosmos"] .c{border-radius:14px;box-shadow:0 0 0 1px color-mix(in srgb,var(--tx) 12%,transparent)}
+.sp[data-s="cosmos"] .b{border-radius:999px;background:var(--gold)}
+
+/* — Nuit illustrée : paysage blackwork, tons doux */
+:root[data-sty="nuit"] h1{font-family:"Iowan Old Style",Didot,Georgia,serif;font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:27px;background:none;color:var(--tx);animation:none}
+:root[data-sty="nuit"] h2{font-family:"Iowan Old Style",Didot,Georgia,serif;text-transform:none;letter-spacing:.02em;font-size:18px;font-weight:600;color:var(--tx)}
+:root[data-sty="nuit"] :is(.card,.hmsg,.kal){background:var(--card)!important;border-radius:24px!important;box-shadow:none!important}
+:root[data-sty="nuit"] .tl{background:var(--card)!important;border-radius:22px!important;box-shadow:none!important}
+:root[data-sty="nuit"] .tl::after{display:none}
+:root[data-sty="nuit"] .tl .ico{background:none!important;color:var(--tx)!important;animation:none!important;box-shadow:none!important}
+:root[data-sty="nuit"] .tl .n{background:var(--hi)!important;color:var(--on)!important}
+:root[data-sty="nuit"] .pri{background:var(--gold)!important;color:var(--on)!important;border-radius:999px!important;animation:none!important;box-shadow:none!important;font-weight:700}
+:root[data-sty="nuit"] .wk{border-radius:999px}
+:root[data-sty="nuit"] .wk.on{background:var(--gold);color:var(--on)}
+:root[data-sty="nuit"] .wk.on :is(b,small,em){color:inherit}
+:root[data-sty="nuit"] .dur[aria-pressed="true"]{background:var(--gold)!important;color:var(--on)!important}
+:root[data-sty="nuit"] :is(.sht,.styb,.pal){border-radius:18px;background:var(--card)}
+:root[data-sty="nuit"] .sht.on{border-color:var(--gold)}
+:root[data-sty="nuit"] #tabbar{background:var(--card)!important;border-radius:35px;-webkit-backdrop-filter:none;backdrop-filter:none}
+:root[data-sty="nuit"] #tabbar button.on{background:none;color:var(--hi)}
+:root[data-sty="nuit"] #tabbar .tplus i{background:var(--tx);color:var(--card);box-shadow:0 0 0 6px var(--bg)}
+:root[data-sty="nuit"] canvas{border-radius:20px}
+:root[data-sty="nuit"] #s4{position:relative}
+:root[data-sty="nuit"] #s4::before{content:"";display:block;height:170px;margin:0 0 14px;border-radius:28px;background:radial-gradient(circle at 78% 36%,var(--gold) 0 26px,color-mix(in srgb,var(--gold) 30%,transparent) 27px,transparent 70px),radial-gradient(1.2px 1.2px at 14% 22%,var(--tx),transparent),radial-gradient(1px 1px at 34% 12%,var(--tx),transparent),radial-gradient(1.2px 1.2px at 52% 30%,var(--tx),transparent),radial-gradient(1px 1px at 64% 14%,var(--tx),transparent),linear-gradient(180deg,var(--card),color-mix(in srgb,var(--fill) 70%,var(--card)))}
+:root[data-sty="nuit"] #s4::after{content:"";position:absolute;left:0;right:0;top:0;height:170px;border-radius:28px;pointer-events:none;background:color-mix(in srgb,var(--card) 55%,#000);-webkit-mask:var(--nuitArt) center bottom/100% 100% no-repeat;mask:var(--nuitArt) center bottom/100% 100% no-repeat}
+.sp[data-s="nuit"]{background:linear-gradient(180deg,var(--card),var(--bg))}
+.sp[data-s="nuit"]::after{content:"";position:absolute;right:12px;top:10px;width:18px;height:18px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px color-mix(in srgb,var(--gold) 60%,transparent)}
+.sp[data-s="nuit"] .c{border-radius:12px;background:var(--card)}
+.sp[data-s="nuit"] .b{border-radius:999px;background:var(--gold)}
+
+/* couleurs par familles */
+.pals.pfam{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pnow{grid-column:1/-1;margin:0 2px;font-size:13px;color:var(--mut)}
+.pnow b{color:var(--tx)}
+.pfb{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;padding:12px;border-radius:16px;background:var(--fill);border:1.5px solid transparent;color:var(--tx);text-align:left}
+.pfb[aria-current="true"]{border-color:var(--gold)}
+.pfb .sw{display:flex;flex:none;padding-left:8px}
+.pfb .sw i{width:24px;height:24px;border-radius:50%;margin-left:-8px;box-shadow:0 0 0 2px var(--fill)}
+.pfb b{display:block;font-size:13.5px;line-height:1.2}
+.pfb small{display:block;color:var(--mut);font-size:11.5px;margin-top:2px}
+.pback{grid-column:1/-1;justify-self:start;background:none;color:var(--hi);font-weight:600;font-size:15px;padding:4px 2px}
+</style>
 </head>
 <body>
 <div id="splash" aria-hidden="true"><div class="sg"></div><div class="sfx"><i></i><b></b></div><div class="sw"><div class="ss"><svg viewBox="0 0 100 100"><defs><linearGradient id="spg" gradientUnits="userSpaceOnUse" x1="18" y1="4" x2="82" y2="96"><stop offset="0" style="stop-color:color-mix(in srgb,var(--hi) 65%,#fff)"/><stop offset=".45" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--acc2) 80%,#000)"/></linearGradient></defs><clipPath id="spc"><polygon points="50,2 53.4,41.7 71.2,28.8 58.3,46.6 98,50 58.3,53.4 71.2,71.2 53.4,58.3 50,98 46.6,58.3 28.8,71.2 41.7,53.4 2,50 41.7,46.6 28.8,28.8 46.6,41.7"/></clipPath><g clip-path="url(#spc)"><g class="liq"><path class="wv wv2" d="M-100 6 Q-87.5 1 -75 6 T-50 6 Q-37.5 1 -25 6 T0 6 Q12.5 1 25 6 T50 6 Q62.5 1 75 6 T100 6 Q112.5 1 125 6 T150 6 Q162.5 1 175 6 T200 6 V140 H-100 Z" fill="url(#spg)" opacity=".45"/><path class="wv wv1" d="M-100 9 Q-87.5 5 -75 9 T-50 9 Q-37.5 5 -25 9 T0 9 Q12.5 5 25 9 T50 9 Q62.5 5 75 9 T100 9 Q112.5 5 125 9 T150 9 Q162.5 5 175 9 T200 9 V140 H-100 Z" fill="url(#spg)"/></g></g><polygon class="sline" points="50,2 53.4,41.7 71.2,28.8 58.3,46.6 98,50 58.3,53.4 71.2,71.2 53.4,58.3 50,98 46.6,58.3 28.8,71.2 41.7,53.4 2,50 41.7,46.6 28.8,28.8 46.6,41.7"/></svg></div><div class="st" id="spT"></div><div class="su">@hugo_Smoll</div></div></div>
@@ -3428,6 +3520,37 @@ const _sd=showDetail;showDetail=async function(id){await _sd.apply(this,argument
   card.innerHTML='<h2>Ses tatouages</h2><div class="card"><div class="f"><div class="zndual"><div>'+svgBody('f',[],all,pins('f'))+'<span>Face</span></div><div>'+svgBody('b',[],all,pins('b'))+'<span>Dos</span></div></div></div>'
    +'<div class="zntl">'+T.map(t=>'<div class="zi"><span class="znn">'+t.n+'</span><span class="zit"><b>'+esc(znLabel(t.z))+'</b><small>'+t.se.length+' séance'+(t.se.length>1?'s':'')+' · '+(t.se.length>1?'dernière le ':'')+esc(t.se[t.se.length-1].date)+'</small></span></div>').join('')+'</div></div>';
   const first=det.querySelector('.card');if(first)first.after(card);else det.appendChild(card)};
+})();
+
+</script>
+<script>
+// ================= 3 nouveaux styles + couleurs classées par familles =================
+(function(){
+STYS.push(['verre','Verre sombre','Cartes vitrées, halos lumineux','saphir','Saphir'],
+  ['cosmos','Violet cosmique','Sphères lumineuses, typo fine','cosmos','Cosmos'],
+  ['nuit','Nuit illustrée','Paysage blackwork, tons doux','nuit','Nuit']);
+STY_FLAT.push('nuit');
+PALS.push(['saphir','Saphir','#4d7bff','#08090f','#7a3dff'],['cosmos','Cosmos','#b79cff','#0f0818','#9a5fe0'],['nuit','Nuit','#f4dc8f','#2a2c30','#8ee6c9']);
+document.documentElement.style.setProperty('--nuitArt','url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 360 170%22 preserveAspectRatio=%22none%22%3E%3Cpath fill-opacity=%22.45%22 d=%22M0 118L52 84 96 108 152 64 214 110 262 82 360 120V170H0Z%22/%3E%3Cpath d=%22M20 170l11-46 11 46zM31 126l-8 18h16zM31 112l-6 15h12zM50 170l9-34 9 34zM59 138l-6 13h12zM296 170l12-54 12 54zM308 118l-9 20h18zM308 102l-7 17h14zM326 170l9-38 9 38zM335 134l-6 14h12z%22/%3E%3Cpath transform=%22translate(150 44)%22 d=%22M0 10C6 7 12 7 16 9C18 4 22 1 29 0C26 4 25 6 25 9C29 8 35 9 41 12C35 12 31 14 28 16L31 20L25 18C22 20 18 20 15 18L10 22L11 17C7 15 3 13 0 10Z%22/%3E%3Cpath transform=%22translate(198 66) scale(.6)%22 d=%22M0 10C6 7 12 7 16 9C18 4 22 1 29 0C26 4 25 6 25 9C29 8 35 9 41 12C35 12 31 14 28 16L31 20L25 18C22 20 18 20 15 18L10 22L11 17C7 15 3 13 0 10Z%22/%3E%3Cpath d=%22M0 170V150c50-10 100 4 160-2s110-12 200 0V170z%22/%3E%3C/svg%3E")');
+// ---- couleurs rangées par familles
+const FAM=[['rouge','Rouges & roses'],['orange','Oranges & cuivres'],['jaune','Or & jaunes'],['vert','Verts'],['bleu','Bleus'],['violet','Violets'],['neutre','Noir, blanc & gris']];
+function famOf(p){const h=String(p[2]||'#888').replace('#','');const r=parseInt(h.slice(0,2),16)/255,g=parseInt(h.slice(2,4),16)/255,b=parseInt(h.slice(4,6),16)/255;
+  const mx=Math.max(r,g,b),mn=Math.min(r,g,b),d=mx-mn;if(d<.12)return 'neutre';let H;
+  if(mx===r)H=((g-b)/d)%6;else if(mx===g)H=(b-r)/d+2;else H=(r-g)/d+4;H=(H*60+360)%360;
+  if(H>=330||H<12)return 'rouge';if(H<38)return 'orange';if(H<64)return 'jaune';if(H<170)return 'vert';if(H<250)return 'bleu';return 'violet'}
+let palGrp=null;
+const sw=p=>'<i style="background:radial-gradient(circle,transparent 0 46%,'+p[3]+' 48%),linear-gradient(135deg,'+p[2]+','+p[4]+')"></i>';
+renderPals=function(){const el=$('pals');if(!el)return;const c=curPal()[0],cf=PALS.find(p=>p[0]===c);
+  if(!palGrp){el.classList.add('pfam');const now=cf?'<p class="pnow">Couleur actuelle : <b>'+esc(cf[1])+'</b></p>':'';
+    el.innerHTML=now+FAM.map(([k,n])=>{const L=PALS.filter(p=>famOf(p)===k);if(!L.length)return '';
+      return '<button class="pfb" type="button" data-f="'+k+'" aria-current="'+(!!cf&&famOf(cf)===k)+'"><span class="sw">'+L.slice(0,4).map(sw).join('')+'</span><span><b>'+n+'</b><small>'+L.length+' couleur'+(L.length>1?'s':'')+'</small></span></button>'}).join('')}
+  else{el.classList.remove('pfam');const n=(FAM.find(f=>f[0]===palGrp)||[,''])[1];
+    el.innerHTML='<button class="pback" type="button">‹ Toutes les familles</button><p class="pnow"><b>'+esc(n)+'</b></p>'
+     +PALS.filter(p=>famOf(p)===palGrp).map(p=>'<button class="pal" type="button" data-p="'+p[0]+'" aria-pressed="'+(p[0]===c)+'">'+sw(p)+esc(p[1])+'</button>').join('')}
+  try{renderStys()}catch(e){}};
+$('pals').addEventListener('click',e=>{const f=e.target.closest('.pfb');if(f){palGrp=f.dataset.f;try{vib(6)}catch(_){}renderPals();return}
+  if(e.target.closest('.pback')){palGrp=null;renderPals()}});
+applyPal();applySty();
 })();
 
 </script>
