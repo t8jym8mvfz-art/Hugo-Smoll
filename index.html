@@ -2028,6 +2028,27 @@ html.paged .segt{grid-template-columns:repeat(5,minmax(0,1fr))}
 #xfsheet .xfpick small{font-size:10.5px;line-height:1.15;text-align:center}
 #xfsheet .xfpick button[aria-pressed="true"]{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 14%,var(--fill));color:var(--tx)}
 
+/* tri et rangement */
+#xfo .xfsort{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px}
+#xfo .xfsort::-webkit-scrollbar{display:none}
+#xfo .xfsort span{flex:none;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin-right:2px}
+#xfo .xfsort button{flex:none;padding:7px 12px;border-radius:999px;background:var(--fill);color:var(--tx);font-size:13px;font-weight:600}
+#xfo .xfsort button[aria-pressed="true"]{background:color-mix(in srgb,var(--gold) 22%,var(--fill));box-shadow:0 0 0 1.5px var(--gold)}
+#xfo .xftool{justify-content:space-between;align-items:center}
+#xfo .xforgb{padding:8px 14px;border-radius:999px;background:var(--fill);color:var(--tx);font-size:13.5px;font-weight:600}
+#xfo .xforg{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px 10px 14px;border-radius:16px;background:color-mix(in srgb,var(--gold) 16%,var(--card));font-size:13.5px}
+#xfo .xforg button{flex:none;padding:8px 14px;border-radius:999px;background:var(--gold);color:var(--on,#fff);font-weight:700}
+#xfo .xfdrag{display:none}
+#xfo.org .xfdrag{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--fill);color:var(--mut);font-size:18px;touch-action:none;cursor:grab;flex:none;-webkit-user-select:none;user-select:none}
+#xfo.org .xfc{padding-top:46px}
+#xfo.org .xfc .xfdrag{position:absolute;top:8px;left:8px;z-index:3}
+#xfo.org .xfc,#xfo.org .xfr{animation:xfwig .5s ease-in-out infinite alternate}
+#xfo.org .xfc:nth-child(2n),#xfo.org .xfr:nth-child(2n){animation-delay:-.25s}
+@keyframes xfwig{from{transform:rotate(-.6deg)}to{transform:rotate(.6deg)}}
+#xfo .drag{animation:none!important;transform:scale(1.05)!important;z-index:5;box-shadow:0 20px 40px -10px rgba(0,0,0,.6)!important;opacity:.95}
+@media (prefers-reduced-motion:reduce){#xfo.org .xfc,#xfo.org .xfr{animation:none}}
+#xfo.org .xfgrid,#xfo.org .xftb{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+
 /* ================= Fond d'écran au choix ================= */
 #xwall{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;display:none}
 :root[data-wall]:not([data-wall="theme"]) #xwall{display:block}
@@ -5824,8 +5845,13 @@ const unitOf=n=>{const b=BASE.find(x=>x[0]===n);if(b)return b[3];if(/rouleau|fil
 const lvl=x=>x.q==null?'nc':x.q<=0?'out':x.q<=(x.m==null?1:x.m)?'low':'ok';
 const full=x=>Math.max(x.full||0,x.q||0,((x.m==null?1:x.m)+1)*3,4);
 const LVN={nc:'À compter',out:'Épuisé',low:'À racheter',ok:'En stock'};
-let items=[],view=lsg('fournView')||'cards',cat='all',prev=4;
-const load=async()=>{items=await allOf(STO);items.sort((a,b)=>CATS.findIndex(c=>c[0]===a.c)-CATS.findIndex(c=>c[0]===b.c)||(a.n||'').localeCompare(b.n||'','fr')||(a.d||'').localeCompare(b.d||'','fr',{numeric:true}));return items};
+let items=[],view=lsg('fournView')||'cards',cat='all',prev=4,sort=lsg('fournSort')||'cat',org=false,fdrag=false;
+const SORTS=[['cat','Catégorie'],['perso','Mon ordre'],['nom','A → Z'],['bas','À racheter d’abord']];
+document.addEventListener('touchmove',e=>{if(fdrag)e.preventDefault()},{passive:false});
+const byCat=(a,b)=>CATS.findIndex(c=>c[0]===a.c)-CATS.findIndex(c=>c[0]===b.c)||(a.n||'').localeCompare(b.n||'','fr')||(a.d||'').localeCompare(b.d||'','fr',{numeric:true});
+const LR={out:0,low:1,nc:2,ok:3};
+const sorter=m=>m==='perso'?(a,b)=>(a.o??1e9)-(b.o??1e9)||byCat(a,b):m==='nom'?(a,b)=>(a.n||'').localeCompare(b.n||'','fr')||(a.d||'').localeCompare(b.d||'','fr',{numeric:true}):m==='bas'?(a,b)=>LR[lvl(a)]-LR[lvl(b)]||(a.q??99)-(b.q??99)||byCat(a,b):byCat;
+const load=async()=>{items=await allOf(STO);items.sort(sorter(sort));return items};
 window.fournLow=async()=>(await allOf(STO)).filter(x=>{const l=lvl(x);return l==='low'||l==='out'});
 window.fournAll=()=>allOf(STO);
 
@@ -5841,8 +5867,8 @@ const close=()=>{show(prev>=3?prev:4);try{if(prev===4)renderHome()}catch(_){}};
 function pill(x){const l=lvl(x);return '<span class="xfpl">'+(l==='low'?(x.q===1?'Plus qu’1':'Plus que '+x.q):LVN[l])+'</span>'}
 function stepper(x){return '<div class="xfst"><button type="button" data-d="-1" aria-label="Retirer un">−</button><span class="xfq"><b>'+(x.q==null?'—':x.q)+'</b><small>'+esc(unit(x,x.q))+'</small></span><button type="button" data-d="1" aria-label="Ajouter un">+</button></div>'}
 function gauge(x){const p=x.q==null?0:Math.round(Math.min(1,x.q/full(x))*100);return '<span class="xfg"><i style="width:'+p+'%"></i></span>'}
-function card(x){return '<div class="xfc lv-'+lvl(x)+'" data-id="'+x.id+'"><button type="button" class="xfe"><span class="xfi">'+G2(icon(x))+'</span>'+pill(x)+'<b class="xfn">'+esc(x.n)+'</b><small>'+esc(x.d||CN[x.c]||'')+'</small></button>'+gauge(x)+stepper(x)+'</div>'}
-function row(x){return '<div class="xfr lv-'+lvl(x)+'" data-id="'+x.id+'"><button type="button" class="xfe"><span class="xfi sm">'+G2(icon(x))+'</span><span class="xfrn"><b>'+esc(x.n)+'</b><small>'+esc(x.d||'')+(x.d?' · ':'')+'<em>'+LVN[lvl(x)]+'</em></small>'+gauge(x)+'</span></button>'+stepper(x)+'</div>'}
+function card(x){return '<div class="xfc lv-'+lvl(x)+'" data-id="'+x.id+'"><span class="xfdrag" aria-label="Déplacer">⠿</span><button type="button" class="xfe"><span class="xfi">'+G2(icon(x))+'</span>'+pill(x)+'<b class="xfn">'+esc(x.n)+'</b><small>'+esc(x.d||CN[x.c]||'')+'</small></button>'+gauge(x)+stepper(x)+'</div>'}
+function row(x){return '<div class="xfr lv-'+lvl(x)+'" data-id="'+x.id+'"><span class="xfdrag" aria-label="Déplacer">⠿</span><button type="button" class="xfe"><span class="xfi sm">'+G2(icon(x))+'</span><span class="xfrn"><b>'+esc(x.n)+'</b><small>'+esc(x.d||'')+(x.d?' · ':'')+'<em>'+LVN[lvl(x)]+'</em></small>'+gauge(x)+'</span></button>'+stepper(x)+'</div>'}
 
 function paint(){const low=items.filter(x=>['low','out'].includes(lvl(x))),out=items.filter(x=>lvl(x)==='out'),nc=items.filter(x=>lvl(x)==='nc');
   const have=CATS.filter(c=>items.some(x=>x.c===c[0]));if(cat!=='all'&&!have.some(c=>c[0]===cat))cat='all';
@@ -5852,17 +5878,23 @@ function paint(){const low=items.filter(x=>['low','out'].includes(lvl(x))),out=i
   h+='<div class="xfstats"><div class="card"><b>'+items.length+'</b><small>articles</small></div><div class="card'+(low.length?' warn':'')+'"><b>'+low.length+'</b><small>à racheter</small></div><div class="card'+(out.length?' bad':'')+'"><b>'+out.length+'</b><small>épuisé'+(out.length>1?'s':'')+'</small></div></div>';
   if(low.length)h+='<div class="card xfal"><div class="xfalh"><span class="xfai">!</span><b>À racheter</b></div><div class="xfchips">'+low.map(x=>'<button type="button" data-go="'+x.id+'" class="lv-'+lvl(x)+'">'+esc(x.n)+(x.d?' <small>'+esc(x.d)+'</small>':'')+' · '+x.q+'</button>').join('')+'</div><button type="button" class="xfb2" id="xfShare">Partager la liste de courses</button></div>';
   if(nc.length)h+='<p class="xfhint">'+nc.length+' article'+(nc.length>1?'s':'')+' à compter : appuie sur + pour indiquer combien tu en as.</p>';
-  h+='<div class="xftool"><div class="xfseg" role="group" aria-label="Affichage"><button type="button" data-v="cards" aria-pressed="'+(view==='cards')+'">Cartes</button><button type="button" data-v="table" aria-pressed="'+(view==='table')+'">Tableau</button></div></div>';
+  h+='<div class="xfsort"><span>Trier</span>'+SORTS.map(([k,t])=>'<button type="button" data-so="'+k+'" aria-pressed="'+(k===sort)+'">'+t+'</button>').join('')+'</div>';
+  if(org)h+='<div class="xforg"><span>Reste appuyé sur ⠿ et glisse pour ranger ton stock</span><button type="button" id="xfOrgOk">Terminé</button></div>';
+  h+='<div class="xftool"><button type="button" class="xforgb" id="xfOrg"'+(org?' hidden':'')+'>⠿ Organiser</button><div class="xfseg" role="group" aria-label="Affichage"><button type="button" data-v="cards" aria-pressed="'+(view==='cards')+'">Cartes</button><button type="button" data-v="table" aria-pressed="'+(view==='table')+'">Tableau</button></div></div>';
   h+='<div class="xfcats"><button type="button" data-c="all" aria-pressed="'+(cat==='all')+'">Tout</button>'+have.map(c=>'<button type="button" data-c="'+c[0]+'" aria-pressed="'+(cat===c[0])+'">'+c[1]+'</button>').join('')+'</div>';
   if(view==='cards')h+='<div class="xfgrid">'+L.map(card).join('')+'</div>';
-  else{h+='<div class="card xftab"><div class="xfth"><span>Article</span><span>Quantité</span></div>';let lc='';L.forEach(x=>{if(x.c!==lc){lc=x.c;h+='<div class="xfcat">'+(CN[x.c]||'Autre')+'</div>'}h+=row(x)});h+='</div>'}
-  h+='</div>';pg.innerHTML=h;bind()}
+  else{h+='<div class="card xftab"><div class="xfth"><span>Article</span><span>Quantité</span></div><div class="xftb">';let lc='';L.forEach(x=>{if(sort==='cat'&&x.c!==lc){lc=x.c;h+='<div class="xfcat">'+(CN[x.c]||'Autre')+'</div>'}h+=row(x)});h+='</div></div>'}
+  h+='</div>';pg.innerHTML=h;pg.classList.toggle('org',org);bind()}
 
 function bind(){$('xfBack').onclick=close;pg.querySelectorAll('#xfAdd').forEach(b=>b.onclick=()=>edit(null));
   const bs=$('xfBase');if(bs)bs.onclick=async()=>{let i=0;for(const b of BASE){await putIn(STO,{id:'f'+Date.now().toString(36)+(i++),n:b[0],c:b[1],d:b[2],u:b[3],q:null,m:1})}await load();paint();try{vib(10)}catch(_){}msg('Liste créée : indique tes quantités avec +.')};
   const sh=$('xfShare');if(sh)sh.onclick=async()=>{const low=items.filter(x=>['low','out'].includes(lvl(x))),t='À racheter :\n'+low.map(x=>'• '+x.n+(x.d?' ('+x.d+')':'')+' — reste '+x.q+' '+unit(x,x.q)).join('\n');
     try{await navigator.share({title:'Fournitures à racheter',text:t})}catch(e){if(!(e&&e.name==='AbortError')){try{await navigator.clipboard.writeText(t);msg('Liste copiée.')}catch(_){msg(t)}}}};
   pg.querySelectorAll('.xfseg button').forEach(b=>b.onclick=()=>{view=b.dataset.v;lss('fournView',view);keepScroll(paint)});
+  pg.querySelectorAll('[data-so]').forEach(b=>b.onclick=async()=>{sort=b.dataset.so;lss('fournSort',sort);if(sort!=='perso')org=false;await load();keepScroll(paint)});
+  const ob=$('xfOrg');if(ob)ob.onclick=async()=>{if(sort!=='perso'){await fixOrder();sort='perso';lss('fournSort',sort);await load()}org=true;try{vib(8)}catch(_){}keepScroll(paint)};
+  const oo=$('xfOrgOk');if(oo)oo.onclick=()=>{org=false;keepScroll(paint)};
+  if(org)pg.querySelectorAll('.xfdrag').forEach(h=>h.addEventListener('pointerdown',startDrag));
   pg.querySelectorAll('.xfcats button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;keepScroll(paint)});
   pg.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>edit(b.dataset.go));
   pg.querySelectorAll('[data-id]').forEach(el=>{const id=el.dataset.id;el.querySelector('.xfe').onclick=()=>edit(id);
@@ -5870,6 +5902,17 @@ function bind(){$('xfBack').onclick=close;pg.querySelectorAll('#xfAdd').forEach(
       x.q=Math.max(0,(x.q==null?0:x.q)+d);if(d>0)x.full=Math.max(x.full||0,x.q);await putIn(STO,x);try{vib(d>0?6:9)}catch(_){}
       const now=lvl(x);if(now!==before&&(now==='low'||now==='out'))msg(now==='out'?esc(x.n)+' : épuisé, pense à en racheter.':esc(x.n)+' : plus '+(x.q===1?'qu’1':'que '+x.q)+', pense à en racheter.',1);
       keepScroll(paint)})})}
+
+// ---- ranger : on fige l'ordre affiché puis on glisse les articles
+async function fixOrder(){const L=items.slice();for(let i=0;i<L.length;i++){if(L[i].o!==i){L[i].o=i;await putIn(STO,L[i])}}}
+function startDrag(e){if(e.button>0)return;e.preventDefault();const el=e.target.closest('[data-id]'),box=el.parentNode;fdrag=true;el.classList.add('drag');try{vib(10)}catch(_){}
+  const mv=ev=>{const sc=$('scroller'),dy=ev.clientY<110?-12:ev.clientY>innerHeight-130?12:0;if(dy){if(sc&&sc.scrollHeight>sc.clientHeight)sc.scrollTop+=dy;else scrollBy(0,dy)}
+    const o=document.elementFromPoint(ev.clientX,ev.clientY),tg=o&&o.closest&&o.closest('[data-id]');if(!tg||tg===el||tg.parentNode!==box)return;
+    const r=tg.getBoundingClientRect(),grid=box.classList.contains('xfgrid'),after=grid?(ev.clientY>r.top+r.height/2||(ev.clientX>r.left+r.width/2&&ev.clientY>r.top)):ev.clientY>r.top+r.height/2;box.insertBefore(el,after?tg.nextSibling:tg)};
+  const up=async()=>{document.removeEventListener('pointermove',mv);document.removeEventListener('pointerup',up);document.removeEventListener('pointercancel',up);fdrag=false;el.classList.remove('drag');
+    const vis=[...box.querySelectorAll('[data-id]')].map(n=>n.dataset.id),full=items.slice(),pos=full.map((x,i)=>vis.includes(x.id)?i:-1).filter(i=>i>=0);
+    pos.forEach((p,k)=>{full[p]=items.find(x=>x.id===vis[k])});for(let i=0;i<full.length;i++){if(full[i].o!==i){full[i].o=i;await putIn(STO,full[i])}}items=full;try{vib(6)}catch(_){}};
+  document.addEventListener('pointermove',mv);document.addEventListener('pointerup',up);document.addEventListener('pointercancel',up)}
 
 // ---- fiche d'un article (ajout / modification)
 const sh=document.createElement('div');sh.id='xfsheet';sh.hidden=true;sh.setAttribute('role','dialog');sh.setAttribute('aria-modal','true');document.body.appendChild(sh);
