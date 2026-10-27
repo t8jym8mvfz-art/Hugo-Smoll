@@ -5427,7 +5427,7 @@ const ov=document.createElement('div');ov.id='xdas';ov.hidden=true;ov.setAttribu
 let xdPrev=4;const xdTop=()=>{scrollTo(0,0);const sc=document.getElementById('scroller');if(sc)sc.scrollTop=0};
 const _xdShow=show;show=function(){ov.hidden=true;return _xdShow.apply(this,arguments)};
 let draft=null,regY=null;
-window.openDasri=async function(sec){draft=null;if(ov.hidden){for(let i=1;i<=10;i++){const e=$('s'+i);if(e&&!e.hidden)xdPrev=i;if(e)e.hidden=true}}ov.hidden=false;$('h1').textContent='DASRI';$('gear').hidden=true;msg('');if(sec==='bord')await paintBord();else if(sec==='reg')await paintReg();else await paintHub()};
+window.openDasri=async function(sec){draft=null;if(ov.hidden){for(let i=1;i<=10;i++){const e=$('s'+i);if(e&&!e.hidden)xdPrev=i;if(e)e.hidden=true}}{const xf=document.getElementById('xfo');if(xf)xf.hidden=true}ov.hidden=false;$('h1').textContent='DASRI';$('gear').hidden=true;msg('');if(sec==='bord')await paintBord();else if(sec==='reg')await paintReg();else await paintHub()};
 const close=()=>{draft=null;show(xdPrev>=3?xdPrev:4);try{if(xdPrev===4)renderHome();else paintHome()}catch(_){}};
 const head=(back,label)=>'<div class="xdh"><button class="lnk" type="button" id="xdBack">‹ '+label+'</button></div>';
 async function recsSorted(){return (await allOf(ST)).sort((a,b)=>String(b.date).localeCompare(String(a.date)))}
